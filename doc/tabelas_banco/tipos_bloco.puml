@@ -1,0 +1,9 @@
+@startuml
+entity "Tabela Tipo Bloco" as tipos_bloco {
+  +id: int [PK]
+  --
+  nome: varchar(255)
+  descricao: varchar(255)
+}
+
+@enduml

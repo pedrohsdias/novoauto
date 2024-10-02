@@ -1,0 +1,6 @@
+entity "Tabela Blocos" as blocos {
+  +id: int [PK]
+  --
+  nome: varchar(255)
+  tipo_bloco_id: int [FK]
+}

@@ -1,0 +1,17 @@
+@startuml MER
+
+!include tabelas_banco/blocos.puml
+!include tabelas_banco/modelos_laudo.puml
+!include tabelas_banco/modelos_laudo_blocos.puml
+!include tabelas_banco/tipos_bloco.puml
+!include tabelas_banco/campos.puml
+!include tabelas_banco/tipos_campo.puml
+!include tabelas_banco/opcoes_campo.puml
+
+modelos_laudo ||--o{ modelos_laudo_blocos : "contém"
+blocos ||--o{ modelos_laudo_blocos : "pertence a"
+blocos }--|| tipos_bloco : "tem um"
+campos }--|| tipos_campo : "tem um"
+modelos_laudo ||--o{ campos : "tem vários"
+campos ||--o{ opcoes_campo : "tem várias"
+@enduml

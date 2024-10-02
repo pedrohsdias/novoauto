@@ -1,0 +1,5 @@
+entity "Tabela Tipo Campo" as tipos_campo {
+  +id: int [PK]
+  --
+  nome: varchar(255)
+}

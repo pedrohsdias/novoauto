@@ -1,0 +1,9 @@
+entity "Tabela Opcoes Campo" as opcoes_campo {
+  +id: int [PK]
+  --
+  nome: varchar(255)
+  alias: varchar(255)
+  campos_id: int [FK]
+  eh_padrao: boolean [default: false]
+  risco: enum("padrao", "sucesso", "aviso", "erro") [default: "padrao"]
+}
