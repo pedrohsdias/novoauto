@@ -1,40 +1,37 @@
-import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import { BaseRepository } from './base.repository';
 import { BaseEntity } from './base.entity';
 
 @Injectable()
 export class BaseService<T extends BaseEntity> {
-  constructor(private readonly repository: Repository<T>) {}
-  
+  constructor(protected readonly baseRepository: BaseRepository<T>) {}
+
   async findAll(): Promise<T[]> {
-    return this.repository.find();
+    return await this.baseRepository.findAll();
   }
-  
-  async findOne(id: number): Promise<T | null> {
-    return this.repository.findOneBy({ id });
+
+  async findById(id: number): Promise<T | null> {
+    return await this.baseRepository.findById(id);
   }
-  
-  async create(data: Partial<T>): Promise<T> {
-    const entity = this.repository.create(data);
-    return this.repository.save(entity);
+
+  async create(entity: T): Promise<T> {
+    return await this.baseRepository.saveEntity(entity);
   }
-  
-  async update(id: number, data: Partial<T>): Promise<T | null> {
-    const entity = await this.repository.findOneBy({ id });
-    if (!entity) {
-      return null;
+
+  async update(entity: T): Promise<T> {
+    return await this.baseRepository.saveEntity(entity);
+  }
+
+  async delete(id: number, soft = true): Promise<void> {
+    const entity = await this.findById(id);
+    if (entity) {
+      if (soft) {
+        await this.baseRepository.softDeleteEntity(id);
+      } else {
+        await this.baseRepository.removeEntity(entity);
+      }
+    } else {
+      throw new Error(`Entity with id ${id} not found`);
     }
-    Object.assign(entity, data);
-    return this.repository.save(entity);
-  }
-  
-  async delete(id: number): Promise<boolean> {
-    const result = await this.repository.softDelete(id);
-    return result.affected > 0;
-  }
-  
-  async restore(id: number): Promise<boolean> {
-    const result = await this.repository.restore(id);
-    return result.affected > 0;
   }
 }

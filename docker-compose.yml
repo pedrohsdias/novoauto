@@ -10,8 +10,8 @@ services:
       POSTGRES_DB: yourdatabase
     ports:
       - "5433:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+#    volumes:
+      # - postgres_data:/var/lib/postgresql/data
     networks:
       - postgres_network
 
@@ -28,8 +28,8 @@ services:
     networks:
       - postgres_network
 
-volumes:
-  postgres_data:
+#volumes:
+#  postgres_data:
 
 networks:
   postgres_network:

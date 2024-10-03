@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ModeloLaudoModule } from './modelo-de-laudo/ModeloLaudo.module';
+import { ModeloVistoriaModule } from './modelo-de-vistoria/ModeloVistoria.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppDataSource } from './config/data-source';
-import { ModeloLaudoService } from './modelo-de-laudo/service/ModeloLaudo.service';
+import { ModeloVistoriaService } from './modelo-de-vistoria/service/ModeloVistoria.service';
 
 @Module({
-  imports: [ModeloLaudoModule, TypeOrmModule.forRoot(AppDataSource.options)],
+  imports: [ModeloVistoriaModule, TypeOrmModule.forRoot(AppDataSource.options)],
   controllers: [],
-  providers: [ModeloLaudoService],
+  providers: [ModeloVistoriaService],
 })
 export class AppModule {}

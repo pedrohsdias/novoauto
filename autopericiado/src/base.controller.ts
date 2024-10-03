@@ -1,20 +1,18 @@
 import {
   Get,
-  Post,
-  Put,
-  Delete,
   Param,
+  Post,
   Body,
+  Delete,
+  Patch,
   Controller,
-  HttpException,
-  HttpStatus,
 } from '@nestjs/common';
-import { BaseService } from './base.service';
 import { BaseEntity } from './base.entity';
+import { BaseService } from './base.service';
 
 @Controller()
 export class BaseController<T extends BaseEntity> {
-  constructor(private readonly baseService: BaseService<T>) {}
+  constructor(protected readonly baseService: BaseService<T>) {}
 
   @Get()
   async findAll(): Promise<T[]> {
@@ -22,41 +20,25 @@ export class BaseController<T extends BaseEntity> {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<T> {
-    const entity = await this.baseService.findOne(id);
-    if (!entity) {
-      throw new HttpException('Entity not found', HttpStatus.NOT_FOUND);
-    }
-    return entity;
+  async findById(@Param('id') id: number): Promise<T | null> {
+    return this.baseService.findById(id);
   }
 
   @Post()
-  async create(@Body() data: Partial<T>): Promise<T> {
-    return this.baseService.create(data);
+  async create(@Body() entity: T): Promise<T> {
+    return this.baseService.create(entity);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: number, @Body() data: Partial<T>): Promise<T> {
-    const updatedEntity = await this.baseService.update(id, data);
-    if (!updatedEntity) {
-      throw new HttpException('Entity not found', HttpStatus.NOT_FOUND);
+  @Patch(':id')
+  async update(@Param('id') id: number, @Body() entity: T): Promise<T> {
+    const existingEntity = await this.baseService.findById(id);
+    if (!existingEntity) {
+      throw new Error(`Entity with id ${id} not found`);
     }
-    return updatedEntity;
+    return this.baseService.update(entity);
   }
-
   @Delete(':id')
-  async delete(@Param('id') id: number): Promise<void> {
-    const deleted = await this.baseService.delete(id);
-    if (!deleted) {
-      throw new HttpException('Entity not found', HttpStatus.NOT_FOUND);
-    }
-  }
-
-  @Put(':id/restore')
-  async restore(@Param('id') id: number): Promise<void> {
-    const restored = await this.baseService.restore(id);
-    if (!restored) {
-      throw new HttpException('Entity not found', HttpStatus.NOT_FOUND);
-    }
+  async remove(@Param('id') id: number): Promise<void> {
+    await this.baseService.delete(id);
   }
 }
