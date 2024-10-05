@@ -1,7 +1,6 @@
-import { Entity, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { Campos } from './campos.entity';
 import { BaseEntity } from '../../base.entity';
-
 
 @Entity('opcoes_campo')
 export class OpcoesCampo extends BaseEntity {
@@ -11,16 +10,18 @@ export class OpcoesCampo extends BaseEntity {
   @Column()
   alias: string;
 
-  @Column({ default: false })
-  eh_padrao: boolean;
+  @Column({ name: 'eh_padrao', default: false })
+  ehPadrao: boolean;
 
   @Column({
+    name: 'nivel_risco',
     type: 'enum',
     enum: ['padrao', 'sucesso', 'aviso', 'erro'],
     default: 'padrao',
   })
-  risco: string;
+  nivelRisco: string;
 
   @ManyToOne(() => Campos, (campo) => campo.opcoesCampo)
+  @JoinColumn({ name: 'campo_id' })
   campo: Campos;
 }

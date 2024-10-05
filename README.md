@@ -22,7 +22,7 @@ npm install --save @nestjs/swagger swagger-ui-express
 nest generate module modelo-de-laudo
 nest generate controller modelo-de-laudo
 #precisei fazer alterações nos scripts do package.json
-npm run typeorm migration:generate src/migrations/CreateAllTables
+npm run typeorm migration:generate src/migrations/criaTabelasModeloVistoria
 npm run typeorm migration:run
 npm run typeorm -- migration:run -d src/config/data-source.ts"
 ```

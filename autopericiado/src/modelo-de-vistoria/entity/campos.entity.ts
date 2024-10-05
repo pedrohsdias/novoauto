@@ -17,9 +17,10 @@ export class Campos extends BaseEntity {
   tiposCampo: TiposCampo;
 
   @ManyToOne(() => ModeloVistoria, (modeloVistoria) => modeloVistoria.campos)
+  @JoinColumn({ name: 'modelo_vistoria_id' })
   modeloVistoria: ModeloVistoria;
 
-  @Column('qtd_selecionado')
+  @Column({ name: 'qtd_selecionado' })
   qtdSelecionado: number;
 
   @OneToMany(() => OpcoesCampo, (opcaoCampo) => opcaoCampo.campo)

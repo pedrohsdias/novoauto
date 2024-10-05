@@ -5,10 +5,8 @@ import { BaseService } from '../../base.service';
 
 @Injectable()
 export class ModeloVistoriaService extends BaseService<ModeloVistoria> {
-  constructor(
-    protected readonly modeloVistoriaRepository: ModeloVistoriaRepository,
-  ) {
-    super(modeloVistoriaRepository); // Passa o ModeloVistoriaRepository para o BaseService
+  constructor(protected readonly repository: ModeloVistoriaRepository) {
+    super(repository); // Passa o ModeloVistoriaRepository para o BaseService
   }
 
   // Métodos específicos do serviço ModeloVistoria podem ser adicionados aqui
