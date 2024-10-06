@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ModeloVistoriaRepository } from './repository/ModeloVistoria.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ModeloVistoria } from './entity/modelo-vistoria.entity';
+import { ModelosVistoria } from './entity/modelos-vistoria.entity';
 import { ModeloVistoriaService } from './service/ModeloVistoria.service';
 import { ModeloVistoriaController } from './controller/ModeloVistoria.controller';
 import { Blocos } from './entity/blocos.entity';
@@ -14,7 +14,7 @@ import { TiposBloco } from './entity/tipos-bloco.entity';
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      ModeloVistoria,
+      ModelosVistoria,
       Blocos,
       Campos,
       ModelosVistoriaBlocos,

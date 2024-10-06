@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { ModeloVistoria } from './modelo-vistoria.entity';
+import { ModelosVistoria } from './modelos-vistoria.entity';
 import { Blocos } from './blocos.entity';
 
 @Entity('modelos_vistoria_blocos')
@@ -7,11 +7,11 @@ export class ModelosVistoriaBlocos {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => ModeloVistoria, (mv) => mv.modelosVistoriaBlocos)
+  @ManyToOne(() => ModelosVistoria, (mv) => mv.modelosVistoriaBlocos)
   @JoinColumn({ name: 'modelo_vistoria_id' })
-  modeloVistoria: ModeloVistoria;
+  modeloVistoria: ModelosVistoria;
 
   @ManyToOne(() => Blocos, (blocos) => blocos.modelosVistoriaBlocos)
-  @JoinColumn({ name: 'blocos_id' })
+  @JoinColumn({ name: 'bloco_id' })
   blocos: Blocos;
 }

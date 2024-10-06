@@ -1,8 +1,8 @@
 import { Entity, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { TiposCampo } from './tipos-campo.entity';
-import { ModeloVistoria } from './modelo-vistoria.entity';
 import { OpcoesCampo } from './opcoes-campo.entity';
 import { BaseEntity } from '../../base.entity';
+import { Blocos } from './blocos.entity';
 
 @Entity('campos')
 export class Campos extends BaseEntity {
@@ -13,12 +13,12 @@ export class Campos extends BaseEntity {
   alias: string;
 
   @ManyToOne(() => TiposCampo, (tiposCampo) => tiposCampo.campos)
-  @JoinColumn({ name: 'tipos_campos_id' })
+  @JoinColumn({ name: 'tipo_campo_id' })
   tiposCampo: TiposCampo;
 
-  @ManyToOne(() => ModeloVistoria, (modeloVistoria) => modeloVistoria.campos)
-  @JoinColumn({ name: 'modelo_vistoria_id' })
-  modeloVistoria: ModeloVistoria;
+  @ManyToOne(() => Blocos, (bloco) => bloco.campos)
+  @JoinColumn({ name: 'bloco_id' })
+  bloco: Blocos;
 
   @Column({ name: 'qtd_selecionado' })
   qtdSelecionado: number;
