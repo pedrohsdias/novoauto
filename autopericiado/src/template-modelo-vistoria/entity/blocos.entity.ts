@@ -6,10 +6,10 @@ import {
   JoinColumn,
   ManyToMany,
 } from 'typeorm';
-import { TiposBloco } from './tipos-bloco.entity';
+import { TiposBloco } from './tiposBloco.entity';
 import { BaseEntity } from '../../base/base.entity';
 import { Campos } from './campos.entity';
-import { ModelosVistoria } from './modelos-vistoria.entity';
+import { ModelosVistoria } from './modelosVistoria.entity';
 
 @Entity('blocos')
 export class Blocos extends BaseEntity {

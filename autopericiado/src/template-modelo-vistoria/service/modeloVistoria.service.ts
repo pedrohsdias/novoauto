@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ModeloVistoriaRepository } from '../repository/modeloVistoria.repository';
-import { ModelosVistoria } from '../entity/modelos-vistoria.entity';
+import { ModelosVistoria } from '../entity/modelosVistoria.entity';
 import { BaseService } from '../../base/base.service';
 import { CreateModeloVistoriaDto } from '../dto/modeloVistoria.dto';
 import { BlocosRepository } from '../repository/blocos.repository';

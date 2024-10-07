@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { BaseRepository } from '../../base/base.repository';
 import { DataSource } from 'typeorm';
-import { TiposBloco } from '../entity/tipos-bloco.entity';
+import { TiposBloco } from '../entity/tiposBloco.entity';
 
 @Injectable()
 export class TiposBlocoRepository extends BaseRepository<TiposBloco> {

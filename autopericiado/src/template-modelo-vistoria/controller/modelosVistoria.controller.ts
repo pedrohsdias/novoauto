@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { BaseController } from '../../base/base.controller';
-import { ModelosVistoria } from '../entity/modelos-vistoria.entity';
+import { ModelosVistoria } from '../entity/modelosVistoria.entity';
 import { ModeloVistoriaService } from '../service/modeloVistoria.service';
 import {
   CreateModeloVistoriaDto,

@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { BaseController } from '../../base/base.controller';
-import { OpcoesCampo } from '../entity/opcoes-campo.entity';
+import { OpcoesCampo } from '../entity/opcoesCampo.entity';
 import { OpcoesCampoService } from '../service/opcoesCampo.service';
 import {
   CreateOpcaoCampoDto,

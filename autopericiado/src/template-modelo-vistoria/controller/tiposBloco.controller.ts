@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { BaseController } from '../../base/base.controller';
-import { TiposBloco } from '../entity/tipos-bloco.entity';
+import { TiposBloco } from '../entity/tiposBloco.entity';
 import { TiposBlocoService } from '../service/tiposBloco.service';
 import { CreateTipoBlocoDto, UpdateTipoBlocoDto } from '../dto/tipoBloco.dto';
 
