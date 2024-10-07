@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { BaseRepository } from './base.repository';
 import { BaseEntity } from './base.entity';
+import { BaseDto } from './base.dto';
 
 @Injectable()
 export class BaseService<T extends BaseEntity> {
@@ -14,12 +15,19 @@ export class BaseService<T extends BaseEntity> {
     return await this.repository.findById(id);
   }
 
-  async create(entity: T): Promise<T> {
+  async create(createDto: BaseDto): Promise<T> {
+    const entity = await this.repository.create();
+    Object.assign(entity, createDto);
     return await this.repository.saveEntity(entity);
   }
 
-  async update(entity: T): Promise<T> {
-    return await this.repository.saveEntity(entity);
+  async update(id: number, udpateDto: BaseDto): Promise<T> {
+    const existingEntity = await this.findById(id);
+    if (!existingEntity) {
+      throw new Error(`Entity with id ${id} not found`);
+    }
+    Object.assign(existingEntity, udpateDto);
+    return await this.repository.saveEntity(existingEntity);
   }
 
   async delete(id: number, soft = true): Promise<void> {

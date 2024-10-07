@@ -1,7 +1,7 @@
 import { Entity, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { TiposCampo } from './tipos-campo.entity';
 import { OpcoesCampo } from './opcoes-campo.entity';
-import { BaseEntity } from '../../base.entity';
+import { BaseEntity } from '../../base/base.entity';
 import { Blocos } from './blocos.entity';
 
 @Entity('campos')

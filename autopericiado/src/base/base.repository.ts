@@ -7,8 +7,13 @@ export class BaseRepository<T extends BaseEntity> extends Repository<T> {
   constructor(
     protected readonly entity: EntityTarget<T>,
     protected readonly dataSource: DataSource,
+    private readonly entityClass: new () => T,
   ) {
     super(entity, dataSource.createEntityManager());
+  }
+
+  createInstance(): T {
+    return new this.entityClass(); // Cria uma nova instância de T
   }
 
   findAll(): Promise<T[]> {

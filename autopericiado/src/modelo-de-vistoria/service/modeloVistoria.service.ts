@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ModeloVistoriaRepository } from '../repository/ModeloVistoria.repository';
+import { ModeloVistoriaRepository } from '../repository/modeloVistoria.repository';
 import { ModelosVistoria } from '../entity/modelos-vistoria.entity';
-import { BaseService } from '../../base.service';
+import { BaseService } from '../../base/base.service';
 
 @Injectable()
 export class ModeloVistoriaService extends BaseService<ModelosVistoria> {

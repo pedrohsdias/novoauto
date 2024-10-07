@@ -7,8 +7,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 import { TiposBloco } from './tipos-bloco.entity';
-import { ModelosVistoriaBlocos } from './modelos-vistoria-blocos.entity';
-import { BaseEntity } from '../../base.entity';
+import { BaseEntity } from '../../base/base.entity';
 import { Campos } from './campos.entity';
 import { ModelosVistoria } from './modelos-vistoria.entity';
 
@@ -20,9 +19,6 @@ export class Blocos extends BaseEntity {
   @ManyToOne(() => TiposBloco, (tipoBloco) => tipoBloco.blocos)
   @JoinColumn({ name: 'tipo_bloco_id' })
   tiposBloco: TiposBloco;
-
-  @OneToMany(() => ModelosVistoriaBlocos, (mlb) => mlb.blocos)
-  modelosVistoriaBlocos: ModelosVistoriaBlocos[];
 
   @ManyToMany(() => ModelosVistoria, (modeloVistoria) => modeloVistoria.blocos)
   modelosVistoria: ModelosVistoria[];

@@ -1,11 +1,29 @@
-import { Controller } from '@nestjs/common';
-import { BaseController } from '../../base.controller';
+import { Body, Controller, Param, Post, Put } from '@nestjs/common';
+import { BaseController } from '../../base/base.controller';
 import { ModelosVistoria } from '../entity/modelos-vistoria.entity';
-import { ModeloVistoriaService } from '../service/ModeloVistoria.service';
+import { ModeloVistoriaService } from '../service/modeloVistoria.service';
+import {
+  CreateModeloVistoriaDto,
+  UpdateModeloVistoriaDto,
+} from '../dto/modeloVistoria.dto';
 
 @Controller('modelo-vistoria')
 export class ModeloVistoriaController extends BaseController<ModelosVistoria> {
   constructor(protected readonly baseService: ModeloVistoriaService) {
     super(baseService);
+  }
+  @Post()
+  async create(
+    @Body() createDto: CreateModeloVistoriaDto,
+  ): Promise<ModelosVistoria> {
+    return super.create(createDto);
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id') id: number,
+    @Body() updateDto: UpdateModeloVistoriaDto,
+  ): Promise<ModelosVistoria> {
+    return super.update(id, updateDto);
   }
 }

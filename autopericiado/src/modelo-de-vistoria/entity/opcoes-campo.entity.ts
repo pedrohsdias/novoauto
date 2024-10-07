@@ -1,6 +1,7 @@
 import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { Campos } from './campos.entity';
-import { BaseEntity } from '../../base.entity';
+import { BaseEntity } from '../../base/base.entity';
+import { NivelRiscoEnum } from '../enum/nivelRisco.enum';
 
 @Entity('opcoes_campo')
 export class OpcoesCampo extends BaseEntity {
@@ -16,8 +17,8 @@ export class OpcoesCampo extends BaseEntity {
   @Column({
     name: 'nivel_risco',
     type: 'enum',
-    enum: ['padrao', 'sucesso', 'aviso', 'erro'],
-    default: 'padrao',
+    enum: NivelRiscoEnum,
+    default: NivelRiscoEnum.PADRAO,
   })
   nivelRisco: string;
 

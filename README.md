@@ -17,6 +17,8 @@ cd autopericiado && nvm use 21 && npm run start:dev
 ```bash
 npm install --save @nestjs/typeorm typeorm pg
 npm install dotenv
+npm install class-validator 
+
 npm install --save @nestjs/swagger swagger-ui-express
 
 nest generate module modelo-de-laudo
