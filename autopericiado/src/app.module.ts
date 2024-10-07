@@ -1,11 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ModeloVistoriaModule } from './modelo-de-vistoria/ModeloVistoria.module';
+import { TemplateModeloVistoriaModule } from './template-modelo-vistoria/TemplateModeloVistoriaModule';
 import { TypeOrmModule } from '@nestjs/typeorm';
-// import { AppDataSource } from './config/data-source';
-import { ModeloVistoriaService } from './modelo-de-vistoria/service/modeloVistoria.service';
 import { DbConfigService } from './config/data-source';
-// import { AutenticacaoModule } from './autenticacao/autenticacao.module';
-// import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -13,13 +9,9 @@ import { DbConfigService } from './config/data-source';
       useClass: DbConfigService,
       inject: [DbConfigService],
     }),
-    ModeloVistoriaModule,
-    // AutenticacaoModule,
-    // ConfigModule.forRoot({
-    //   isGlobal: true,
-    // }),
+    TemplateModeloVistoriaModule,
   ],
   controllers: [],
-  providers: [ModeloVistoriaService],
+  providers: [],
 })
 export class AppModule {}

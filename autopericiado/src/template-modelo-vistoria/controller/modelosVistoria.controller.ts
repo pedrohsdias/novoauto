@@ -8,7 +8,7 @@ import {
 } from '../dto/modeloVistoria.dto';
 
 @Controller('modelo-vistoria')
-export class ModeloVistoriaController extends BaseController<ModelosVistoria> {
+export class ModelosVistoriaController extends BaseController<ModelosVistoria> {
   constructor(protected readonly baseService: ModeloVistoriaService) {
     super(baseService);
   }
