@@ -9,6 +9,11 @@ import { Campos } from './entity/campos.entity';
 import { OpcoesCampo } from './entity/opcoes-campo.entity';
 import { TiposCampo } from './entity/tipos-campo.entity';
 import { TiposBloco } from './entity/tipos-bloco.entity';
+import { BlocosRepository } from './repository/blocos.repository';
+import { CamposRepository } from './repository/campos.repository';
+import { OpcoesCampoRepository } from './repository/opcoesCampo.repository';
+import { TiposCampoRepository } from './repository/tiposCampo.repository';
+import { TiposBlocoRepository } from './repository/tiposBloco.repository';
 
 @Module({
   imports: [
@@ -21,7 +26,15 @@ import { TiposBloco } from './entity/tipos-bloco.entity';
       TiposBloco,
     ]),
   ],
-  providers: [ModeloVistoriaService, ModeloVistoriaRepository],
+  providers: [
+    ModeloVistoriaService,
+    ModeloVistoriaRepository,
+    BlocosRepository,
+    CamposRepository,
+    OpcoesCampoRepository,
+    TiposCampoRepository,
+    TiposBlocoRepository,
+  ],
   controllers: [ModeloVistoriaController],
   exports: [ModeloVistoriaRepository],
 })

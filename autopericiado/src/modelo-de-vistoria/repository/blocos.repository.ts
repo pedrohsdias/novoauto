@@ -4,7 +4,7 @@ import { DataSource } from 'typeorm';
 import { Blocos } from '../entity/blocos.entity';
 
 @Injectable()
-export class ModeloVistoriaRepository extends BaseRepository<Blocos> {
+export class BlocosRepository extends BaseRepository<Blocos> {
   constructor(dataSource: DataSource) {
     super(Blocos, dataSource, Blocos);
   }

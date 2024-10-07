@@ -4,7 +4,7 @@ import { DataSource } from 'typeorm';
 import { Campos } from '../entity/campos.entity';
 
 @Injectable()
-export class ModeloVistoriaRepository extends BaseRepository<Campos> {
+export class CamposRepository extends BaseRepository<Campos> {
   constructor(dataSource: DataSource) {
     super(Campos, dataSource, Campos);
   }
