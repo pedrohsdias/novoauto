@@ -5,7 +5,7 @@ import { EstadosEntity } from './estados.entity';
 
 @Entity('municipios')
 export class MunicipiosEntity extends BaseEntity {
-  @Column()
+  @Column({ length: 150 })
   nome: string;
 
   @ManyToOne(() => EstadosEntity, (estado) => estado.municipios)

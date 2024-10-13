@@ -6,7 +6,7 @@ import { OrdensServicoEntity } from '../../vistoria/entity/ordensServico.entity'
 
 @Entity('modelos_vistoria')
 export class ModelosVistoriaEntity extends BaseEntity {
-  @Column()
+  @Column({ length: 100 })
   nome: string;
 
   @ManyToMany(() => BlocosEntity, (bloco) => bloco.modelosVistoria)

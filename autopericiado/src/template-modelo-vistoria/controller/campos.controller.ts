@@ -16,7 +16,7 @@ export class CamposController extends BaseController<CamposEntity> {
 
   @Put(':id')
   async update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() updateDto: UpdateCampoDto,
   ): Promise<CamposEntity> {
     return super.update(id, updateDto);

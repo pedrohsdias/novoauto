@@ -5,7 +5,6 @@ import {
   Body,
   Delete,
   Controller,
-  ParseIntPipe,
   Put,
 } from '@nestjs/common';
 import { BaseEntity } from './base.entity';
@@ -22,7 +21,7 @@ export class BaseController<T extends BaseEntity> {
   }
 
   @Get(':id')
-  async findById(@Param('id', ParseIntPipe) id: number): Promise<T | null> {
+  async findById(@Param('id') id: string): Promise<T | null> {
     return this.service.findById(id);
   }
 
@@ -33,13 +32,13 @@ export class BaseController<T extends BaseEntity> {
 
   @Put(':id')
   async update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: string,
     @Body() updateDto: BaseDto,
   ): Promise<T> {
     return this.service.update(id, updateDto);
   }
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
+  async remove(@Param('id') id: string): Promise<void> {
     await this.service.delete(id);
   }
 }

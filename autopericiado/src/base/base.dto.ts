@@ -2,7 +2,7 @@ import { IsOptional } from 'class-validator';
 
 export class BaseDto {
   @IsOptional()
-  id: number;
+  id: string;
   @IsOptional()
   createdAt: Date;
   @IsOptional()

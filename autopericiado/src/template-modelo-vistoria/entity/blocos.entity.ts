@@ -6,10 +6,10 @@ import { TipoBLocoEnum } from '../enum/tipoBLoco.enum';
 
 @Entity('blocos')
 export class BlocosEntity extends BaseEntity {
-  @Column()
+  @Column({ length: 75 })
   nome: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, length: 30 })
   fontAwesomeIcon: string;
 
   @Column({

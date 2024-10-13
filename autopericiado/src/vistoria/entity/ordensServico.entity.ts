@@ -13,7 +13,7 @@ import { ClientesEntity } from './clientes.entity';
 export class OrdensServicoEntity extends BaseEntity {
   usuarioFinalizador: number;
 
-  @Column()
+  @Column({ length: 50 })
   sequenciador: string;
 
   @ManyToOne(() => ClientesEntity, (cliente) => cliente.ordensServico)
@@ -39,17 +39,17 @@ export class OrdensServicoEntity extends BaseEntity {
   })
   tipoDadoConsultado: TipoDadoConsultadoEnum;
 
-  @Column({ name: `dado_consultado`, nullable: true })
+  @Column({ name: `dado_consultado`, length: 10, nullable: true })
   dadoConsultado: string;
 
-  @Column({ nullable: true })
+  @Column({ length: 200, nullable: true })
   comentario: string;
 
-  @Column()
-  custo: string;
+  @Column('decimal', { precision: 10, scale: 2, comment: 'Valor em reais' })
+  custo: number;
 
-  @Column()
-  preco: string;
+  @Column('decimal', { precision: 10, scale: 2, comment: 'Valor em reais' })
+  preco: number;
 
   @Column({
     name: 'status',

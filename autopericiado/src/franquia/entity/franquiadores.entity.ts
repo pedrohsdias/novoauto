@@ -6,11 +6,12 @@ import { UnidadesEntity } from './unidades.entity';
 @Entity('franquiadores')
 export class FranquiadoresEntity extends BaseEntity {
   @Column({
+    length: 150,
     comment: 'nome para exibição em tela, é o msm valor do homônimo em pessoa',
   })
   apelido: string;
 
-  @Column({ name: 'link_logo' })
+  @Column({ name: 'link_logo', length: 200 })
   linkLogo: string;
 
   @Column({ name: 'termo_data_aceite', nullable: true })

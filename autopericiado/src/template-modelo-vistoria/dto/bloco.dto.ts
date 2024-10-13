@@ -7,12 +7,12 @@ export class CreateBlocoDto extends BaseDto {
   @ApiProperty()
   nome: string;
   @IsNumber()
-  tipoBlocoId: number; // ID do tipo de bloco
+  tipoBlocoId: string; // ID do tipo de bloco
 }
 
 export class UpdateBlocoDto extends CreateBlocoDto {
   @IsOptional()
   nome: string;
   @IsOptional()
-  tipoBlocoId: number;
+  tipoBlocoId: string;
 }

@@ -20,7 +20,7 @@ export class BaseRepository<T extends BaseEntity> extends Repository<T> {
     return this.find();
   }
 
-  findById(id: number): Promise<T | null> {
+  findById(id: string): Promise<T | null> {
     const options: FindOneOptions<T> = {
       where: { id } as any, // 'as any' usado para contornar o erro de tipagem
     };
@@ -35,7 +35,7 @@ export class BaseRepository<T extends BaseEntity> extends Repository<T> {
     await this.remove(entity);
   }
 
-  async softDeleteEntity(id: number): Promise<void> {
+  async softDeleteEntity(id: string): Promise<void> {
     await this.softDelete(id);
   }
 }

@@ -6,15 +6,15 @@ import { PessoasEntity } from './pessoas.entity';
 
 @Entity('enderecos')
 export class EnderecosEntity extends BaseEntity {
-  @Column({ nullable: true })
+  @Column({ length: 200 })
   logradouro: string;
-  @Column()
+  @Column({ length: 15, default: 'S/N' })
   numero: string;
-  @Column()
+  @Column({ length: 150 })
   complemento: string;
-  @Column()
+  @Column({ length: 8 })
   cep: string;
-  @Column()
+  @Column({ length: 70 })
   bairro: string;
 
   @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.enderecos)

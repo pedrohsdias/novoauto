@@ -4,10 +4,10 @@ import { MunicipiosEntity } from './municipios.entity';
 
 @Entity('estados')
 export class EstadosEntity extends BaseEntity {
-  @Column()
+  @Column({ length: 70 })
   nome: string;
 
-  @Column()
+  @Column({ length: 2 })
   uf: string;
 
   @OneToMany(() => MunicipiosEntity, (municipio) => municipio.estado)

@@ -5,8 +5,8 @@ import {
   DeleteDateColumn,
 } from 'typeorm';
 export class BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAt: Date;

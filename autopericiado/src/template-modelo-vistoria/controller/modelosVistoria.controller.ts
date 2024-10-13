@@ -21,7 +21,7 @@ export class ModelosVistoriaController extends BaseController<ModelosVistoriaEnt
 
   @Put(':id')
   async update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() updateDto: UpdateModeloVistoriaDto,
   ): Promise<ModelosVistoriaEntity> {
     return super.update(id, updateDto);

@@ -6,10 +6,13 @@ import { TipoCampoEnum } from '../enum/tipoCampo.enum';
 
 @Entity('campos')
 export class CamposEntity extends BaseEntity {
-  @Column()
+  @Column({ length: 100 })
   nome: string;
 
-  @Column({ comment: 'Campo tipo slug para usara em referencias especificas' })
+  @Column({
+    comment: 'Campo tipo slug para usara em referencias especificas',
+    length: 100,
+  })
   alias: string;
 
   @Column({

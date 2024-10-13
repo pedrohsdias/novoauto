@@ -5,7 +5,7 @@ import { PessoasEntity } from './pessoas.entity';
 
 @Entity('telefones')
 export class TelefonesEntity extends BaseEntity {
-  @Column()
+  @Column({ length: 15 })
   numero: string;
 
   @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.telefones)

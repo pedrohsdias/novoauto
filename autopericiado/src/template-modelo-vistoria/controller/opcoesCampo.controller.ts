@@ -21,7 +21,7 @@ export class OpcoesCampoController extends BaseController<OpcoesCampoEntity> {
 
   @Put(':id')
   async update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() updateDto: UpdateOpcaoCampoDto,
   ): Promise<OpcoesCampoEntity> {
     return super.update(id, updateDto);

@@ -13,7 +13,7 @@ import { UnidadesEntity } from './unidades.entity';
 
 @Entity('servicos')
 export class ServicosEntity extends BaseEntity {
-  @Column()
+  @Column({ length: 150 })
   nome: string;
 
   @Column({
@@ -24,10 +24,10 @@ export class ServicosEntity extends BaseEntity {
   })
   tipo: TipoServicoEnum;
 
-  @Column()
+  @Column('decimal', { precision: 10, scale: 2, comment: 'Valor em reais' })
   custo: number;
 
-  @Column()
+  @Column('decimal', { precision: 10, scale: 2, comment: 'Valor em reais' })
   preco: number;
 
   @Column()

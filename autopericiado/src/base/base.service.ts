@@ -11,7 +11,7 @@ export class BaseService<T extends BaseEntity> {
     return await this.repository.findAll();
   }
 
-  async findById(id: number): Promise<T | null> {
+  async findById(id: string): Promise<T | null> {
     return await this.repository.findById(id);
   }
 
@@ -21,7 +21,7 @@ export class BaseService<T extends BaseEntity> {
     return await this.repository.saveEntity(entity);
   }
 
-  async update(id: number, udpateDto: BaseDto): Promise<T> {
+  async update(id: string, udpateDto: BaseDto): Promise<T> {
     const existingEntity = await this.findById(id);
     if (!existingEntity) {
       throw new Error(`Entity with id ${id} not found`);
@@ -30,7 +30,7 @@ export class BaseService<T extends BaseEntity> {
     return await this.repository.saveEntity(existingEntity);
   }
 
-  async delete(id: number, soft = true): Promise<void> {
+  async delete(id: string, soft = true): Promise<void> {
     const entity = await this.findById(id);
     if (entity) {
       if (soft) {

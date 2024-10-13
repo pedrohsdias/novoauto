@@ -10,18 +10,20 @@ import { ClientesEntity } from '../../vistoria/entity/clientes.entity';
 @Entity('pessoa')
 export class PessoasEntity extends BaseEntity {
   @Column({
+    length: 150,
     nullable: true,
     comment: 'Apelido para pf e nome fantasia para pj',
   })
   apelido: string;
 
   @Column({
+    length: 200,
     name: 'nome_formal',
     comment: 'Nome como no RG ou razão social para pj',
   })
   nomeFormal: string;
 
-  @Column({ nullable: true, comment: 'CPF ou CNPJ' })
+  @Column({ length: 18, nullable: true, comment: 'CPF ou CNPJ' })
   documento: string;
 
   @Column({

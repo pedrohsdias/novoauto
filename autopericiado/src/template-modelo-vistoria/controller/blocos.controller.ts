@@ -16,7 +16,7 @@ export class BlocosController extends BaseController<BlocosEntity> {
 
   @Put(':id')
   async update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() updateDto: UpdateBlocoDto,
   ): Promise<BlocosEntity> {
     return super.update(id, updateDto);

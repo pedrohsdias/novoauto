@@ -10,10 +10,10 @@ export class CreateCampoDto extends BaseDto {
   qtdSelecionado: number;
   @IsNotEmpty()
   @IsNumber()
-  tipoCampoId: number; // ID do tipo de campo
+  tipoCampoId: string; // ID do tipo de campo
   @IsNotEmpty()
   @IsNumber()
-  blocoId: number; // ID do bloco ao qual o campo pertence
+  blocoId: string; // ID do bloco ao qual o campo pertence
 }
 
 export class UpdateCampoDto extends CreateCampoDto {
@@ -23,7 +23,7 @@ export class UpdateCampoDto extends CreateCampoDto {
   @IsOptional()
   qtdSelecionado: number;
   @IsOptional()
-  tipoCampoId: number;
+  tipoCampoId: string;
   @IsOptional()
-  blocoId: number;
+  blocoId: string;
 }

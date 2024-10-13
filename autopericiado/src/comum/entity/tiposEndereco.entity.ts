@@ -4,7 +4,7 @@ import { EnderecosEntity } from './enderecos.entity';
 
 @Entity('tipos_endereco')
 export class TiposEnderecoEntity extends BaseEntity {
-  @Column()
+  @Column({ length: 30 })
   descricao: string;
   @OneToMany(() => EnderecosEntity, (endereco) => endereco.tipo)
   enderecos: EnderecosEntity[];

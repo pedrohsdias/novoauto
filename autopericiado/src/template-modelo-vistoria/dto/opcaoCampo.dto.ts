@@ -19,7 +19,7 @@ export class CreateOpcaoCampoDto extends BaseDto {
   @IsEnum(NivelRiscoEnum)
   nivelRisco: string; // Pode ser um Enum, dependendo de como está definido
   @IsNumber()
-  campoId: number; // ID do campo associado
+  campoId: string; // ID do campo associado
 }
 
 export class UpdateOpcaoCampoDto extends CreateOpcaoCampoDto {
@@ -32,5 +32,5 @@ export class UpdateOpcaoCampoDto extends CreateOpcaoCampoDto {
   @IsOptional()
   nivelRisco: string;
   @IsOptional()
-  campoId: number;
+  campoId: string;
 }
