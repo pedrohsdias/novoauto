@@ -1,0 +1,7 @@
+@startuml
+entity servicos_modelos_vistoria {
+  +modelo_vistoria_id : integer
+  +servico_id : integer
+}
+
+@enduml

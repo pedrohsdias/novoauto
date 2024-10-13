@@ -1,0 +1,14 @@
+@startuml
+entity franquiador {
+  +id : serial
+  --
+  +created_at : timestamp
+  +updated_at : timestamp
+  +deleted_at : timestamp
+  +apelido : varchar
+  +link_logo : varchar
+  +termo_data_aceite : timestamp
+  +termo_usuario_id : varchar
+  +pessoa_id : integer
+}
+@enduml

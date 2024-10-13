@@ -1,0 +1,12 @@
+@startuml
+entity unidades {
+  +id : serial
+  --
+  +created_at : timestamp
+  +updated_at : timestamp
+  +deleted_at : timestamp
+  +apelido : varchar
+  +franquiador_id : integer
+  +pessoa_id : integer
+}
+@enduml

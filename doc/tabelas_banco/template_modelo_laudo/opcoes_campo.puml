@@ -1,0 +1,15 @@
+@startuml
+
+entity opcoes_campo {
+  +id : serial
+  --
+  +created_at : timestamp
+  +updated_at : timestamp
+  +deleted_at : timestamp
+  +nome : varchar
+  +alias : varchar
+  +eh_padrao : boolean
+  +nivel_risco : enum
+  +campo_id : integer
+}
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+entity estados {
+  +id : serial
+  --
+  +created_at : timestamp
+  +updated_at : timestamp
+  +deleted_at : timestamp
+  +nome : varchar
+  +uf : varchar
+}
+@enduml

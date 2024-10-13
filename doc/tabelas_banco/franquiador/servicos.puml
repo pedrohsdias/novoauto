@@ -1,0 +1,16 @@
+@startuml
+entity servicos {
+  +id : serial
+  --
+  +created_at : timestamp
+  +updated_at : timestamp
+  +deleted_at : timestamp
+  +nome : varchar
+  +tipo_servico : enum
+  +custo : integer
+  +preco : integer
+  +consulta : integer
+  +unidade_id : integer
+}
+
+@enduml

@@ -1,9 +1,0 @@
-entity "Tabela Campos" as campos {
-  +id: int [PK]
-  --
-  nome: varchar(255)
-  alias: varchar(255)
-  tipos_campo_id: int [FK]
-  modelos_laudo_id: int [FK]
-  qtd_selecionado: int
-}

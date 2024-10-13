@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { ModeloVistoriaRepository } from '../repository/modeloVistoria.repository';
-import { ModelosVistoria } from '../entity/modelosVistoria.entity';
+import { ModelosVistoriaEntity } from '../entity/modelosVistoria.entity';
 import { BaseService } from '../../base/base.service';
 import { CreateModeloVistoriaDto } from '../dto/modeloVistoria.dto';
 import { BlocosRepository } from '../repository/blocos.repository';
 
 @Injectable()
-export class ModeloVistoriaService extends BaseService<ModelosVistoria> {
+export class ModeloVistoriaService extends BaseService<ModelosVistoriaEntity> {
   constructor(
     protected readonly repository: ModeloVistoriaRepository,
     protected readonly blocosRepository: BlocosRepository,
@@ -15,7 +15,7 @@ export class ModeloVistoriaService extends BaseService<ModelosVistoria> {
   }
   async create(
     createModeloVistoriaDto: CreateModeloVistoriaDto,
-  ): Promise<ModelosVistoria> {
+  ): Promise<ModelosVistoriaEntity> {
     const { nome, blocos } = createModeloVistoriaDto;
 
     // Criar o modelo de vistoria

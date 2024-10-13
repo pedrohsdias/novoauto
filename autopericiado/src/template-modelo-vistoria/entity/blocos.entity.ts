@@ -1,28 +1,37 @@
-import {
-  Entity,
-  Column,
-  ManyToOne,
-  OneToMany,
-  JoinColumn,
-  ManyToMany,
-} from 'typeorm';
-import { TiposBloco } from './tiposBloco.entity';
+import { Entity, Column, OneToMany, ManyToMany } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
-import { Campos } from './campos.entity';
-import { ModelosVistoria } from './modelosVistoria.entity';
+import { CamposEntity } from './campos.entity';
+import { ModelosVistoriaEntity } from './modelosVistoria.entity';
+import { TipoBLocoEnum } from '../enum/tipoBLoco.enum';
 
 @Entity('blocos')
-export class Blocos extends BaseEntity {
+export class BlocosEntity extends BaseEntity {
   @Column()
   nome: string;
 
-  @ManyToOne(() => TiposBloco, (tipoBloco) => tipoBloco.blocos)
-  @JoinColumn({ name: 'tipo_bloco_id' })
-  tiposBloco: TiposBloco;
+  @Column()
+  fontAwesomeIcon: string;
 
-  @ManyToMany(() => ModelosVistoria, (modeloVistoria) => modeloVistoria.blocos)
-  modelosVistoria: ModelosVistoria[];
+  @Column({
+    name: 'imagem_caminho',
+    comment: 'Somente preenchido quando tipo bloco = imagem',
+  })
+  imagemCaminho: string;
 
-  @OneToMany(() => Campos, (campo) => campo.bloco)
-  campos: Campos[];
+  @Column({
+    name: 'tipo_bloco',
+    type: 'enum',
+    enum: TipoBLocoEnum,
+    default: TipoBLocoEnum.PADRAO,
+  })
+  tipo: TipoBLocoEnum;
+
+  @ManyToMany(
+    () => ModelosVistoriaEntity,
+    (modeloVistoria) => modeloVistoria.blocos,
+  )
+  modelosVistoria: ModelosVistoriaEntity[];
+
+  @OneToMany(() => CamposEntity, (campo) => campo.bloco)
+  campos: CamposEntity[];
 }

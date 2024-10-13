@@ -1,0 +1,11 @@
+@startuml
+entity tipos_bloco {
+  +id : serial
+  --
+  +created_at : timestamp
+  +updated_at : timestamp
+  +deleted_at : timestamp
+  +nome : varchar
+  +descricao : varchar
+}
+@enduml

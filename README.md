@@ -24,10 +24,6 @@ npm install --save @nestjs/swagger swagger-ui-express
 nest generate module modelo-de-laudo
 nest generate controller modelo-de-laudo
 #precisei fazer alterações nos scripts do package.json
-npm run typeorm migration:generate src/migrations/criaTabelasModeloVistoria
+npm run typeorm migration:generate src/migrations/cria_template_modelo_laudo_franquiador_comum
 npm run typeorm migration:run
-npm run typeorm -- migration:run -d src/config/data-source.ts"
 ```
- ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --d src/config/data-source.ts migration:generate -n CreateAllTables src/migrations
-
-"typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",

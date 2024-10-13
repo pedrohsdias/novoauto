@@ -1,0 +1,14 @@
+@startuml
+entity pessoa {
+  +id : serial
+  --
+  +created_at : timestamp
+  +updated_at : timestamp
+  +deleted_at : timestamp
+  +apelido : varchar
+  +nome_formal : varchar
+  +documento : varchar
+  +tipo_documento : enum
+}
+
+@enduml

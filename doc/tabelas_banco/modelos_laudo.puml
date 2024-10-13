@@ -1,5 +1,0 @@
-entity "Tabela Modelos Laudo" as modelos_laudo {
-  +id: int [PK]
-  --
-  nome: varchar(255)
-}

@@ -1,0 +1,7 @@
+@startuml
+
+entity modelos_vistoria_blocos {
+  +modelo_vistoria_id : integer
+  +bloco_id : integer
+}
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+
+entity modelos_vistoria {
+  +id : serial
+  --
+  +created_at : timestamp
+  +updated_at : timestamp
+  +deleted_at : timestamp
+  +nome : varchar
+}
+@enduml

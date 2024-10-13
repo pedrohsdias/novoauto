@@ -1,28 +1,43 @@
 import { Entity, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
-import { TiposCampo } from './tiposCampo.entity';
-import { OpcoesCampo } from './opcoesCampo.entity';
+import { OpcoesCampoEntity } from './opcoesCampo.entity';
 import { BaseEntity } from '../../base/base.entity';
-import { Blocos } from './blocos.entity';
+import { BlocosEntity } from './blocos.entity';
+import { TipoCampoEnum } from '../enum/tipoCampo.enum';
 
 @Entity('campos')
-export class Campos extends BaseEntity {
+export class CamposEntity extends BaseEntity {
   @Column()
   nome: string;
 
   @Column()
   alias: string;
 
-  @ManyToOne(() => TiposCampo, (tiposCampo) => tiposCampo.campos)
-  @JoinColumn({ name: 'tipo_campo_id' })
-  tiposCampo: TiposCampo;
+  @Column({
+    name: 'tipo_campo',
+    type: 'enum',
+    enum: TipoCampoEnum,
+    default: TipoCampoEnum.INPUT,
+  })
+  tipo: TipoCampoEnum;
 
-  @ManyToOne(() => Blocos, (bloco) => bloco.campos)
+  @ManyToOne(() => BlocosEntity, (bloco) => bloco.campos)
   @JoinColumn({ name: 'bloco_id' })
-  bloco: Blocos;
+  bloco: BlocosEntity;
 
-  @Column({ name: 'qtd_selecionado' })
+  @Column({
+    name: 'qtd_selecionado',
+    default: 0,
+    comment: '0 = campo opcional, 1 = campo obrigatorio, 2=campo multivalorado',
+  })
   qtdSelecionado: number;
 
-  @OneToMany(() => OpcoesCampo, (opcaoCampo) => opcaoCampo.campo)
-  opcoesCampo: OpcoesCampo[];
+  @Column({
+    name: 'tem_observacao',
+    comment:
+      'Caso alem do valor o campo permita observação, tipo item de avaliacao',
+  })
+  temObservacao: boolean;
+
+  @OneToMany(() => OpcoesCampoEntity, (opcaoCampo) => opcaoCampo.campo)
+  opcoesCampo: OpcoesCampoEntity[];
 }

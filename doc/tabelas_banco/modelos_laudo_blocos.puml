@@ -1,4 +1,0 @@
-entity "Tabela Modelos Laudo Blocos" as modelos_laudo_blocos {
-  +modelos_laudo_id: int [FK]
-  +blocos_id: int [FK]
-}

@@ -1,15 +1,22 @@
 import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { Campos } from './campos.entity';
+import { CamposEntity } from './campos.entity';
 import { BaseEntity } from '../../base/base.entity';
 import { NivelRiscoEnum } from '../enum/nivelRisco.enum';
 
 @Entity('opcoes_campo')
-export class OpcoesCampo extends BaseEntity {
+export class OpcoesCampoEntity extends BaseEntity {
   @Column()
   nome: string;
 
   @Column()
   alias: string;
+
+  @Column({
+    name: 'coordenada_x_y',
+    comment:
+      'Campo preenchido quando bloco tipo imagem, indicando onde marcar na imagem',
+  })
+  coordenada: string;
 
   @Column({ name: 'eh_padrao', default: false })
   ehPadrao: boolean;
@@ -19,10 +26,11 @@ export class OpcoesCampo extends BaseEntity {
     type: 'enum',
     enum: NivelRiscoEnum,
     default: NivelRiscoEnum.PADRAO,
+    comment: 'Campo indica um coloração diferente para a opção',
   })
-  nivelRisco: string;
+  nivelRisco: NivelRiscoEnum;
 
-  @ManyToOne(() => Campos, (campo) => campo.opcoesCampo)
+  @ManyToOne(() => CamposEntity, (campo) => campo.opcoesCampo)
   @JoinColumn({ name: 'campo_id' })
-  campo: Campos;
+  campo: CamposEntity;
 }

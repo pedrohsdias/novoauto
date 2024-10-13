@@ -1,17 +1,43 @@
 @startuml MER
 
-!include tabelas_banco/blocos.puml
-!include tabelas_banco/modelos_laudo.puml
-!include tabelas_banco/modelos_laudo_blocos.puml
-!include tabelas_banco/tipos_bloco.puml
-!include tabelas_banco/campos.puml
-!include tabelas_banco/tipos_campo.puml
-!include tabelas_banco/opcoes_campo.puml
+!include tabelas_banco/template_modelo_laudo/blocos.puml
+!include tabelas_banco/template_modelo_laudo/modelos_vistoria.puml
+!include tabelas_banco/template_modelo_laudo/modelos_vistoria_blocos.puml
+!include tabelas_banco/template_modelo_laudo/tipos_bloco.puml
+!include tabelas_banco/template_modelo_laudo/campos.puml
+!include tabelas_banco/template_modelo_laudo/tipos_campo.puml
+!include tabelas_banco/template_modelo_laudo/opcoes_campo.puml
 
-modelos_laudo ||--o{ modelos_laudo_blocos : "contém"
-blocos ||--o{ modelos_laudo_blocos : "pertence a"
-blocos }--|| tipos_bloco : "tem um"
-campos }--|| tipos_campo : "tem um"
-modelos_laudo ||--o{ campos : "tem vários"
-campos ||--o{ opcoes_campo : "tem várias"
+!include tabelas_banco/franquiador/franquiador.puml
+!include tabelas_banco/franquiador/servicos.puml
+!include tabelas_banco/franquiador/servicos_modelos_vistoria.puml
+!include tabelas_banco/franquiador/unidades.puml
+
+!include tabelas_banco/comum/enderecos.puml
+!include tabelas_banco/comum/estados.puml
+!include tabelas_banco/comum/municipios.puml
+!include tabelas_banco/comum/pessoa.puml
+!include tabelas_banco/comum/telefones.puml
+!include tabelas_banco/comum/tipos_endereco.puml
+!include tabelas_banco/comum/tipos_telefone.puml
+
+
+migrations --> tipos_bloco
+estados --> municipios : "1:N"
+municipios --> enderecos : "1:N"
+tipos_endereco --> enderecos : "1:N"
+pessoa --> franquiador : "1:N"
+pessoa --> enderecos : "1:N"
+pessoa --> telefones : "1:N"
+pessoa --> unidades : "1:N"
+franquiador --> unidades : "1:N"
+unidades --> servicos : "1:N"
+modelos_vistoria --> servicos_modelos_vistoria : "1:N"
+blocos --> campos : "1:N"
+campos --> opcoes_campo : "1:N"
+tipos_bloco --> blocos : "1:N"
+tipos_campo --> campos : "1:N"
+servicos --> servicos_modelos_vistoria : "1:N"
+modelos_vistoria --> modelos_vistoria_blocos : "1:N"
+blocos --> modelos_vistoria_blocos : "1:N"
 @enduml

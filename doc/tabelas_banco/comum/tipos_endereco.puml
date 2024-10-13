@@ -1,0 +1,10 @@
+@startuml
+entity tipos_endereco {
+  +id : serial
+  --
+  +created_at : timestamp
+  +updated_at : timestamp
+  +deleted_at : timestamp
+  +descricao : varchar
+}
+@enduml

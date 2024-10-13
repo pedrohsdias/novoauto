@@ -1,0 +1,17 @@
+@startuml
+entity enderecos {
+  +id : serial
+  --
+  +created_at : timestamp
+  +updated_at : timestamp
+  +deleted_at : timestamp
+  +logradouro : varchar
+  +numero : varchar
+  +complemento : varchar
+  +cep : varchar
+  +bairro : varchar
+  +pessoa_id : integer
+  +municipio_id : integer
+  +tipo_endereco_id : integer
+}
+@enduml

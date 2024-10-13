@@ -1,0 +1,14 @@
+@startuml
+entity campos {
+  +id : serial
+  --
+  +created_at : timestamp
+  +updated_at : timestamp
+  +deleted_at : timestamp
+  +nome : varchar
+  +alias : varchar
+  +qtd_selecionado : integer
+  +tipo_campo_id : integer
+  +bloco_id : integer
+}
+@enduml
