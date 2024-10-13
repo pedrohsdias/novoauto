@@ -6,7 +6,7 @@ import { PessoasEntity } from './pessoas.entity';
 
 @Entity('enderecos')
 export class EnderecosEntity extends BaseEntity {
-  @Column()
+  @Column({ nullable: true })
   logradouro: string;
   @Column()
   numero: string;

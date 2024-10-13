@@ -5,16 +5,18 @@ import { PessoasEntity } from '../../comum/entity/pessoas.entity';
 import { UnidadesEntity } from './unidades.entity';
 @Entity('franquiadores')
 export class FranquiadoresEntity extends BaseEntity {
-  @Column()
+  @Column({
+    comment: 'nome para exibição em tela, é o msm valor do homônimo em pessoa',
+  })
   apelido: string;
 
   @Column({ name: 'link_logo' })
   linkLogo: string;
 
-  @Column({ name: 'termo_data_aceite' })
+  @Column({ name: 'termo_data_aceite', nullable: true })
   termoDtAceite: Date;
 
-  @Column({ name: 'termo_usuario_id' })
+  @Column({ name: 'termo_usuario_id', nullable: true })
   termoUsuarioAceite: string;
 
   @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.franquiadores)

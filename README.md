@@ -24,6 +24,8 @@ npm install --save @nestjs/swagger swagger-ui-express
 nest generate module modelo-de-laudo
 nest generate controller modelo-de-laudo
 #precisei fazer alterações nos scripts do package.json
-npm run typeorm migration:generate src/migrations/cria_template_modelo_laudo_franquiador_comum
+npm run typeorm migration:generate src/migrations/cria_tabelas_iniciais
 npm run typeorm migration:run
+npm run seed
+
 ```

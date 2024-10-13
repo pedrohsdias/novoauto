@@ -39,10 +39,10 @@ export class OrdensServicoEntity extends BaseEntity {
   })
   tipoDadoConsultado: TipoDadoConsultadoEnum;
 
-  @Column({ name: `dado_consultado` })
+  @Column({ name: `dado_consultado`, nullable: true })
   dadoConsultado: string;
 
-  @Column()
+  @Column({ nullable: true })
   comentario: string;
 
   @Column()

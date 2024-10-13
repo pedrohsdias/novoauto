@@ -8,13 +8,14 @@ export class OpcoesCampoEntity extends BaseEntity {
   @Column()
   nome: string;
 
-  @Column()
+  @Column({ comment: 'Campo tipo slug para usara em referencias especificas' })
   alias: string;
 
   @Column({
     name: 'coordenada_x_y',
     comment:
       'Campo preenchido quando bloco tipo imagem, indicando onde marcar na imagem',
+    nullable: true,
   })
   coordenada: string;
 

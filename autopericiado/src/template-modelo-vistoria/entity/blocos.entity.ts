@@ -9,12 +9,13 @@ export class BlocosEntity extends BaseEntity {
   @Column()
   nome: string;
 
-  @Column()
+  @Column({ nullable: true })
   fontAwesomeIcon: string;
 
   @Column({
     name: 'imagem_caminho',
     comment: 'Somente preenchido quando tipo bloco = imagem',
+    nullable: true,
   })
   imagemCaminho: string;
 

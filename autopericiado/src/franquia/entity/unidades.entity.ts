@@ -8,7 +8,9 @@ import { ClientesEntity } from '../../vistoria/entity/clientes.entity';
 
 @Entity('unidades')
 export class UnidadesEntity extends BaseEntity {
-  @Column()
+  @Column({
+    comment: 'nome para exibição em tela, é o msm valor do homônimo em pessoa',
+  })
   apelido: string;
 
   @ManyToOne(() => FranquiadoresEntity, (franquiador) => franquiador.unidades)

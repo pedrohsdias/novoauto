@@ -9,7 +9,7 @@ export class CamposEntity extends BaseEntity {
   @Column()
   nome: string;
 
-  @Column()
+  @Column({ comment: 'Campo tipo slug para usara em referencias especificas' })
   alias: string;
 
   @Column({
@@ -33,6 +33,7 @@ export class CamposEntity extends BaseEntity {
 
   @Column({
     name: 'tem_observacao',
+    default: false,
     comment:
       'Caso alem do valor o campo permita observação, tipo item de avaliacao',
   })
