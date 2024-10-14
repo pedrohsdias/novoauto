@@ -9,7 +9,7 @@ nvm use 21
 ```bash
 docker compose up -d
 
-cd autopericiado && nvm use 21 && npm run start:dev
+cd api && nvm use 21 && npm run start:dev
 ```
 
 # Cola para comandos cli

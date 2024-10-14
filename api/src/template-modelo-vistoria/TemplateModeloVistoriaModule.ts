@@ -43,8 +43,9 @@ import { OpcoesCampoService } from './service/opcoesCampo.service';
     OpcoesCampoController,
   ],
   exports: [
-    ModeloVistoriaRepository,
+    TypeOrmModule,
     BlocosRepository,
+    CamposRepository,
     ModeloVistoriaRepository,
     ModeloVistoriaService,
   ],
