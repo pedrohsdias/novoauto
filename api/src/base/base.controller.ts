@@ -10,7 +10,9 @@ import {
 import { BaseEntity } from './base.entity';
 import { BaseService } from './base.service';
 import { BaseDto } from './base.dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @Controller()
 export class BaseController<T extends BaseEntity> {
   constructor(protected readonly service: BaseService<T>) {}

@@ -6,7 +6,8 @@ import {
 } from '../../template-modelo-vistoria/dto/bloco.dto';
 import { MunicipiosEntity } from '../entity/municipios.entity';
 import { MunicipiosService } from '../service/municipios.service';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('Municipio')
 @Controller('municipios')
 export class MunicipiosController extends BaseController<MunicipiosEntity> {
   constructor(protected readonly baseService: MunicipiosService) {

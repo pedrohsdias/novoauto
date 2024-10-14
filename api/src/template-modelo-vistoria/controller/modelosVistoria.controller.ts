@@ -6,7 +6,9 @@ import {
   CreateModeloVistoriaDto,
   UpdateModeloVistoriaDto,
 } from '../dto/modeloVistoria.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Modelo Vistoria')
 @Controller('modelo-vistoria')
 export class ModelosVistoriaController extends BaseController<ModelosVistoriaEntity> {
   constructor(protected readonly baseService: ModeloVistoriaService) {

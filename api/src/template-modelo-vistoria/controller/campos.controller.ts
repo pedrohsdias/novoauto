@@ -3,7 +3,9 @@ import { BaseController } from '../../base/base.controller';
 import { CamposEntity } from '../entity/campos.entity';
 import { CamposService } from '../service/campos.service';
 import { CreateCampoDto, UpdateCampoDto } from '../dto/campo.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Campos do bloco')
 @Controller('campo')
 export class CamposController extends BaseController<CamposEntity> {
   constructor(protected readonly baseService: CamposService) {

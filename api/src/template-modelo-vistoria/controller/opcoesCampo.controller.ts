@@ -6,7 +6,9 @@ import {
   CreateOpcaoCampoDto,
   UpdateOpcaoCampoDto,
 } from '../dto/opcaoCampo.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Opções dos campos do bloco')
 @Controller('opcao-campo')
 export class OpcoesCampoController extends BaseController<OpcoesCampoEntity> {
   constructor(protected readonly baseService: OpcoesCampoService) {
