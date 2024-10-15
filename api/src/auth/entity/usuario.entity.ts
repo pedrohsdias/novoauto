@@ -9,9 +9,8 @@ import {
   OneToMany,
 } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
-import { ConfigService } from '@nestjs/config';
 import { PerfilUsuarioEnum } from '../enum/perfilUsuario.enum';
 import { FranquiadoresEntity } from '../../franquia/entity/franquiadores.entity';
 import { UnidadesEntity } from '../../franquia/entity/unidades.entity';
@@ -19,10 +18,10 @@ import { OrdensServicoEntity } from '../../vistoria/entity/ordensServico.entity'
 
 @Entity('usuarios')
 export class UsuariosEntity extends BaseEntity {
-  @Column({ length: 150 })
+  @Column({ length: 150, nullable: false })
   nome: string;
 
-  @Column({ length: 150, unique: true })
+  @Column({ length: 150, unique: true, nullable: false })
   email: string;
 
   @Column({
@@ -33,7 +32,9 @@ export class UsuariosEntity extends BaseEntity {
   })
   perfil: PerfilUsuarioEnum;
 
-  @ManyToOne(() => FranquiadoresEntity, (franquiador) => franquiador.usuarios)
+  @ManyToOne(() => FranquiadoresEntity, (franquiador) => franquiador.usuarios, {
+    nullable: true,
+  })
   @JoinColumn({ name: 'franquiador_id' })
   franquiador: FranquiadoresEntity;
 
@@ -46,20 +47,17 @@ export class UsuariosEntity extends BaseEntity {
   unidades: UnidadesEntity[];
 
   @Exclude()
-  @Column()
+  @Column({ nullable: false })
   senha: string;
 
   @BeforeInsert()
-  async hashSenha(configService: ConfigService) {
-    this.senha = await bcrypt.hash(
-      this.senha,
-      configService.get<string>('APP_KEY'),
-    );
+  async hashSenha() {
+    this.senha = await bcrypt.hash(this.senha, 10);
   }
 
-  @OneToMany(() => OrdensServicoEntity, (os) => os.ordensServicoCriadas)
+  @OneToMany(() => OrdensServicoEntity, (os) => os.usuarioFinalizador)
   ordensServicoFinalizadas: OrdensServicoEntity;
 
-  @OneToMany(() => OrdensServicoEntity, (os) => os.ordensServicoFinalizadas)
+  @OneToMany(() => OrdensServicoEntity, (os) => os.usuarioCriador)
   ordensServicoCriadas: OrdensServicoEntity;
 }

@@ -6,16 +6,12 @@ import { ServicosController } from '../franquia/controller/servicos.controller';
 import { UnidadesController } from '../franquia/controller/unidades.controller';
 import { ClientesEntity } from './entity/clientes.entity';
 import { OrdensServicoEntity } from './entity/ordensServico.entity';
-import { UsuariosEntity } from '../auth/entity/usuario.entity';
+import { AuthModule } from '../auth/AuthModule';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      ClientesEntity,
-      OrdensServicoEntity,
-      UsuariosEntity,
-    ]),
-    UsuariosEntity,
+    TypeOrmModule.forFeature([ClientesEntity, OrdensServicoEntity]),
+    AuthModule,
   ],
   providers: [],
   controllers: [

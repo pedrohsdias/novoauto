@@ -1,17 +1,13 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsuariosService } from './usuarios.service';
-import { ConfigService } from '@nestjs/config';
 import bcrypt from 'bcrypt';
-import { UsuariosEntity } from '../entity/usuario.entity';
-import { LoginDto } from '../dto/login.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly usuarioService: UsuariosService,
-    private configService: ConfigService,
   ) {}
 
   async validateUser(email: string, senha: string): Promise<any> {

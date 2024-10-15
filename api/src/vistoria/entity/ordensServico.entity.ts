@@ -12,7 +12,6 @@ import { UsuariosEntity } from '../../auth/entity/usuario.entity';
 
 @Entity('ordem_servico')
 export class OrdensServicoEntity extends BaseEntity {
-
   @Column({ length: 50 })
   sequenciador: string;
 
@@ -38,7 +37,7 @@ export class OrdensServicoEntity extends BaseEntity {
 
   @Column('decimal', { precision: 10, scale: 2, comment: 'Valor em reais' })
   preco: number;
-  
+
   @Column({ name: 'custo_zerado', default: false })
   custoZerado: boolean;
 
@@ -65,26 +64,27 @@ export class OrdensServicoEntity extends BaseEntity {
     default: TipoOrdemServicoEnum.VISTORIA,
   })
   tipoOS: TipoOrdemServicoEnum;
-  
-  
+
   @ManyToOne(() => ClientesEntity, (cliente) => cliente.ordensServico)
   @JoinColumn({ name: 'cliente_id' })
   cliente: ClientesEntity;
-  
+
   @ManyToOne(() => UnidadesEntity, (unidade) => unidade.ordensServico)
   @JoinColumn({ name: 'unidade_id' })
   unidade: UnidadesEntity;
-  
+
   @ManyToOne(() => ModelosVistoriaEntity, (modelo) => modelo.ordensServico)
   @JoinColumn({ name: 'modelo_vistoria_id' })
   modeloVistoria: ModelosVistoriaEntity;
-  
-  ManyToOne(() => UsuariosEntity, (usuario) => usuario.ordensServicoCriadas)
+
+  @ManyToOne(() => UsuariosEntity, (usuario) => usuario.ordensServicoCriadas)
   @JoinColumn({ name: 'usuario_criador_id' })
   usuarioCriador: UsuariosEntity;
-  
-  
-  ManyToOne(() => UsuariosEntity, (usuario) => usuario.ordensServicoFinalizadas)
+
+  @ManyToOne(
+    () => UsuariosEntity,
+    (usuario) => usuario.ordensServicoFinalizadas,
+  )
   @JoinColumn({ name: 'usuario_finalizador_id' })
   usuarioFinalizador: UsuariosEntity;
 }
