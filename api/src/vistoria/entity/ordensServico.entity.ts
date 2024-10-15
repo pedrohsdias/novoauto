@@ -8,25 +8,13 @@ import { StatusOrdemServicoEnum } from '../enum/statusOrdemServico.enum';
 import { ParecerVistoriaEnum } from '../enum/parecerVistoria.enum';
 import { TipoOrdemServicoEnum } from '../enum/tipoOrdemServico.enum';
 import { ClientesEntity } from './clientes.entity';
+import { UsuariosEntity } from '../../auth/entity/usuario.entity';
 
 @Entity('ordem_servico')
 export class OrdensServicoEntity extends BaseEntity {
-  usuarioFinalizador: number;
 
   @Column({ length: 50 })
   sequenciador: string;
-
-  @ManyToOne(() => ClientesEntity, (cliente) => cliente.ordensServico)
-  @JoinColumn({ name: 'cliente_id' })
-  cliente: number;
-
-  @ManyToOne(() => UnidadesEntity, (unidade) => unidade.ordensServico)
-  @JoinColumn({ name: 'unidade_id' })
-  unidade: UnidadesEntity;
-
-  @ManyToOne(() => ModelosVistoriaEntity, (modelo) => modelo.ordensServico)
-  @JoinColumn({ name: 'modelo_vistoria_id' })
-  modeloVistoria;
 
   @Column('jsonb', { name: 'modelo_vistoria_snapshot' })
   modeloVistoriaSnapshot: object;
@@ -50,6 +38,9 @@ export class OrdensServicoEntity extends BaseEntity {
 
   @Column('decimal', { precision: 10, scale: 2, comment: 'Valor em reais' })
   preco: number;
+  
+  @Column({ name: 'custo_zerado', default: false })
+  custoZerado: boolean;
 
   @Column({
     name: 'status',
@@ -74,7 +65,26 @@ export class OrdensServicoEntity extends BaseEntity {
     default: TipoOrdemServicoEnum.VISTORIA,
   })
   tipoOS: TipoOrdemServicoEnum;
-
-  @Column({ name: 'custo_zerado', default: false })
-  custoZerado: boolean;
+  
+  
+  @ManyToOne(() => ClientesEntity, (cliente) => cliente.ordensServico)
+  @JoinColumn({ name: 'cliente_id' })
+  cliente: ClientesEntity;
+  
+  @ManyToOne(() => UnidadesEntity, (unidade) => unidade.ordensServico)
+  @JoinColumn({ name: 'unidade_id' })
+  unidade: UnidadesEntity;
+  
+  @ManyToOne(() => ModelosVistoriaEntity, (modelo) => modelo.ordensServico)
+  @JoinColumn({ name: 'modelo_vistoria_id' })
+  modeloVistoria: ModelosVistoriaEntity;
+  
+  ManyToOne(() => UsuariosEntity, (usuario) => usuario.ordensServicoCriadas)
+  @JoinColumn({ name: 'usuario_criador_id' })
+  usuarioCriador: UsuariosEntity;
+  
+  
+  ManyToOne(() => UsuariosEntity, (usuario) => usuario.ordensServicoFinalizadas)
+  @JoinColumn({ name: 'usuario_finalizador_id' })
+  usuarioFinalizador: UsuariosEntity;
 }

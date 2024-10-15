@@ -17,9 +17,10 @@ cd api && nvm use 21 && npm run start:dev
 ```bash
 npm install --save @nestjs/typeorm typeorm pg
 npm install dotenv
-npm install class-validator 
-
+npm install class-validator
 npm install --save @nestjs/swagger swagger-ui-express
+npm install @nestjs/jwt @nestjs/passport passport passport-jwt
+npm install -D @types/bcrypt
 
 nest generate module modelo-de-laudo
 nest generate controller modelo-de-laudo

@@ -1,10 +1,18 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
 import { PessoasEntity } from '../../comum/entity/pessoas.entity';
 import { ServicosEntity } from './servicos.entity';
 import { FranquiadoresEntity } from './franquiadores.entity';
 import { OrdensServicoEntity } from '../../vistoria/entity/ordensServico.entity';
 import { ClientesEntity } from '../../vistoria/entity/clientes.entity';
+import { UsuariosEntity } from '../../auth/entity/usuario.entity';
 
 @Entity('unidades')
 export class UnidadesEntity extends BaseEntity {
@@ -30,4 +38,7 @@ export class UnidadesEntity extends BaseEntity {
   @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.unidades)
   @JoinColumn({ name: 'pessoa_id' })
   pessoa: PessoasEntity;
+
+  @ManyToMany(() => UsuariosEntity, (usuario) => usuario.unidades)
+  usuarios: UsuariosEntity[];
 }

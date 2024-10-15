@@ -6,12 +6,15 @@ import {
   Delete,
   Controller,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { BaseEntity } from './base.entity';
 import { BaseService } from './base.service';
 import { BaseDto } from './base.dto';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../guard/guard';
 
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @Controller()
 export class BaseController<T extends BaseEntity> {

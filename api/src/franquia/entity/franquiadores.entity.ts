@@ -3,6 +3,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
 import { PessoasEntity } from '../../comum/entity/pessoas.entity';
 import { UnidadesEntity } from './unidades.entity';
+import { UsuariosEntity } from '../../auth/entity/usuario.entity';
 @Entity('franquiadores')
 export class FranquiadoresEntity extends BaseEntity {
   @Column({
@@ -26,4 +27,7 @@ export class FranquiadoresEntity extends BaseEntity {
 
   @OneToMany(() => UnidadesEntity, (unidade) => unidade.franquiador)
   unidades: UnidadesEntity[];
+
+  @OneToMany(() => UsuariosEntity, (usuario) => usuario.franquiador)
+  usuarios: UnidadesEntity[];
 }
