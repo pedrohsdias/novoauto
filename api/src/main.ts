@@ -19,7 +19,14 @@ async function bootstrap() {
     operationIdFactory: (controllerKey: string, methodKey: string) => methodKey,
   };
   const document = SwaggerModule.createDocument(app, config, options);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document, {
+    swaggerOptions: {
+      tagsSorter: (tag1, tag2) => {
+        if (tag1 === 'Auth') return -1; // Coloca 'Auth' primeiro
+        return tag1.localeCompare(tag2); // Ordem alfabética para o resto
+      },
+    },
+  });
 
   await app.listen(3000);
 }

@@ -28,5 +28,14 @@ nest generate controller modelo-de-laudo
 npm run typeorm migration:generate src/migrations/cria_tabelas_iniciais
 npm run typeorm migration:run
 npm run seed
+```
+
+### Usuario  inicial do seed:
+
+```json
+{
+  "email": "root@email.com",
+  "senha": "12"
+}
 
 ```

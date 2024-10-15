@@ -5,6 +5,7 @@ import { DbConfigService } from './config/data-source';
 import { ComumModule } from './comum/comum.module';
 import { FranquiaModule } from './franquia/franquia.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/AuthModule';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ConfigModule } from '@nestjs/config';
     TemplateModeloVistoriaModule,
     ComumModule,
     FranquiaModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
