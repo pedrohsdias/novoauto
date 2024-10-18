@@ -9,6 +9,12 @@ import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: ['http://localhost:3000', 'https://meudominio.com'], // Domínios permitidos
+    methods: 'GET,POST,PUT,DELETE', // Métodos permitidos
+    allowedHeaders: 'Content-Type, Authorization', // Cabeçalhos permitidos
+    credentials: true, // Permite envio de cookies e credenciais
+  });
   const configService = app.get(ConfigService);
   // Configurando o Swagger
   const config = new DocumentBuilder()

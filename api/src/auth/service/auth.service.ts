@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsuariosService } from './usuarios.service';
 import * as bcrypt from 'bcrypt';
+import { UsuariosEntity } from '../entity/usuario.entity';
 
 @Injectable()
 export class AuthService {
@@ -13,8 +14,12 @@ export class AuthService {
   async validateUser(email: string, senha: string): Promise<any> {
     const usuario = await this.usuarioService.buscaPorEmail(email);
 
-    const usuarioAutenticado = await bcrypt.compare(senha, usuario.senha);
-    if (!usuarioAutenticado) {
+    if (!usuario) {
+      throw new UnauthorizedException('E-mail ou senha incorreto');
+    }
+
+    const senhaValida = await bcrypt.compare(senha, usuario.senha);
+    if (!senhaValida) {
       throw new UnauthorizedException('E-mail ou senha incorreto');
     }
     return usuario;
@@ -22,10 +27,27 @@ export class AuthService {
 
   async login(email: string, senha: string) {
     const usuario = await this.validateUser(email, senha);
+    return this.buildTokens(usuario);
+  }
+  async refreshToken(refreshToken: string) {
+    try {
+      const payload = this.jwtService.verify(refreshToken);
+      const usuario = await this.usuarioService.findById(payload.sub);
+      return this.buildTokens(usuario);
+    } catch (e) {
+      console.log(e);
+      throw new UnauthorizedException(
+        'Token de renovação inválido ou expirado',
+      );
+    }
+  }
+  async buildTokens(usuario: UsuariosEntity) {
     //todo adicionar mais valores ao paylod que vai formar o bearer
-    const payload = { username: usuario.nome, sub: usuario.id };
+    const dadosToken = { username: usuario.nome, sub: usuario.id };
+    const dadosRefresh = { sub: usuario.id };
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign(dadosToken),
+      refresh_token: this.jwtService.sign(dadosRefresh, { expiresIn: '90m' }),
     };
   }
 }

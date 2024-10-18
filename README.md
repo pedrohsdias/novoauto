@@ -8,8 +8,13 @@ nvm use 21
 
 ```bash
 docker compose up -d
-
+```
+```bash
 cd api && nvm use 21 && npm run start:dev
+```
+```bash
+cd web && nvm use 21 && npm run dev
+
 ```
 
 ### Usuario  inicial do seed:
@@ -17,7 +22,7 @@ cd api && nvm use 21 && npm run start:dev
 ```json
 {
   "email": "root@email.com",
-  "senha": "12"
+  "senha": "123"
 }
 
 ```
