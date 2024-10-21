@@ -10,7 +10,7 @@ async function runSeeds() {
   const dataSource = await AppDataSourceCli.initialize();
 
   try {
-    console.log('Running User Seed...');
+    console.log('Running Default Seed...');
     await new UsuarioSeed().run(dataSource);
     await new BlocoDadosVeiculoSeed().run(dataSource);
     await new BlocoEstruturaSeed().run(dataSource);

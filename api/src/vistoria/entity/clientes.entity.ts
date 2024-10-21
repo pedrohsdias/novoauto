@@ -10,7 +10,9 @@ export class ClientesEntity extends BaseEntity {
   @JoinColumn({ name: 'unidade_id' })
   unidade: UnidadesEntity;
 
-  @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.clientes)
+  @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.clientes, {
+    nullable: false,
+  })
   @JoinColumn({ name: 'pessoa_id' })
   pessoa: PessoasEntity;
 

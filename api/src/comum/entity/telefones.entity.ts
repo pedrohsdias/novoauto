@@ -8,7 +8,9 @@ export class TelefonesEntity extends BaseEntity {
   @Column({ length: 15 })
   numero: string;
 
-  @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.telefones)
+  @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.telefones, {
+    nullable: false,
+  })
   @JoinColumn({ name: 'pessoa_id' })
   pessoa: PessoasEntity;
 

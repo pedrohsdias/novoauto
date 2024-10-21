@@ -26,6 +26,12 @@ export class UnidadesEntity extends BaseEntity {
   @JoinColumn({ name: 'franquiador_id' })
   franquiador: FranquiadoresEntity;
 
+  @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.unidades, {
+    nullable: false,
+  })
+  @JoinColumn({ name: 'pessoa_id' })
+  pessoa: PessoasEntity;
+
   @OneToMany(() => ServicosEntity, (servico) => servico.unidade)
   servicos: ServicosEntity[];
 
@@ -34,10 +40,6 @@ export class UnidadesEntity extends BaseEntity {
 
   @OneToMany(() => ClientesEntity, (cliente) => cliente.unidade)
   clientes: ClientesEntity[];
-
-  @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.unidades)
-  @JoinColumn({ name: 'pessoa_id' })
-  pessoa: PessoasEntity;
 
   @ManyToMany(() => UsuariosEntity, (usuario) => usuario.unidades)
   usuarios: UsuariosEntity[];

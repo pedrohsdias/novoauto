@@ -17,7 +17,9 @@ export class EnderecosEntity extends BaseEntity {
   @Column({ length: 70 })
   bairro: string;
 
-  @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.enderecos)
+  @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.enderecos, {
+    nullable: false,
+  })
   @JoinColumn({ name: 'pessoa_id' })
   pessoa: PessoasEntity;
 
