@@ -1,6 +1,29 @@
-version: '3.8'
-
 services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/api.dockerfile
+    container_name: api
+    ports:
+      - "3001:3000"
+      - "9230:9229"
+    volumes:
+      - ./api:/app
+    depends_on:
+      - postgres
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/web.dockerfile
+    container_name: web
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    volumes:
+      - ./web:/app
+    depends_on:
+      - api
   postgres:
     image: postgres:latest
     container_name: postgres

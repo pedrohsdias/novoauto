@@ -22,6 +22,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MainBreadcrumbs from '@/components/MainLayoutContainer/BreadCrumb';
 import { AuthContext } from '@/contexts/AuthContextType';
 import { useContext } from 'react';
+import CadastroMenuList from '@/components/MainLayoutContainer/cadastro.menuList';
 
 const drawerWidth = 200;
 
@@ -137,30 +138,10 @@ export default function MainContainer({ children }: { children: React.ReactNode 
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox',].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <MailIcon />
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          <CadastroMenuList/>
         </List>
         <Divider />
         <List>
-          {['All mail'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-          <Divider />
           {/*botão de logout*/}
           <ListItem  disablePadding onClick={logout}>
             <ListItemButton>

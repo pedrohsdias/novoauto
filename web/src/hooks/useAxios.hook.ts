@@ -1,45 +1,38 @@
 // api/axiosInstance.ts
-import axios, { AxiosInstance } from "axios";
-import { useContext } from "react";
+import axios, { AxiosInstance } from 'axios';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from '@/contexts/AuthContextType';
 
-let api: AxiosInstance;
 
 export const useAxios = (): AxiosInstance => {
   const { accessToken, logout } = useContext(AuthContext);
+  const api = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+  });
   
-  if (!api) {
-    api = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000",
-    });
-    
-    // Configuração do interceptor para adicionar o token
-    api.interceptors.request.use(
+  
+  useEffect(() => {
+    // Interceptor para adicionar o token nas requisições
+    const requestInterceptor = api.interceptors.request.use(
       (config) => {
         if (accessToken) {
           config.headers.Authorization = `Bearer ${accessToken}`;
-        } else {
-          console.warn("Nenhum token encontrado no contexto");
+          console.log('Token enviado:', accessToken); // Verificar se o token está disponível
         }
         return config;
       },
       (error) => {
         return Promise.reject(error);
-      }
+      },
     );
     
-    // Configuração para interceptar respostas e lidar com erros de autenticação
-    api.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        if (error.response?.status === 401) {
-          console.warn("Token expirado ou inválido, redirecionando para login.");
-          logout();
-        }
-        return Promise.reject(error);
-      }
-    );
-  }
+    return () => {
+      // Remove o interceptor quando o componente desmonta
+      api.interceptors.request.eject(requestInterceptor);
+    };
+  }, [accessToken]); // O interceptor será atualizado quando o token mudar
+  
+  
   
   return api;
 };

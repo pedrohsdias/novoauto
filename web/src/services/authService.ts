@@ -1,10 +1,10 @@
-import { ILoginResponse } from '@/Types/ILoginResponse';
+import { LoginInterface } from '@/Types/login.interface';
 import { AxiosInstance } from 'axios';
 
-export const loginUser = async (api: AxiosInstance,email: string, senha: string): Promise<ILoginResponse | null> => {
+export const loginUser = async (api: AxiosInstance,email: string, senha: string): Promise<LoginInterface | null> => {
   
   try {
-  const response = await api.post<ILoginResponse>("/auth/login", {
+  const response = await api.post<LoginInterface>("/auth/login", {
     email,
     senha,
   });

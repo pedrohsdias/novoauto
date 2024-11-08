@@ -13,9 +13,9 @@ export default function MainBreadcrumbs() {
   const pathnames = pathname.split('/').filter((x) => x); // Remove partes vazias do caminho
   
   return (
-    <Breadcrumbs aria-label="breadcrumb">
+    <Breadcrumbs aria-label="breadcrumb"  sx={{ color: 'white' }}>
       {/* Sempre exibe o link para a página inicial */}
-      <Link underline="hover" color="inherit" href="/" sx={{ color: 'white' }}>
+      <Link underline="hover" color="inherit" href="/">
         <HomeIcon/>
       </Link>
       
@@ -25,11 +25,11 @@ export default function MainBreadcrumbs() {
         const to = `/${pathnames.slice(0, index + 1).join('/')}`; // Constrói a URL até o ponto atual
         
         return last ? (
-          <Typography key={to} color="text.primary">
+          <Typography key={to} color="text.primary"  sx={{ color: 'white' }}>
             {value.charAt(0).toUpperCase() + value.slice(1)} {/* Capitaliza a primeira letra */}
           </Typography>
         ) : (
-          <Link underline="hover" color="inherit" href={to} key={to}>
+          <Link underline="hover" color="inherit" href={to} key={to}  sx={{ color: 'white' }}>
             {value.charAt(0).toUpperCase() + value.slice(1)} {/* Capitaliza a primeira letra */}
           </Link>
         );

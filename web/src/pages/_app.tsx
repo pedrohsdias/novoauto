@@ -36,7 +36,7 @@ export default function MyApp({ Component, pageProps,router }: AppProps) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Head>
-        <title>AutoPericicado</title>
+        <title>AutoPericiado</title>
       </Head>
       <AuthProvider>
         <Content Component={Component} pageProps={pageProps} router={router} />
