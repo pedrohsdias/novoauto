@@ -8,6 +8,8 @@ import MainContainer from '../components/MainLayoutContainer';
 import { AuthContext, AuthProvider } from '@/contexts/AuthContextType';
 import { useContext } from 'react';
 import Login from '@/components/login';
+import {LoadingProvider} from "@/contexts/LoadingContext";
+import LoadContextHelper from "@/components/load/LoadContextHelper";
 
 const theme = createTheme({
   palette: {
@@ -24,6 +26,7 @@ function Content({ Component, pageProps, router }: AppProps) {
   
   return accessToken ? (
     <MainContainer>
+      <LoadContextHelper/>
       <Component {...pageProps} router={router} />
     </MainContainer>
   ) : (
@@ -31,7 +34,7 @@ function Content({ Component, pageProps, router }: AppProps) {
   );
 }
 
-export default function MyApp({ Component, pageProps,router }: AppProps) {
+export default function AutoPericiado({ Component, pageProps,router }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -39,7 +42,9 @@ export default function MyApp({ Component, pageProps,router }: AppProps) {
         <title>AutoPericiado</title>
       </Head>
       <AuthProvider>
-        <Content Component={Component} pageProps={pageProps} router={router} />
+        <LoadingProvider>
+          <Content Component={Component} pageProps={pageProps} router={router} />
+        </LoadingProvider>
     </AuthProvider>
     </ThemeProvider>
   );

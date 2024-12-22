@@ -6,12 +6,11 @@ import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import ListItemText from '@mui/material/ListItemText';
 import * as React from 'react';
 
-
 export default function CadastroMenuList() {
   
   return (
     <>
-      <ListItem disablePadding>
+      <ListItem disablePadding key={'franquias'} >
         <ListItemButton href="/franquias">
           <ListItemIcon>
             <ApartmentIcon />
@@ -19,8 +18,8 @@ export default function CadastroMenuList() {
           <ListItemText primary={'Franquia'} />
         </ListItemButton>
       </ListItem>
-      <ListItem disablePadding>
-        <ListItemButton href="/unidades">
+      <ListItem disablePadding key={'unidades'}>
+        <ListItemButton href="/unidades" >
           <ListItemIcon>
             <HomeWorkIcon />
           </ListItemIcon>

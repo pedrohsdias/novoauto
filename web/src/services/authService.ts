@@ -1,16 +1,20 @@
 import { LoginInterface } from '@/Types/login.interface';
-import { AxiosInstance } from 'axios';
+import axios from 'axios';
 
-export const loginUser = async (api: AxiosInstance,email: string, senha: string): Promise<LoginInterface | null> => {
-  
+export const loginUser = async (email: string, senha: string): Promise<LoginInterface | number> => {
+
   try {
-  const response = await api.post<LoginInterface>("/auth/login", {
-    email,
-    senha,
-  });
-  return response.data;
+    const response = await axios.post<LoginInterface>(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+      email,
+      senha,
+    });
+
+    return response.data as LoginInterface
   } catch (error) {
-    console.error("Erro ao fazer login:", error);
-    return null;
+    console.error("Erro ao fazer login:",error?.response?.data?.statusCode);
+    if (!error?.response?.data?.statusCode) {
+      console.error(error);
+    }
+    return error?.response?.data?.statusCode ?? 500
   }
 }

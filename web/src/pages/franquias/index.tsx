@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '@/contexts/AuthContextType';
-import DataTable from '@/components/dataTable/table';
+import DataTable from '@/components/dataTable';
 import { headerCell } from '@/components/dataTable/table.types';
 
 export default function Franquias() {

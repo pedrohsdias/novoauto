@@ -5,7 +5,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import Link from '@mui/material/Link';
 import { useRouter } from 'next/router';
 
-export default function MainBreadcrumbs() {
+export default function MainBreadcrumb() {
   const router = useRouter();
   const { pathname } = router;
   
@@ -14,7 +14,6 @@ export default function MainBreadcrumbs() {
   
   return (
     <Breadcrumbs aria-label="breadcrumb"  sx={{ color: 'white' }}>
-      {/* Sempre exibe o link para a página inicial */}
       <Link underline="hover" color="inherit" href="/">
         <HomeIcon/>
       </Link>

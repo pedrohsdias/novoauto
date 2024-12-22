@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { TipoFranquiaEnum } from '@/Types/enum/TipoFranquia.enum';
-import { IFranquiador } from '@/Types/franquia.interface';
+import { IFranquiador } from '@/Types/models/franquia.interface';
 
 interface FranquiadorFormProps {
   initialValues?: IFranquiador; // Valores iniciais, opcional

@@ -12,9 +12,8 @@ import MyTableHead from '@/components/dataTable/TableHead';
 import MyTableTitle from '@/components/dataTable/TableTitle';
 import { headerCell, order, RowData } from '@/components/dataTable/table.types';
 import { useEffect, useState } from 'react';
-import { useAxios } from '@/hooks/useAxios.hook';
-
-
+import useFranquiadores from "@/hooks/Services/FranquiadorService.hook";
+import {useLoading} from "@/contexts/LoadingContext";
 
 interface DataTableProps {
   urlPath: string;
@@ -22,6 +21,7 @@ interface DataTableProps {
   actionEdit: boolean;
   actionDelete: boolean;
 }
+
 export default function DataTable({urlPath,headCells,actionEdit,actionDelete }: DataTableProps) {
   const [order, setOrder] = useState<order>('asc');
   const [orderBy, setOrderBy] = useState<string>('');
@@ -29,21 +29,16 @@ export default function DataTable({urlPath,headCells,actionEdit,actionDelete }: 
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(20);
-  const api = useAxios()
-  
+  const { listar, detalhar } = useFranquiadores();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get(urlPath, {params:{
-          rowsPerPage:rowsPerPage,
-          page:page,
-            }
-        });
-        setRows(response.data)
-        console.log(response)
-        // Lógica adicional com a resposta, se necessário
+        const response = await listar()
+        setRows(response);
       } catch (error) {
         console.error("Erro ao buscar os dados", error);
+      } finally {
       }
     };
     
@@ -62,7 +57,9 @@ export default function DataTable({urlPath,headCells,actionEdit,actionDelete }: 
   const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDense(event.target.checked);
   };
-  
+
+  const tableSize: "small" | "medium" = dense ? "small" : "medium";
+
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2,}}>
@@ -71,7 +68,7 @@ export default function DataTable({urlPath,headCells,actionEdit,actionDelete }: 
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={tableSize}
           >
             <MyTableHead
               order={order}
@@ -81,44 +78,42 @@ export default function DataTable({urlPath,headCells,actionEdit,actionDelete }: 
               orderBy={orderBy}
               hasOptions={actionEdit || actionDelete}/>
             <TableBody>
-              {rows.length>0 ? rows.map((row, index) => {
-                const labelId = `enhanced-table-checkbox-${index}`;
-                return (
-                  <TableRow
-                    hover
-                    tabIndex={-1}
-                    key={row.index}
-                    sx={{ ml:5, mr:2 }}
-                  >
-                    {headCells.map((head)=>{
-                      return (
+              {rows.length > 0 ? (
+                rows.map((row, index) => {
+                  const labelId = `enhanced-table-checkbox-${index}`;
+                  return (
+                    <TableRow
+                      hover
+                      tabIndex={-1}
+                      key={row.id || index} // Use um identificador único
+                      sx={{ ml: 5, mr: 2 }}
+                    >
+                      {headCells.map((head) => (
                         <TableCell
                           component="th"
                           id={labelId}
                           scope="row"
-                          key={`${row.index}_${head.id}`}
+                          key={`${row.id || index}_${head.id}`} // Identificador único para cada célula
                         >
                           {row[head.id]}
                         </TableCell>
-                      )
-                    })}
-                    
-                    <TableCell align="center">
-                      Nenhum dado encontrado.
-                    </TableCell>
-                  </TableRow>
-                );
-              }) : (
+                      ))}
+                    </TableRow>
+                  );
+                })
+              ) : (
                 <TableRow>
-                  {(actionEdit || actionDelete) &&
-                    <TableCell colSpan={headCells.length} align="center">
-                      {actionEdit && <></>}
-                      {actionDelete && <></>}
-                    </TableCell>
-                  }
-          </TableRow>
-          )}
+                  <TableCell
+                    colSpan={headCells.length}
+                    align="center"
+                    key={`emptytable`} // Está estático, pode ser alterado para algo mais único
+                  >
+                    Nenhum dado encontrado.
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
+
           </Table>
         </TableContainer>
         <TablePagination

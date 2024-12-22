@@ -6,23 +6,15 @@ import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import LogoutIcon from '@mui/icons-material/Logout';
-import MainBreadcrumbs from '@/components/MainLayoutContainer/BreadCrumb';
-import { AuthContext } from '@/contexts/AuthContextType';
-import { useContext } from 'react';
 import CadastroMenuList from '@/components/MainLayoutContainer/cadastro.menuList';
+import AccountMenu from "@/components/MainLayoutContainer/ToolbarOptions/AccountMenu";
+import MainBreadcrumb from "@/components/MainLayoutContainer/ToolbarOptions/BreadCrumb";
+import Notifications from "@/components/MainLayoutContainer/ToolbarOptions/Notifications";
 
 const drawerWidth = 200;
 
@@ -87,7 +79,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function MainContainer({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
-  const { accessToken, logout } = useContext(AuthContext)
   const [open, setOpen] = React.useState(false);
   
   const handleDrawerOpen = () => {
@@ -102,20 +93,23 @@ export default function MainContainer({ children }: { children: React.ReactNode 
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={[
-              {mr: 2,},
-              open && { display: 'none' },
-            ]}
-          >
-            <MenuIcon />
-          </IconButton>
-            <MainBreadcrumbs />
+        <Toolbar  sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <IconButton
+              color="inherit"
+              aria-label="Abrir Menu"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={[{ mr: 2 }, open && { display: 'none' }]}
+            >
+              <MenuIcon />
+            </IconButton>
+            <MainBreadcrumb />
+          </Box>
+          <Box>
+            <Notifications />
+            <AccountMenu />
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -141,17 +135,17 @@ export default function MainContainer({ children }: { children: React.ReactNode 
           <CadastroMenuList/>
         </List>
         <Divider />
-        <List>
-          {/*botão de logout*/}
-          <ListItem  disablePadding onClick={logout}>
-            <ListItemButton>
-              <ListItemIcon>
-              <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary="Sair" />
-            </ListItemButton>
-          </ListItem>
-        </List>
+        {/*<List>*/}
+        {/*  /!*botão de logout*!/*/}
+        {/*  <ListItem  disablePadding onClick={logout}>*/}
+        {/*    <ListItemButton>*/}
+        {/*      <ListItemIcon>*/}
+        {/*      <LogoutIcon />*/}
+        {/*      </ListItemIcon>*/}
+        {/*      <ListItemText primary="Sair" />*/}
+        {/*    </ListItemButton>*/}
+        {/*  </ListItem>*/}
+        {/*</List>*/}
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
