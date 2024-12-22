@@ -41,7 +41,7 @@ npm install && npm run dev
   * Remote root folder: /app (Esta é a pasta no contêiner, conforme definida no Dockerfile).
   * Local root folder: Selecione a pasta local do seu projeto, geralmente a raiz onde está o código da API.
 ### Passo 2: Rodar o Docker Compose
-```
+```bash
 docker-compose up
 ```
 ### Passo 3: Iniciar a sessão de debug
@@ -51,7 +51,7 @@ docker-compose up
 ## Config debug da api no vscode
 * No menu lateral esquerdo, vá até a aba "Run and Debug"
 * Clique na engrenagem para abrir o arquivo launch.json e adicione:
-```
+```json
 {
   "version": "0.2.0",
   "configurations": [
@@ -68,5 +68,14 @@ docker-compose up
     }
   ]
 }
+```
+```bash
+docker exec -it api npm run typeorm migration:run
+
+docker exec -it api npm run seed:dev
+
+docker exec -it web npm install  
+
+docker exec -it web npm run dev
 
 ```

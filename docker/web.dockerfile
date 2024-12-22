@@ -12,10 +12,11 @@ WORKDIR /app
 ## Compila a aplicação Next.js
 #RUN npm run build
 
-# Expõe a porta que o Next.js usará
 EXPOSE 3000 9229
 
 # Comando para iniciar a aplicação Next.js
-CMD ["sh", "-c", "npm install && npm run start:dev"]
+# CMD ["sh", "-c", "npm install && npm run start:dev"]
 #CMD ["npm", "run", "dev"]
 #CMD ["node", "--inspect=0.0.0.0:9229", "node_modules/.bin/next", "dev"]
+CMD ["tail","-f","/dev/null"]
+# docker exec -it web npm run dev
