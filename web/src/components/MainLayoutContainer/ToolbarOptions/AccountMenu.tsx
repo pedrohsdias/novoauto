@@ -16,7 +16,7 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
   useEffect(() => {
-    console.info(tokenData)
+    // console.info(tokenData)//todo - primeira tela o token esta bugado
   },[])
   return (<>
     <Tooltip title="Opções do usuario">

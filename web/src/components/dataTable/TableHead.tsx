@@ -4,8 +4,8 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Box from '@mui/material/Box';
-import { visuallyHidden } from '@mui/utils';
-import { headerCell, order } from '@/components/dataTable/table.types';
+import {visuallyHidden} from '@mui/utils';
+import {headerCell, order} from '@/components/dataTable/table.types';
 
 interface TableHeadProps {
   orderAsc: (fieldToOrder: string) => void;
@@ -33,7 +33,7 @@ export default function MyTableHead({orderAsc, orderDesc, order, orderBy, header
               direction={orderBy === cell.id ? order : 'asc'}
               onClick={() => order === 'desc' ? orderDesc(cell.id) : orderAsc(cell.id)}
             >
-              {cell.label}
+              <strong>{cell.label}</strong>
               {orderBy === cell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === 'desc' ? 'Ordem Decrescente' : 'Ordem Crescente'}
@@ -45,7 +45,7 @@ export default function MyTableHead({orderAsc, orderDesc, order, orderBy, header
         {hasOptions &&  <TableCell
           padding={'normal'}
           align="center"
-        > Opções </TableCell>}
+        > <strong>Opções</strong> </TableCell>}
       </TableRow>
     </TableHead>
   );

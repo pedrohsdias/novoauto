@@ -1,14 +1,14 @@
 import {useAxios} from "@/hooks/useAxios.hook";
 import {useLoading} from "@/contexts/LoadingContext";
 import {UseCrudService} from "@/Types/hooks/crud.interface";
-import {IFranquiador} from "@/Types/models/franquia.interface";
 import {simpleWarning} from "@/services/swAlertService";
+import {IUnidade} from "@/Types/models/unidade.interface";
 
-const useFranquiadores = ():UseCrudService<IFranquiador> => {
+const useUnidades = ():UseCrudService<IUnidade> => {
   const api = useAxios();
-  const urlPath = '/franquiadores';
+  const urlPath = '/unidades';
   const {addMessage,removeMessage} = useLoading()
-  const loadAllMsg = "Carregando Franquiadores"
+  const loadAllMsg = "Carregando Unidades"
 
   const listar = async (
     page: number = 1,
@@ -33,7 +33,7 @@ const useFranquiadores = ():UseCrudService<IFranquiador> => {
       return response.data;
     } catch (error) {
       removeMessage(loadAllMsg)
-      await simpleWarning('Falha ao listar Franquiadores')
+      await simpleWarning('Falha ao listar Unidades')
       throw error;
     }
   };
@@ -71,4 +71,4 @@ const useFranquiadores = ():UseCrudService<IFranquiador> => {
   return { listar, detalhar, criar, editar };
 };
 
-export default useFranquiadores;
+export default useUnidades;

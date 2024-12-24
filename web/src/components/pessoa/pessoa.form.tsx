@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import {
-  TextField,
-  Button,
-  MenuItem,
-  Container,
-  Typography,
-} from '@mui/material';
+import React, {useEffect, useState} from 'react';
+import {Button, Container, MenuItem, TextField, Typography,} from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { TipoPessoaEnum } from '@/Types/enum/TipoPesso.enum';
-import { IPessoa } from '@/Types/pessoa.interface';
+import {TipoPessoaEnum} from '@/Types/enum/TipoPesso.enum';
+import {IPessoa} from '@/Types/models/pessoa.interface';
 
 interface PessoaFormProps {
   initialFormValues?: IPessoa; // Tipando initialFormValues como IPessoa, opcional

@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     localStorage.setItem('accessToken', tokens.access_token)
     localStorage.setItem('refreshToken', tokens?.refresh_token || '')
-
+    console.log('escreveu token')
     setAccessToken(tokens.access_token);
     setRefreshToken(tokens?.refresh_token|| null)
 
@@ -67,6 +67,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   
   const logout = () => {
     setTokenData(null)
+    console.log('apagou token')
     setAccessToken(null);
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');

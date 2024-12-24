@@ -1,14 +1,11 @@
-import {TipoFranquiaEnum} from '@/Types/enum/TipoFranquia.enum';
 import {IPessoa} from '@/Types/models/pessoa.interface';
 import {RowData} from "@/components/dataTable/table.types";
+import {IFranquiador} from "@/Types/models/franquia.interface";
 
-export interface IFranquiador extends RowData {
+export interface IUnidade extends RowData {
   id?: string; // UUID pode ser opcional
   apelido?: string;
-  tipo?: TipoFranquiaEnum;
-  linkLogo?: string;
-  termoDtAceite?: Date;
-  termoUsuarioAceite?: string;
+  franquiador?: IFranquiador;
   pessoaId?: string;
   pessoa?: IPessoa;
 }
