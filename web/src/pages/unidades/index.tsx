@@ -12,12 +12,12 @@ export default function Franquias() {
       disablePadding: false, //default true
       label: 'Nome',
     },
-    // {
-    //   id: 'tipo',
-    //   numeric: false, //default false
-    //   disablePadding: false, //default true
-    //   label: 'Tipo',
-    // },
+    {
+      id: 'franquiador.apelido',
+      numeric: false, //default false
+      disablePadding: false, //default true
+      label: 'Franquiador',
+    },
     // {
     //   id: 'termoDtAceite',
     //   numeric: false, //default false

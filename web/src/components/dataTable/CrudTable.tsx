@@ -19,6 +19,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {FilledInput, FormControl, InputAdornment, InputLabel} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import {Search} from "@mui/icons-material";
+import {getPropertyByPath} from "@/services/utilService";
 
 interface DataTableProps {
   titulo: string;
@@ -138,7 +139,7 @@ export default function CrudDataTable({titulo,listar,headCells,pathToEdit, pathT
                           scope="row"
                           key={`${row.id || index}_${head.id}`}
                         >
-                          {row[head.id]}
+                          {getPropertyByPath(row,head.id)}
                         </TableCell>
                       ))}
                       <TableCell

@@ -1,5 +1,5 @@
 // pages/_document.tsx
-import { Html, Head, Main, NextScript } from 'next/document';
+import {Head, Html, Main, NextScript} from 'next/document';
 import * as React from 'react';
 
 export default function Document() {
@@ -7,6 +7,7 @@ export default function Document() {
     <Html lang="pt-BR">
       <Head>
         <meta name="description" content="Solução em vistorias automotivas" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
         <link rel="icon" href="/assets/images/favicon.ico" />
       </Head>
       <body>

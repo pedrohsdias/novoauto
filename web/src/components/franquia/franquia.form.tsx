@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import {
-  TextField,
-  Button,
-  MenuItem,
-  Container,
-  Typography
-} from '@mui/material';
+import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {Button, Container, FormControl, FormLabel, Radio, RadioGroup, TextField, Typography} from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { TipoFranquiaEnum } from '@/Types/enum/TipoFranquia.enum';
-import { IFranquiador } from '@/Types/models/franquia.interface';
+import {TipoFranquiaEnum} from '@/Types/enum/TipoFranquia.enum';
+import {IFranquiador} from '@/Types/models/franquia.interface';
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 interface FranquiadorFormProps {
-  initialValues?: IFranquiador; // Valores iniciais, opcional
-  onSubmit?: (values: IFranquiador) => void;
+  initialValues?: IFranquiador,
+  parentForm?: object | null,
+  onSubmit?: ((values: IFranquiador) => void) | null,
+  setParentForm?: Dispatch<SetStateAction<{}>> | null
 }
 
-const FranquiadorForm = ({ initialValues }:FranquiadorFormProps) => {
+const FranquiadorForm = ({initialValues, parentForm = null, onSubmit = null, setParentForm=null}: FranquiadorFormProps) => {
   const [formValues, setFormValues] = useState<IFranquiador>({
     id: '',
     apelido: '',
@@ -26,7 +23,7 @@ const FranquiadorForm = ({ initialValues }:FranquiadorFormProps) => {
     pessoaId: '', // Assumindo que o ID da pessoa será passado
     ...initialValues, // Sobrescreve com valores iniciais se forem passados
   });
-  
+
   // Atualiza os formValues se as props mudarem
   useEffect(() => {
     if (initialValues) {
@@ -36,21 +33,25 @@ const FranquiadorForm = ({ initialValues }:FranquiadorFormProps) => {
       }));
     }
   }, [initialValues]);
-  
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
+    const {name, value} = e.target;
+    const newForm = {...formValues, [name]: value};
+    setFormValues(newForm);
+    if (setParentForm && parentForm) {
+      const updatedForm = 'franquiador' in parentForm
+        ? { ...parentForm, franquiador: newForm }
+        : newForm;
+      setParentForm(updatedForm);
+    }
   };
-  
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Lógica de submissão pode ser implementada aqui, como enviar para a API
     console.log('Form Values:', formValues);
   };
-  
+
   return (
     <Container maxWidth="sm">
       <Typography variant="h4" gutterBottom>
@@ -75,7 +76,40 @@ const FranquiadorForm = ({ initialValues }:FranquiadorFormProps) => {
               />
             </Grid>
           )}
-          
+          {/* Campo Tipo de Franquia */}
+          <Grid size={12}>
+            <FormControl>
+              <FormLabel id="demo-controlled-radio-buttons-group">Gender</FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-controlled-radio-buttons-group"
+                name="controlled-radio-buttons-group"
+                value={formValues.tipo}
+                onChange={handleInputChange}
+              >
+                <FormControlLabel value={TipoFranquiaEnum.AUTONOMO} control={<Radio />} label="Autonomo" />
+                <FormControlLabel value={TipoFranquiaEnum.EMPRESA_UNICA} control={<Radio />} label="Empresa Individual" />
+                <FormControlLabel value={TipoFranquiaEnum.EMPRESA_FRANQUIA} control={<Radio />} label="Empresa com Filiais" />
+              </RadioGroup>
+            </FormControl>
+            {/*<TextField*/}
+            {/*  select*/}
+            {/*  label="Tipo de Franquia"*/}
+            {/*  name="tipo"*/}
+            {/*  fullWidth*/}
+            {/*  value={formValues.tipo}*/}
+            {/*  onChange={handleInputChange}*/}
+            {/*  required*/}
+            {/*  helperText="Selecione o tipo de franquia"*/}
+            {/*>*/}
+            {/*  {Object.values(TipoFranquiaEnum).map((value) => (*/}
+            {/*    <MenuItem key={value} value={value}>*/}
+            {/*      {value === TipoFranquiaEnum.EMPRESA_UNICA*/}
+            {/*        ? 'Empresa Única'*/}
+            {/*        : 'Grupo de Empresas'}*/}
+            {/*    </MenuItem>*/}
+            {/*  ))}*/}
+            {/*</TextField>*/}
+          </Grid>
           {/* Campo Apelido */}
           <Grid size={12}>
             <TextField
@@ -88,29 +122,7 @@ const FranquiadorForm = ({ initialValues }:FranquiadorFormProps) => {
               helperText="Nome para exibição em tela"
             />
           </Grid>
-          
-          {/* Campo Tipo de Franquia */}
-          <Grid size={12}>
-            <TextField
-              select
-              label="Tipo de Franquia"
-              name="tipo"
-              fullWidth
-              value={formValues.tipo}
-              onChange={handleInputChange}
-              required
-              helperText="Selecione o tipo de franquia"
-            >
-              {Object.values(TipoFranquiaEnum).map((value) => (
-                <MenuItem key={value} value={value}>
-                  {value === TipoFranquiaEnum.EMPRESA_UNICA
-                    ? 'Empresa Única'
-                    : 'Grupo de Empresas'}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
-          
+
           {/* Campo Link Logo */}
           <Grid size={12}>
             <TextField
@@ -123,7 +135,7 @@ const FranquiadorForm = ({ initialValues }:FranquiadorFormProps) => {
               helperText="URL do logo da franquia"
             />
           </Grid>
-          
+
           {/* Campo Termo Data Aceite */}
           <Grid size={12}>
             <TextField
@@ -141,7 +153,7 @@ const FranquiadorForm = ({ initialValues }:FranquiadorFormProps) => {
               helperText="Data de aceite do termo"
             />
           </Grid>
-          
+
           {/* Campo Termo Usuário Aceite */}
           <Grid size={12}>
             <TextField
@@ -153,7 +165,7 @@ const FranquiadorForm = ({ initialValues }:FranquiadorFormProps) => {
               helperText="Usuário que aceitou o termo"
             />
           </Grid>
-          
+
           {/* Campo Pessoa ID (Assumindo que será um input de texto para o ID da pessoa) */}
           <Grid size={12}>
             <TextField
@@ -166,13 +178,13 @@ const FranquiadorForm = ({ initialValues }:FranquiadorFormProps) => {
               helperText="ID da pessoa relacionada à franquia"
             />
           </Grid>
-          
-          {/* Botão de Envio */}
-          <Grid size={12}>
-            <Button type="submit" variant="contained" color="primary" fullWidth>
-              Enviar
-            </Button>
-          </Grid>
+          {onSubmit !== null &&
+              <Grid size={12}>
+                  <Button type="submit" variant="contained" color="primary" fullWidth>
+                      Enviar
+                  </Button>
+              </Grid>
+          }
         </Grid>
       </form>
     </Container>

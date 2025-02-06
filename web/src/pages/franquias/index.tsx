@@ -37,7 +37,7 @@ export default function Franquias() {
       listar={listar}
       headCells={headerCell}
       pathToEdit={''}
-      pathToCreate={''}
+      pathToCreate={'/franquias/create'}
       handleDelete={()=>{}}/>
     </>
   );
