@@ -1,9 +1,5 @@
 # Instruções
 
-```bash
-nvm use 21
-```
-
 ## Como subir o projeto pela primeira vez
 > Ambiente todo no docker
 Construa e suba os containers:
@@ -18,15 +14,9 @@ docker exec -it web npm install
 #backend
 docker exec -it api npm install 
 ```
-Crie o banco:
-```bash
-docker exec -it api npm run typeorm migration:run
-```
 Crie a estrutura do banco:
 ```bash
-docker exec -it api npm run seed
-# ainda em construção
-#docker exec -it api npm run seed:dev 
+docker exec -it api npm run typeorm migration:run
 ```
 Popule o banco com dados iniciais:
 ```bash
