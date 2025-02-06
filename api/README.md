@@ -1,4 +1,4 @@
-# Rodando apenas o back
+# Cola de comandos utilizados na criação do projeto
 
 ```bash
 npm run start:dev
@@ -25,4 +25,22 @@ npm run typeorm migration:generate src/migrations/cria_tabelas_iniciais
 npm run typeorm migration:run
 npm run seed
 npm run seed:dev
+```
+```bash
+docker exec -it api npm run typeorm migration:generate src/migrations/cria_tabelas_iniciais
+```
+```bash
+sudo rm ../api/src/migrations/
+```
+```bash
+docker exec -it api npm run typeorm migration:run
+```
+```bash
+docker exec -it api npm run seed
+```
+```bash
+docker exec -it api npm run seed:dev
+```
+```bash
+docker exec -it api npm run typeorm migration:revert
 ```

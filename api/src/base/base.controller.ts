@@ -7,6 +7,7 @@ import {
   Controller,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { BaseEntity } from './base.entity';
 import { BaseService } from './base.service';
@@ -21,8 +22,18 @@ export class BaseController<T extends BaseEntity> {
   constructor(protected readonly service: BaseService<T>) {}
 
   @Get()
-  async findAll(): Promise<T[]> {
-    return this.service.findAll();
+  async findAll(
+    @Query('rowsPerPage') rowsPerPage: number = 10,
+    @Query('page') page: number = 0,
+    @Query('orderBy') orderBy: string = '',
+    @Query('order') order: 'asc' | 'desc' = 'asc',
+  ): Promise<T[]> {
+    return this.service.findAll({
+      rowsPerPage: rowsPerPage ? Number(rowsPerPage) : 10,
+      page: page ? Number(page) : 0,
+      orderBy: orderBy || undefined,
+      order: order || 'asc',
+    });
   }
 
   @Get(':id')
@@ -46,4 +57,7 @@ export class BaseController<T extends BaseEntity> {
   async remove(@Param('id') id: string): Promise<void> {
     await this.service.delete(id);
   }
+  private delay(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 }

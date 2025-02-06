@@ -3,17 +3,36 @@ import { OpcoesCampoEntity } from './opcoesCampo.entity';
 import { BaseEntity } from '../../base/base.entity';
 import { BlocosEntity } from './blocos.entity';
 import { TipoCampoEnum } from '../enum/tipoCampo.enum';
+import { CampoCoordenadaImagemEntity } from './camposCoordenadasImagens.entity';
+import { CamposCategoriasEntity } from './camposCategorias.entity';
 
 @Entity('campos')
 export class CamposEntity extends BaseEntity {
-  @Column({ length: 100 })
+  @Column({
+    length: 100,
+    comment: 'Campo para usara em referencias especificas'
+  })
   nome: string;
 
   @Column({
-    comment: 'Campo tipo slug para usara em referencias especificas',
     length: 100,
+    comment: 'Campo tipo slug para usara em referencias fixas'
   })
   alias: string;
+
+  @Column({
+    name: 'regex_validacao',
+    length: 100,
+    comment: 'Validação aplicada no campos tipo input',
+    nullable: true,
+  })
+  regexValidacao: string;
+  @Column({
+    length: 100,
+    comment: 'Mascara aplicada nos campos tipo input',
+    nullable: true,
+  })
+  mascara: string;
 
   @Column({
     name: 'tipo_campo',
@@ -26,6 +45,10 @@ export class CamposEntity extends BaseEntity {
   @ManyToOne(() => BlocosEntity, (bloco) => bloco.campos)
   @JoinColumn({ name: 'bloco_id' })
   bloco: BlocosEntity;
+
+  @ManyToOne(() => CamposCategoriasEntity, (categoria) => categoria.campos)
+  @JoinColumn({ name: 'categoria_id' })
+  categoria: CamposCategoriasEntity;
 
   @Column({
     name: 'qtd_selecionado',
@@ -44,4 +67,7 @@ export class CamposEntity extends BaseEntity {
 
   @OneToMany(() => OpcoesCampoEntity, (opcaoCampo) => opcaoCampo.campo)
   opcoesCampo: OpcoesCampoEntity[];
+
+  @OneToMany(() => CampoCoordenadaImagemEntity, (coordenada) => coordenada.campo)
+  coordenadas: CampoCoordenadaImagemEntity[];
 }

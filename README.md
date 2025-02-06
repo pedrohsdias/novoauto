@@ -4,20 +4,48 @@
 nvm use 21
 ```
 
-# Como subir o projeto
-
+## Como subir o projeto pela primeira vez
+> Ambiente todo no docker
+Construa e suba os containers:
 ```bash
 docker compose up -d
 ```
+Instale as dependencias dos dois projetos:
 ```bash
-cd api && nvm use 21 && npm run start:dev
+#frontend
+docker exec -it web npm install
+
+#backend
+docker exec -it api npm install 
 ```
+Crie o banco:
 ```bash
-cd web && nvm use 21 && npm run dev
-
-npm install && npm run dev
-
+docker exec -it api npm run typeorm migration:run
 ```
+Crie a estrutura do banco:
+```bash
+docker exec -it api npm run seed
+# ainda em construção
+#docker exec -it api npm run seed:dev 
+```
+Popule o banco com dados iniciais:
+```bash
+docker exec -it api npm run seed
+# ainda em construção
+#docker exec -it api npm run seed:dev 
+```
+Suba os servidores:
+```bash
+#frontend
+docker exec -it web npm run dev
+
+#backend
+docker exec -it api npm run start:dev
+```
+### Endpoints local
+* PG Admin: http://localhost:5050/
+* Frontend: http://localhost:3000/
+* backend: http://localhost:3001/
 
 ### Usuario  inicial do seed:
 
@@ -26,7 +54,18 @@ npm install && npm run dev
   "email": "root@email.com",
   "senha": "123"
 }
+```
 
+### Credenciais de banco:
+```yaml
+POSTGRES_DB: yourdatabase
+POSTGRES_USER: yourusername
+POSTGRES_PASSWORD: yourpassword
+```
+### Credenciais do PG Admin
+```yaml
+PGADMIN_DEFAULT_EMAIL: your-email@example.com
+PGADMIN_DEFAULT_PASSWORD: yourpassword
 ```
 
 ## Config debug da api no webstorm
@@ -69,13 +108,13 @@ docker-compose up
   ]
 }
 ```
+<!-- ## Como atualizar os containers
+
 ```bash
-docker exec -it api npm run typeorm migration:run
-
-docker exec -it api npm run seed:dev
-
-docker exec -it web npm install  
-
-docker exec -it web npm run dev
-
 ```
+
+## Como resetar o banco
+```bash
+docker compose down
+docker 
+``` -->

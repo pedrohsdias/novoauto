@@ -1,15 +1,14 @@
 import { DataSource } from 'typeorm';
 import { PessoasEntity } from '../../comum/entity/pessoas.entity';
-import { TipoPessoaEnum } from '../../franquia/enum/tipoPessoa.enum';
-import { FranquiadoresEntity } from '../../franquia/entity/franquiadores.entity';
-import { UnidadesEntity } from '../../franquia/entity/unidades.entity';
-import { TipoFranquiaEnum } from '../../franquia/enum/tipoFranquia.enum';
+import { ClienteEntity } from '../../cliente/entity/cliente.entity';
+import { TipoPessoaEnum } from '../../comum/enum/tipoPessoa.enum';
+import { TipoClienteEnum } from '../../cliente/enum/tipoCliente.enum';
 
 export class FranquiaSeed {
   async run(dataSource: DataSource): Promise<void> {
     const pessoaRepository = dataSource.getRepository(PessoasEntity);
-    const franquiaRepository = dataSource.getRepository(FranquiadoresEntity);
-    const unidadeRepository = dataSource.getRepository(UnidadesEntity);
+    const franquiaRepository = dataSource.getRepository(ClienteEntity);
+    const unidadeRepository = dataSource.getRepository(ClienteEntity);
     const pessoas = [
       {
         apelido: `Pessoa Autonoma`,
@@ -50,19 +49,19 @@ export class FranquiaSeed {
         apelido: `Franquia de autonomo`,
         linkLogo: `teste`,
         pessoa: pessoasSalvas[0],
-        tipo: TipoFranquiaEnum.AUTONOMO,
+        tipo: TipoClienteEnum.AUTONOMO,
       },
       {
         apelido: `Franquia de empresa solo`,
         linkLogo: `teste`,
         pessoa: pessoasSalvas[1],
-        tipo: TipoFranquiaEnum.EMPRESA_UNICA,
+        tipo: TipoClienteEnum.EMPRESA_UNICA,
       },
       {
         apelido: `Franquia de franquados`,
         linkLogo: `teste`,
         pessoa: pessoasSalvas[2],
-        tipo: TipoFranquiaEnum.EMPRESA_FRANQUIA,
+        tipo: TipoClienteEnum.EMPRESA_FRANQUIA,
       },
     ];
     const franquiasSalvas = await franquiaRepository.save(franquias);
@@ -70,27 +69,27 @@ export class FranquiaSeed {
       {
         apelido: `Unidade de autonomo`,
         pessoa: pessoasSalvas[0],
-        franquiador: franquiasSalvas[0],
+        matriz: franquiasSalvas[0],
       },
       {
         apelido: `Unidade de empresa solo`,
         pessoa: pessoasSalvas[1],
-        franquiador: franquiasSalvas[1],
+        matriz: franquiasSalvas[1],
       },
       {
         apelido: `Unidade da matriz`,
         pessoa: pessoasSalvas[2],
-        franquiador: franquiasSalvas[2],
+        matriz: franquiasSalvas[2],
       },
       {
         apelido: `Unidade 1`,
         pessoa: pessoasSalvas[3],
-        franquiador: franquiasSalvas[2],
+        matriz: franquiasSalvas[2],
       },
       {
         apelido: `Unidade 2`,
         pessoa: pessoasSalvas[4],
-        franquiador: franquiasSalvas[2],
+        matriz: franquiasSalvas[2],
       },
     ];
     await unidadeRepository.save(unidades);

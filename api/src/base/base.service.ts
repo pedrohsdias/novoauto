@@ -2,13 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { BaseRepository } from './base.repository';
 import { BaseEntity } from './base.entity';
 import { BaseDto } from './base.dto';
-
+import {PaginateOptions} from '../comum/types/paginateOptions.type';
 @Injectable()
 export class BaseService<T extends BaseEntity> {
   constructor(protected readonly repository: BaseRepository<T>) {}
 
-  async findAll(): Promise<T[]> {
-    return await this.repository.findAll();
+  async findAll(options: PaginateOptions): Promise<T[]> {
+    
+    const { rowsPerPage, page, orderBy, order } = options;
+    const query = this.repository.createQueryBuilder('entity');
+    query.skip(page * rowsPerPage).take(rowsPerPage)
+    return query.getMany();
   }
 
   async findById(id: string): Promise<T | null> {

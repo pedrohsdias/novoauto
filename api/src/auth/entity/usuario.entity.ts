@@ -12,9 +12,8 @@ import { BaseEntity } from '../../base/base.entity';
 import * as bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
 import { PerfilUsuarioEnum } from '../enum/perfilUsuario.enum';
-import { FranquiadoresEntity } from '../../franquia/entity/franquiadores.entity';
-import { UnidadesEntity } from '../../franquia/entity/unidades.entity';
 import { OrdensServicoEntity } from '../../vistoria/entity/ordensServico.entity';
+import { ClienteEntity } from '../../cliente/entity/cliente.entity';
 
 @Entity('usuarios')
 export class UsuariosEntity extends BaseEntity {
@@ -32,19 +31,19 @@ export class UsuariosEntity extends BaseEntity {
   })
   perfil: PerfilUsuarioEnum;
 
-  @ManyToOne(() => FranquiadoresEntity, (franquiador) => franquiador.usuarios, {
+  @ManyToOne(() => ClienteEntity, (cliente) => cliente.usuarios, {
     nullable: true,
   })
-  @JoinColumn({ name: 'franquiador_id' })
-  franquiador: FranquiadoresEntity;
+  @JoinColumn({ name: 'cliente_id' })
+  clientePrincipal: ClienteEntity;
 
-  @ManyToMany(() => UnidadesEntity, (unidade) => unidade.usuarios)
+  @ManyToMany(() => ClienteEntity, (cliente) => cliente.usuarios)
   @JoinTable({
-    name: 'usuarios_unidades',
+    name: 'usuarios_clientes',
     joinColumn: { name: 'usuario_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'unidade_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'cliente_id', referencedColumnName: 'id' },
   })
-  unidades: UnidadesEntity[];
+  clientes: ClienteEntity[];
 
   @Exclude()
   @Column({ nullable: false })

@@ -9,7 +9,7 @@ import {
 import { BaseEntity } from '../../base/base.entity';
 import { TipoServicoEnum } from '../enum/tipoServico.enum';
 import { ModelosVistoriaEntity } from '../../template-modelo-vistoria/entity/modelosVistoria.entity';
-import { UnidadesEntity } from './unidades.entity';
+import { ClienteEntity } from './cliente.entity';
 
 @Entity('servicos')
 export class ServicosEntity extends BaseEntity {
@@ -33,9 +33,9 @@ export class ServicosEntity extends BaseEntity {
   @Column()
   consulta: number;
 
-  @ManyToOne(() => UnidadesEntity, (unidade) => unidade.servicos)
-  @JoinColumn({ name: 'unidade_id' })
-  unidade: UnidadesEntity;
+  @ManyToOne(() => ClienteEntity, (clienteVistoriador) => clienteVistoriador.servicos)
+  @JoinColumn({ name: 'cliente_id' })
+  cliente: ClienteEntity;
 
   @ManyToMany(() => ModelosVistoriaEntity, (modelo) => modelo.servicos)
   @JoinTable({

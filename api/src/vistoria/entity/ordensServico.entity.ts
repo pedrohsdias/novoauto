@@ -1,14 +1,14 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 import { BaseEntity } from '../../base/base.entity';
-import { UnidadesEntity } from '../../franquia/entity/unidades.entity';
 import { ModelosVistoriaEntity } from '../../template-modelo-vistoria/entity/modelosVistoria.entity';
-import { TipoDadoConsultadoEnum } from '../../franquia/enum/tipoDadoConsultado.enum';
 import { StatusOrdemServicoEnum } from '../enum/statusOrdemServico.enum';
 import { ParecerVistoriaEnum } from '../enum/parecerVistoria.enum';
 import { TipoOrdemServicoEnum } from '../enum/tipoOrdemServico.enum';
-import { ClientesEntity } from './clientes.entity';
+import { ClienteFinalEntity } from './clienteFinal.entity';
 import { UsuariosEntity } from '../../auth/entity/usuario.entity';
+import { TipoDadoConsultadoEnum } from '../../cliente/enum/tipoDadoConsultado.enum';
+import { ClienteEntity } from '../../cliente/entity/cliente.entity';
 
 @Entity('ordem_servico')
 export class OrdensServicoEntity extends BaseEntity {
@@ -65,13 +65,13 @@ export class OrdensServicoEntity extends BaseEntity {
   })
   tipoOS: TipoOrdemServicoEnum;
 
-  @ManyToOne(() => ClientesEntity, (cliente) => cliente.ordensServico)
-  @JoinColumn({ name: 'cliente_id' })
-  cliente: ClientesEntity;
+  @ManyToOne(() => ClienteFinalEntity, (cliente) => cliente.ordensServico)
+  @JoinColumn({ name: 'cliente_final_id' })
+  clienteFinal: ClienteFinalEntity;
 
-  @ManyToOne(() => UnidadesEntity, (unidade) => unidade.ordensServico)
-  @JoinColumn({ name: 'unidade_id' })
-  unidade: UnidadesEntity;
+  @ManyToOne(() => ClienteEntity, (cliente) => cliente.ordensServico)
+  @JoinColumn({ name: 'cliente_id' })
+  cliente: ClienteEntity;
 
   @ManyToOne(() => ModelosVistoriaEntity, (modelo) => modelo.ordensServico)
   @JoinColumn({ name: 'modelo_vistoria_id' })

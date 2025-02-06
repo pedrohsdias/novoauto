@@ -1,23 +1,23 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { BaseController } from '../../base/base.controller';
-import { FranquiadoresEntity } from '../entity/franquiadores.entity';
-import { FranquiadoresService } from '../service/franquiadores.service';
 import {
   CreateBlocoDto,
   UpdateBlocoDto,
 } from '../../template-modelo-vistoria/dto/bloco.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { ClienteEntity } from '../entity/cliente.entity';
+import { ClientesService } from '../service/clientes.service';
 
-@ApiTags('Franquia')
-@Controller('franquiadores')
-export class FranquiadoresController extends BaseController<FranquiadoresEntity> {
-  constructor(protected readonly baseService: FranquiadoresService) {
+@ApiTags('Cliente')
+@Controller('clientes')
+export class ClientesController extends BaseController<ClienteEntity> {
+  constructor(protected readonly baseService: ClientesService) {
     super(baseService);
   }
   @Post()
   async create(
     @Body() createDto: CreateBlocoDto,
-  ): Promise<FranquiadoresEntity> {
+  ): Promise<ClienteEntity> {
     return super.create(createDto);
   }
 
@@ -25,7 +25,7 @@ export class FranquiadoresController extends BaseController<FranquiadoresEntity>
   async update(
     @Param('id') id: string,
     @Body() updateDto: UpdateBlocoDto,
-  ): Promise<FranquiadoresEntity> {
+  ): Promise<ClienteEntity> {
     return super.update(id, updateDto);
   }
 }

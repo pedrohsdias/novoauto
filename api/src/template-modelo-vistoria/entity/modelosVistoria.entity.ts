@@ -1,8 +1,8 @@
 import { Entity, Column, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
 import { BlocosEntity } from './blocos.entity';
-import { ServicosEntity } from '../../franquia/entity/servicos.entity';
 import { OrdensServicoEntity } from '../../vistoria/entity/ordensServico.entity';
+import { ServicosEntity } from '../../cliente/entity/servicos.entity';
 
 @Entity('modelos_vistoria')
 export class ModelosVistoriaEntity extends BaseEntity {

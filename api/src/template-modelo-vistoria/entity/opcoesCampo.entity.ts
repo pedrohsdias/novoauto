@@ -5,20 +5,14 @@ import { NivelRiscoEnum } from '../enum/nivelRisco.enum';
 
 @Entity('opcoes_campo')
 export class OpcoesCampoEntity extends BaseEntity {
-  @Column({ length: 100 })
+  @Column({
+    length: 100,
+    comment: 'Campo tipo slug para usara em referencias fixas'
+  })
   nome: string;
 
-  @Column({ comment: 'Campo tipo slug para usara em referencias especificas' })
+  @Column({comment: 'Campo exibido nas labels'})
   alias: string;
-
-  @Column({
-    name: 'coordenada_x_y',
-    length: 20,
-    comment:
-      'Campo preenchido quando bloco tipo imagem, indicando onde marcar na imagem',
-    nullable: true,
-  })
-  coordenada: string;
 
   @Column({ name: 'eh_padrao', default: false })
   ehPadrao: boolean;
