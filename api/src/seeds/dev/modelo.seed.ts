@@ -1,8 +1,5 @@
 import { DataSource } from 'typeorm';
-import { PessoasEntity } from '../../comum/entity/pessoas.entity';
 import { ClienteEntity } from '../../cliente/entity/cliente.entity';
-import { TipoPessoaEnum } from '../../comum/enum/tipoPessoa.enum';
-import { TipoClienteEnum } from '../../cliente/enum/tipoCliente.enum';
 import { ModelosVistoriaEntity } from '../../template-modelo-vistoria/entity/modelosVistoria.entity';
 import { BlocosEntity } from '../../template-modelo-vistoria/entity/blocos.entity';
 import { TipoServicoEnum } from '../../cliente/enum/tipoServico.enum';
