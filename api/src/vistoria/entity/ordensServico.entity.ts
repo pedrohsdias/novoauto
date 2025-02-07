@@ -4,7 +4,6 @@ import { BaseEntity } from '../../base/base.entity';
 import { ModelosVistoriaEntity } from '../../template-modelo-vistoria/entity/modelosVistoria.entity';
 import { StatusOrdemServicoEnum } from '../enum/statusOrdemServico.enum';
 import { ParecerVistoriaEnum } from '../enum/parecerVistoria.enum';
-import { TipoOrdemServicoEnum } from '../enum/tipoOrdemServico.enum';
 import { ClienteFinalEntity } from './clienteFinal.entity';
 import { UsuariosEntity } from '../../auth/entity/usuario.entity';
 import { TipoDadoConsultadoEnum } from '../../cliente/enum/tipoDadoConsultado.enum';
@@ -56,15 +55,6 @@ export class OrdensServicoEntity extends BaseEntity {
     default: ParecerVistoriaEnum.SEM_STATUS,
   })
   parecerVistoria: ParecerVistoriaEnum;
-
-  @Column({
-    name: 'tipo_os',
-    type: 'enum',
-    enum: TipoOrdemServicoEnum,
-    default: TipoOrdemServicoEnum.VISTORIA,
-  })
-  tipoOS: TipoOrdemServicoEnum;
-
   @ManyToOne(() => ClienteFinalEntity, (cliente) => cliente.ordensServico)
   @JoinColumn({ name: 'cliente_final_id' })
   clienteFinal: ClienteFinalEntity;

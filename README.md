@@ -21,8 +21,8 @@ docker exec -it api npm run typeorm migration:run
 Popule o banco com dados iniciais:
 ```bash
 docker exec -it api npm run seed
-# ainda em construção
-#docker exec -it api npm run seed:dev 
+
+docker exec -it api npm run seed:dev 
 ```
 Suba os servidores:
 ```bash
@@ -99,6 +99,11 @@ docker-compose up
 }
 ```
 <!-- ## Como atualizar os containers
+
+sudo rm ../api/src/migrations/[arquivo]
+
+docker exec -it api npm run typeorm migration:generate src/migrations/cria_tabelas_iniciais
+
 
 ```bash
 ```

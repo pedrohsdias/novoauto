@@ -1,4 +1,4 @@
 export enum TipoPessoaEnum {
-  PJ,
-  PF,
+  PJ = 'PJ',
+  PF = 'PF',
 }

@@ -4,39 +4,38 @@ import { ClienteEntity } from '../../cliente/entity/cliente.entity';
 import { TipoPessoaEnum } from '../../comum/enum/tipoPessoa.enum';
 import { TipoClienteEnum } from '../../cliente/enum/tipoCliente.enum';
 
-export class FranquiaSeed {
+export class ClienteSeed {
   async run(dataSource: DataSource): Promise<void> {
     const pessoaRepository = dataSource.getRepository(PessoasEntity);
-    const franquiaRepository = dataSource.getRepository(ClienteEntity);
-    const unidadeRepository = dataSource.getRepository(ClienteEntity);
+    const clienteRepository = dataSource.getRepository(ClienteEntity);
     const pessoas = [
       {
         apelido: `Pessoa Autonoma`,
-        nomeFormal: `Uma PF faz Vistoria, pra isso tem 1 Franquia e 1 Unidade`,
+        nomeFormal: `Uma PF faz Vistoria, pra isso é um cliente sem matriz e sem ser referenciado`,
         documento: `111.111.111-11`,
         tipo: TipoPessoaEnum.PF,
       }, //pessoa 0
       {
         apelido: `Empresa Unica`,
-        nomeFormal: `Uma PJ faz Vistoria, pra isso tem 1 Franquia e 1 Unidade`,
+        nomeFormal: `Uma PJ faz Vistoria, pra isso é um cliente sem matriz e sem ser referenciado`,
         documento: `22.222.222/0001-22`,
         tipo: TipoPessoaEnum.PJ,
       }, //pessoa1
       {
-        apelido: `Empresa com Franqueadora`,
-        nomeFormal: `Uma PJ com varias unidades,comeaça com uma unidade padrão`,
+        apelido: `Empresa Matriz`,
+        nomeFormal: `Uma PJ com filiais,pra isso é um cliente que é referenciado`,
         documento: `33.333.333/0001-33`,
         tipo: TipoPessoaEnum.PJ,
       }, //pessoa2
       {
         apelido: `Empresa unidade 1`,
-        nomeFormal: `Uma PF unidade da franqueadora`,
+        nomeFormal: `Uma PJ, que é cliente e referencia a matriz`,
         documento: `33.333.333/0002-33`,
         tipo: TipoPessoaEnum.PJ,
       }, //pessoa3
       {
         apelido: `Empresa unidade 2`,
-        nomeFormal: `Uma PF unidade da franqueadora`,
+        nomeFormal: `Uma PJ, que é cliente e referencia a matriz`,
         documento: `33.333.333/0003-33`,
         tipo: TipoPessoaEnum.PJ,
       }, //pessoa4
@@ -44,54 +43,42 @@ export class FranquiaSeed {
 
     const pessoasSalvas = await pessoaRepository.save(pessoas);
 
-    const franquias = [
+    const clientesMatriz = [
       {
-        apelido: `Franquia de autonomo`,
+        apelido: `Autonomo`,
         linkLogo: `teste`,
         pessoa: pessoasSalvas[0],
         tipo: TipoClienteEnum.AUTONOMO,
-      },
+      },//0
       {
-        apelido: `Franquia de empresa solo`,
+        apelido: `ECV`,
         linkLogo: `teste`,
         pessoa: pessoasSalvas[1],
-        tipo: TipoClienteEnum.EMPRESA_UNICA,
-      },
+        tipo: TipoClienteEnum.EMPRESA_ECV,
+      },//1
       {
-        apelido: `Franquia de franquados`,
+        apelido: `Matriz`,
         linkLogo: `teste`,
         pessoa: pessoasSalvas[2],
-        tipo: TipoClienteEnum.EMPRESA_FRANQUIA,
-      },
-    ];
-    const franquiasSalvas = await franquiaRepository.save(franquias);
-    const unidades = [
+        tipo: TipoClienteEnum.EMPRESA_MATRZ,
+      },//2
+  ]
+
+    const matriz = await clienteRepository.save(clientesMatriz);
+    const clientesFiliais = [
       {
-        apelido: `Unidade de autonomo`,
+        apelido: `Filial 1`,
         pessoa: pessoasSalvas[0],
-        matriz: franquiasSalvas[0],
+        tipo: TipoClienteEnum.EMPRESA_FILIAL,
+        matriz: matriz[2],
       },
       {
-        apelido: `Unidade de empresa solo`,
+        apelido: `Filial 2`,
         pessoa: pessoasSalvas[1],
-        matriz: franquiasSalvas[1],
-      },
-      {
-        apelido: `Unidade da matriz`,
-        pessoa: pessoasSalvas[2],
-        matriz: franquiasSalvas[2],
-      },
-      {
-        apelido: `Unidade 1`,
-        pessoa: pessoasSalvas[3],
-        matriz: franquiasSalvas[2],
-      },
-      {
-        apelido: `Unidade 2`,
-        pessoa: pessoasSalvas[4],
-        matriz: franquiasSalvas[2],
+        tipo: TipoClienteEnum.EMPRESA_FILIAL,
+        matriz: matriz[2],
       },
     ];
-    await unidadeRepository.save(unidades);
+    await clienteRepository.save(clientesFiliais);
   }
 }

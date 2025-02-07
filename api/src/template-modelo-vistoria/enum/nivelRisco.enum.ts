@@ -1,6 +1,6 @@
 export enum NivelRiscoEnum {
-  PADRAO,
-  SUCESSO,
-  AVISO,
-  ERRO,
+  PADRAO = 'PADRAO',
+  SUCESSO = 'SUCESSO',
+  AVISO = 'AVISO',
+  ERRO = 'ERRO',
 }

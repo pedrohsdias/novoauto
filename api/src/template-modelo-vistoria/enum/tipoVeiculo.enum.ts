@@ -1,8 +1,8 @@
 export enum TipoVeiculoEnum {
-  GENERICO,
-  HATCH,
-  SEDAN,
-  SUV,
-  PICAPE,
-  MOTO,
+  GENERICO = 'GENERICO',
+  HATCH = 'HATCH',
+  SEDAN = 'SEDAN',
+  SUV = 'SUV',
+  PICAPE = 'PICAPE',
+  MOTO = 'MOTO',
 }

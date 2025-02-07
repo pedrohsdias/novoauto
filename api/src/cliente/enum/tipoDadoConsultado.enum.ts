@@ -1,4 +1,4 @@
 export enum TipoDadoConsultadoEnum {
-  CHASSI,
-  PLACA,
+  CHASSI = 'CHASSI',
+  PLACA = 'PLACA',
 }

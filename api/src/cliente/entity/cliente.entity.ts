@@ -8,7 +8,7 @@ import { ServicosEntity } from './servicos.entity';
 import { OrdensServicoEntity } from '../../vistoria/entity/ordensServico.entity';
 import { ClienteFinalEntity } from '../../vistoria/entity/clienteFinal.entity';
 
-@Entity('clientes_vistoriadores')
+@Entity('clientes')
 export class ClienteEntity extends BaseEntity {
   @Column({
     length: 150,
@@ -19,7 +19,7 @@ export class ClienteEntity extends BaseEntity {
     name: 'tipo_cliente',
     type: 'enum',
     enum: TipoClienteEnum,
-    default: TipoClienteEnum.EMPRESA_UNICA,
+    default: TipoClienteEnum.EMPRESA_ECV,
     nullable: false,
   })
   tipo: TipoClienteEnum;

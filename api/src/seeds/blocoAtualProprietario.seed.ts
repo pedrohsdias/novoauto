@@ -11,7 +11,7 @@ export class BlocoAtualProprietarioSeed {
 
     const blocos = [
       {
-        nome: 'ATUAL_PROPRIETARIO',
+        nome: 'ATUAL PROPRIETARIO',
         tipo: TipoBlocoEnum.PADRAO,
         fontAwesomeIcon: 'fa-user-tag',
       }, //0

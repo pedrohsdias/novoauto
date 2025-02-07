@@ -1,4 +1,4 @@
 export enum TipoServicoEnum {
-  VISTORIA,
-  CONSULTA,
+  VISTORIA = 'VISTORIA',
+  CONSULTA = 'CONSULTA',
 }
