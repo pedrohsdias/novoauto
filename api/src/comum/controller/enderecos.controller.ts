@@ -1,5 +1,5 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
-import { BaseController } from '../../base/base.controller';
+import { BaseCrudController } from '../../base/baseCrud.controller';
 import {
   CreateBlocoDto,
   UpdateBlocoDto,
@@ -9,7 +9,7 @@ import { EnderecosService } from '../service/enderecos.service';
 import { ApiTags } from '@nestjs/swagger';
 @ApiTags('Endereco')
 @Controller('enderecos')
-export class EnderecosController extends BaseController<EnderecosEntity> {
+export class EnderecosController extends BaseCrudController<EnderecosEntity> {
   constructor(protected readonly baseService: EnderecosService) {
     super(baseService);
   }

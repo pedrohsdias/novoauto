@@ -1,5 +1,5 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
-import { BaseController } from '../../base/base.controller';
+import { BaseCrudController } from '../../base/baseCrud.controller';
 import {
   CreateBlocoDto,
   UpdateBlocoDto,
@@ -11,7 +11,7 @@ import { ConfigService } from '@nestjs/config';
 
 @ApiTags('Usuario')
 @Controller('usuarios')
-export class UsuariosController extends BaseController<UsuariosEntity> {
+export class UsuariosController extends BaseCrudController<UsuariosEntity> {
   constructor(
     protected readonly baseService: UsuariosService,
     protected readonly configService: ConfigService,

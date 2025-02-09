@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { BaseDto } from '../../base/base.dto';
+import { BaseModelDto } from '../../base/dto/baseModel.dto';
 
-export class CreateTipoBlocoDto extends BaseDto {
+export class CreateTipoBlocoDto extends BaseModelDto {
   @IsNotEmpty()
   @IsString()
   nome: string;

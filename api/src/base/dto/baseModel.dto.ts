@@ -1,6 +1,6 @@
 import { IsOptional } from 'class-validator';
 
-export class BaseDto {
+export class BaseModelDto {
   @IsOptional()
   id: string;
   @IsOptional()

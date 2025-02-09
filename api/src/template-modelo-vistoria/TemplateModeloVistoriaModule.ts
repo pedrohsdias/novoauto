@@ -38,9 +38,9 @@ import { OpcoesCampoService } from './service/opcoesCampo.service';
   ],
   controllers: [
     ModelosVistoriaController,
-    BlocosController,
-    CamposController,
-    OpcoesCampoController,
+    // BlocosController,
+    // CamposController,
+    // OpcoesCampoController,
   ],
   exports: [
     TypeOrmModule,

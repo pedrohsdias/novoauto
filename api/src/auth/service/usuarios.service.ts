@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { BaseService } from '../../base/base.service';
 import { UsuariosEntity } from '../entity/usuario.entity';
 import { UsuariosRepository } from '../repository/usuarios.repository';
-import { BaseDto } from '../../base/base.dto';
+import { BaseModelDto } from '../../base/dto/baseModel.dto';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class UsuariosService extends BaseService<UsuariosEntity> {
 
   async updateComSenha(
     id: string,
-    udpateDto: BaseDto,
+    udpateDto: BaseModelDto,
     configService: ConfigService,
   ): Promise<UsuariosEntity> {
     //todo  - hashear senha

@@ -18,7 +18,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   // Configurando o Swagger
   const config = new DocumentBuilder()
-    .setTitle('Minha API')
+    .setTitle('API Autopericiado')
     .setDescription('Documentação da API')
     .setVersion('1.0')
     .addBearerAuth()

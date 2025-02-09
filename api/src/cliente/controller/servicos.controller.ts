@@ -1,5 +1,5 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
-import { BaseController } from '../../base/base.controller';
+import { BaseCrudController } from '../../base/baseCrud.controller';
 import { ServicosEntity } from '../entity/servicos.entity';
 import { ServicosService } from '../service/servicos.service';
 import {
@@ -10,7 +10,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Serviço')
 @Controller('servicos')
-export class ServicosController extends BaseController<ServicosEntity> {
+export class ServicosController extends BaseCrudController<ServicosEntity> {
   constructor(protected readonly baseService: ServicosService) {
     super(baseService);
   }

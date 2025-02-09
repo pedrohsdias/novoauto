@@ -5,10 +5,10 @@ import {
   IsString,
   IsOptional,
 } from 'class-validator';
-import { BaseDto } from '../../base/base.dto';
+import { BaseModelDto } from '../../base/dto/baseModel.dto';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-export class CreateModeloVistoriaDto extends BaseDto {
+export class CreateModeloVistoriaDto extends BaseModelDto {
   @IsNotEmpty()
   @IsString()
   @ApiProperty()

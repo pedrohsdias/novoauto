@@ -7,9 +7,9 @@ import {
   IsString,
 } from 'class-validator';
 import { NivelRiscoEnum } from '../enum/nivelRisco.enum';
-import { BaseDto } from '../../base/base.dto';
+import { BaseModelDto } from '../../base/dto/baseModel.dto';
 
-export class CreateOpcaoCampoDto extends BaseDto {
+export class CreateOpcaoCampoDto extends BaseModelDto {
   @IsNotEmpty()
   @IsString()
   nome: string;

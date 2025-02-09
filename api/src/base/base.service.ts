@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { BaseRepository } from './base.repository';
 import { BaseEntity } from './base.entity';
-import { BaseDto } from './base.dto';
-import {PaginateOptions} from '../comum/types/paginateOptions.type';
+import { BaseModelDto } from './dto/baseModel.dto';
+import { BaseFindAllDto } from './dto/baseFindAll.dto';
+
 @Injectable()
 export class BaseService<T extends BaseEntity> {
   constructor(protected readonly repository: BaseRepository<T>) {}
 
-  async findAll(options: PaginateOptions): Promise<T[]> {
+  async findAll(options: BaseFindAllDto): Promise<T[]> {
     
     const { rowsPerPage, page, orderBy, order } = options;
     const query = this.repository.createQueryBuilder('entity');
@@ -19,13 +20,13 @@ export class BaseService<T extends BaseEntity> {
     return await this.repository.findById(id);
   }
 
-  async create(createDto: BaseDto): Promise<T> {
+  async create(createDto: BaseModelDto): Promise<T> {
     const entity = await this.repository.create();
     Object.assign(entity, createDto);
     return await this.repository.saveEntity(entity);
   }
 
-  async update(id: string, udpateDto: BaseDto): Promise<T> {
+  async update(id: string, udpateDto: BaseModelDto): Promise<T> {
     const existingEntity = await this.findById(id);
     if (!existingEntity) {
       throw new Error(`Entity with id ${id} not found`);

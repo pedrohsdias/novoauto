@@ -1,5 +1,5 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
-import { BaseController } from '../../base/base.controller';
+import { BaseCrudController } from '../../base/baseCrud.controller';
 import { OpcoesCampoEntity } from '../entity/opcoesCampo.entity';
 import { OpcoesCampoService } from '../service/opcoesCampo.service';
 import {
@@ -10,7 +10,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Opções dos campos do bloco')
 @Controller('opcao-campo')
-export class OpcoesCampoController extends BaseController<OpcoesCampoEntity> {
+export class OpcoesCampoController extends BaseCrudController<OpcoesCampoEntity> {
   constructor(protected readonly baseService: OpcoesCampoService) {
     super(baseService);
   }
