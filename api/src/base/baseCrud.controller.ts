@@ -7,16 +7,17 @@ import {
   Controller,
   Put,
   UseGuards,
-  Query,
+  Query, HttpException, HttpStatus,
 } from '@nestjs/common';
 import { BaseEntity } from './base.entity';
 import { BaseService } from './base.service';
 import { BaseModelDto } from './dto/baseModel.dto';
 import { ApiBearerAuth, ApiInternalServerErrorResponse, ApiOkResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../guard/guard';
-import { BaseFindAllDto } from './dto/baseFindAll.dto';
+import { BaseRequestFindAllDto } from './dto/baseRequestFindAll.dto';
 import { ApiResponseDto } from './dto/apiResponse.dto';
 import { ApiResponsePaginatedDto } from './dto/apiResponsePaginated.dto';
+import { createError, createPaginatedResponse, createResponse } from './util/responses.util';
 
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
@@ -35,7 +36,7 @@ export class BaseCrudController<T extends BaseEntity> {
     type: ApiResponseDto,
     isArray: false,
   })
-  async findAll(@Query() query: BaseFindAllDto): Promise<ApiResponseDto<T[]>> {
+  async findAll(@Query() query: BaseRequestFindAllDto): Promise<ApiResponseDto<T[]>> {
     const { rowsPerPage = 15, page = 1, orderBy, order = 'asc' } = query;
     try {
       const response = await this.service.findAll({
@@ -45,9 +46,9 @@ export class BaseCrudController<T extends BaseEntity> {
         order: order as 'asc' | 'desc',
       });
 
-      return this.createPaginatedResponse(response,page)
+      return createPaginatedResponse(response,page)
     }catch (error) {
-      return this.createResponse(null, error)
+      throw new HttpException(createError(error), HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
 
@@ -73,22 +74,7 @@ export class BaseCrudController<T extends BaseEntity> {
   async remove(@Param('id') id: string): Promise<void> {
     await this.service.delete(id);
   }
-  protected createPaginatedResponse<T>(data: T, currentPage=1 , errors?: any): ApiResponsePaginatedDto<T> {
-    return {
-      message: 'success',
-      total: Array.isArray(data) ? data.length : 1,
-      currentPage,
-      errors,
-      data
-    };
-  }
-  protected createResponse<T>(data?: T, errors?: any): ApiResponseDto<T> {
-    return {
-      message: errors?'error':'success',
-      errors,
-      data
-    };
-  }
+
 
   private delay(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));

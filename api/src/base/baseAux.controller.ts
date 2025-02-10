@@ -1,21 +1,17 @@
 import {
   Get,
-  Param,
-  Post,
-  Body,
-  Delete,
   Controller,
-  Put,
   UseGuards,
-  Query,
+  Query, HttpException, HttpStatus,
 } from '@nestjs/common';
 import { BaseEntity } from './base.entity';
 import { BaseService } from './base.service';
-import { BaseModelDto } from './dto/baseModel.dto';
 import { ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../guard/guard';
-import { BaseFindAllDto } from './dto/baseFindAll.dto';
 import { ApiResponseDto } from './dto/apiResponse.dto';
+import { ApiResponsePaginatedDto } from './dto/apiResponsePaginated.dto';
+import { createError, createPaginatedResponse } from './util/responses.util';
+import { RequestAutoCompleteDto } from '../comum/dto/requestAutoComplete.dto';
 
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
@@ -27,17 +23,16 @@ export class BaseAuxController<T extends BaseEntity> {
   @Get()
   @ApiOkResponse({
     description: 'Lista de itens retornados com metadados',
-    type: ApiResponseDto,
+    type: ApiResponsePaginatedDto,
     isArray: false,
   })
-  async findAll(@Query() query: BaseFindAllDto): Promise<T[]> {
-    const { rowsPerPage = 10, page = 0, orderBy, order = 'asc' } = query;
+  async autocomplete(@Query() query: RequestAutoCompleteDto): Promise<ApiResponseDto<T[]>> {
+    try {
+      const response = await this.service.autoComplete(query);
 
-    return await this.service.findAll({
-      rowsPerPage: Number(rowsPerPage),
-      page: Number(page),
-      orderBy: orderBy || undefined,
-      order: order as 'asc' | 'desc',
-    });
+      return createPaginatedResponse(response)
+    }catch (error) {
+      throw new HttpException(createError(error), HttpStatus.INTERNAL_SERVER_ERROR)
+    }
   }
 }

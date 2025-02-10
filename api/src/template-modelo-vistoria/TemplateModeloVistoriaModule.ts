@@ -10,11 +10,8 @@ import { OpcoesCampoEntity } from './entity/opcoesCampo.entity';
 import { BlocosRepository } from './repository/blocos.repository';
 import { CamposRepository } from './repository/campos.repository';
 import { OpcoesCampoRepository } from './repository/opcoesCampo.repository';
-import { BlocosController } from './controller/blocos.controller';
 import { BlocosService } from './service/blocos.service';
-import { CamposController } from './controller/campos.controller';
 import { CamposService } from './service/campos.service';
-import { OpcoesCampoController } from './controller/opcoesCampo.controller';
 import { OpcoesCampoService } from './service/opcoesCampo.service';
 
 @Module({

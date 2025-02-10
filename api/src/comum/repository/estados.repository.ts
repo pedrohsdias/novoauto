@@ -5,6 +5,8 @@ import { EstadosEntity } from '../entity/estados.entity';
 
 @Injectable()
 export class EstadosRepository extends BaseRepository<EstadosEntity> {
+
+  protected autoCompleteFields: string[] = ['nome','uf'];
   constructor(dataSource: DataSource) {
     super(EstadosEntity, dataSource, EstadosEntity);
   }

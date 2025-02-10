@@ -1,7 +1,7 @@
 import { IsOptional, IsInt, IsString, IsIn } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
-export class BaseFindAllDto {
+export class BaseRequestFindAllDto {
   @ApiPropertyOptional({ example: 10, description: 'Número de registros por página', default: 10 })
   @IsOptional()
   @IsInt()

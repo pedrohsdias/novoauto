@@ -7,7 +7,8 @@ import { EstadosEntity } from './estados.entity';
 export class MunicipiosEntity extends BaseEntity {
   @Column({ length: 150 })
   nome: string;
-
+  @Column({ name: 'estado_id' })
+  estadoId: number;
   @ManyToOne(() => EstadosEntity, (estado) => estado.municipios)
   @JoinColumn({ name: 'estado_id' })
   estado: EstadosEntity;

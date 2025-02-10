@@ -36,6 +36,7 @@ async function bootstrap() {
     },
   });
 
+  // noinspection TypeScriptValidateTypes
   await app.listen(configService.get<number>('APP_PORT') || 3000);
 }
 bootstrap();

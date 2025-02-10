@@ -2,17 +2,22 @@ import { Injectable } from '@nestjs/common';
 import { BaseRepository } from './base.repository';
 import { BaseEntity } from './base.entity';
 import { BaseModelDto } from './dto/baseModel.dto';
-import { BaseFindAllDto } from './dto/baseFindAll.dto';
+import { BaseRequestFindAllDto } from './dto/baseRequestFindAll.dto';
+import { RequestAutoCompleteDto } from '../comum/dto/requestAutoComplete.dto';
 
 @Injectable()
 export class BaseService<T extends BaseEntity> {
+
   constructor(protected readonly repository: BaseRepository<T>) {}
 
-  async findAll(options: BaseFindAllDto): Promise<T[]> {
-    
-    const { rowsPerPage, page, orderBy, order } = options;
-    const query = this.repository.createQueryBuilder('entity');
-    query.skip(page * rowsPerPage).take(rowsPerPage)
+  async autoComplete(options: RequestAutoCompleteDto): Promise<T[]> {
+    const query = this.repository.autoComplete(options);
+
+    return query.getMany();
+  }
+
+  async findAll(options: BaseRequestFindAllDto): Promise<T[]> {
+    const query = this.repository.paginate(options)
     return query.getMany();
   }
 

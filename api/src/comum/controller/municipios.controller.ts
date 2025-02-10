@@ -7,22 +7,11 @@ import {
 import { MunicipiosEntity } from '../entity/municipios.entity';
 import { MunicipiosService } from '../service/municipios.service';
 import { ApiTags } from '@nestjs/swagger';
+import { BaseAuxController } from '../../base/baseAux.controller';
 @ApiTags('Municipio')
 @Controller('municipios')
-export class MunicipiosController extends BaseCrudController<MunicipiosEntity> {
+export class MunicipiosController extends BaseAuxController<MunicipiosEntity> {
   constructor(protected readonly baseService: MunicipiosService) {
     super(baseService);
-  }
-  @Post()
-  async create(@Body() createDto: CreateBlocoDto): Promise<MunicipiosEntity> {
-    return super.create(createDto);
-  }
-
-  @Put(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateDto: UpdateBlocoDto,
-  ): Promise<MunicipiosEntity> {
-    return super.update(id, updateDto);
   }
 }

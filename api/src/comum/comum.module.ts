@@ -61,7 +61,7 @@ import { PessoasController } from './controller/pessoas.controller';
     EnderecosController,
     EstadosController,
     MunicipiosController,
-    PessoasController,
+    // PessoasController,
     TelefonesController,
     TiposEnderecoController,
     TiposTelefoneController,
