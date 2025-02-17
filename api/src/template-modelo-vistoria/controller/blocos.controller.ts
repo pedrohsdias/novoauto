@@ -1,18 +1,18 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { BaseCrudController } from '../../base/baseCrud.controller';
-import { BlocosEntity } from '../entity/blocos.entity';
+import { BlocoEntity } from '../entity/bloco.entity';
 import { BlocosService } from '../service/blocos.service';
 import { CreateBlocoDto, UpdateBlocoDto } from '../dto/bloco.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Bloco do modelo')
 @Controller('bloco')
-export class BlocosController extends BaseCrudController<BlocosEntity> {
+export class BlocosController extends BaseCrudController<BlocoEntity> {
   constructor(protected readonly baseService: BlocosService) {
     super(baseService);
   }
   @Post()
-  async create(@Body() createDto: CreateBlocoDto): Promise<BlocosEntity> {
+  async create(@Body() createDto: CreateBlocoDto): Promise<BlocoEntity> {
     return super.create(createDto);
   }
 
@@ -20,7 +20,7 @@ export class BlocosController extends BaseCrudController<BlocosEntity> {
   async update(
     @Param('id') id: string,
     @Body() updateDto: UpdateBlocoDto,
-  ): Promise<BlocosEntity> {
+  ): Promise<BlocoEntity> {
     return super.update(id, updateDto);
   }
 }

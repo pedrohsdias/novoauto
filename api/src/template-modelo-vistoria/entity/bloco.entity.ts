@@ -1,12 +1,12 @@
 import { Entity, Column, OneToMany, ManyToMany } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
-import { CamposEntity } from './campos.entity';
-import { ModelosVistoriaEntity } from './modelosVistoria.entity';
+import { CampoEntity } from './campo.entity';
+import { ModeloVistoriaEntity } from './modeloVistoria.entity';
 import { TipoBlocoEnum } from '../enum/tipoBloco.enum';
-import { BlocoImagemEntity } from './blocoImagens.entity';
+import { BlocoImagemEntity } from './blocoImagem.entity';
 
 @Entity('blocos')
-export class BlocosEntity extends BaseEntity {
+export class BlocoEntity extends BaseEntity {
   @Column({ length: 75 })
   nome: string;
 
@@ -29,13 +29,13 @@ export class BlocosEntity extends BaseEntity {
   tipo: TipoBlocoEnum;
 
   @ManyToMany(
-    () => ModelosVistoriaEntity,
+    () => ModeloVistoriaEntity,
     (modeloVistoria) => modeloVistoria.blocos,
   )
-  modelosVistoria: ModelosVistoriaEntity[];
+  modelosVistoria: ModeloVistoriaEntity[];
 
-  @OneToMany(() => CamposEntity, (campo) => campo.bloco)
-  campos: CamposEntity[];
+  @OneToMany(() => CampoEntity, (campo) => campo.bloco)
+  campos: CampoEntity[];
 
   @OneToMany(() => BlocoImagemEntity, (imagem) => imagem.bloco)
   imagens: BlocoImagemEntity[];

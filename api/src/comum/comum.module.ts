@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { EnderecosEntity } from './entity/enderecos.entity';
-import { EstadosEntity } from './entity/estados.entity';
-import { MunicipiosEntity } from './entity/municipios.entity';
-import { PessoasEntity } from './entity/pessoas.entity';
-import { TelefonesEntity } from './entity/telefones.entity';
-import { TiposEnderecoEntity } from './entity/tiposEndereco.entity';
-import { TiposTelefoneEntity } from './entity/tiposTelefone.entity';
+import { EnderecoEntity } from './entity/endereco.entity';
+import { EstadoEntity } from './entity/estado.entity';
+import { MunicipioEntity } from './entity/municipio.entity';
+import { PessoaEntity } from './entity/pessoa.entity';
+import { TelefoneEntity } from './entity/telefone.entity';
+import { TipoEnderecoEntity } from './entity/tipoEndereco.entity';
+import { TipoTelefoneEntity } from './entity/tipoTelefone.entity';
 import { EnderecosRepository } from './repository/enderecos.repository';
 import { TiposEnderecoRepository } from './repository/tiposEndereco.repository';
 import { EnderecosService } from './service/enderecos.service';
@@ -28,17 +28,18 @@ import { TelefonesController } from './controller/telefones.controller';
 import { MunicipiosController } from './controller/municipios.controller';
 import { EnderecosController } from './controller/enderecos.controller';
 import { PessoasController } from './controller/pessoas.controller';
+import { MockService } from './service/mock.service';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      EnderecosEntity,
-      EstadosEntity,
-      MunicipiosEntity,
-      PessoasEntity,
-      TelefonesEntity,
-      TiposEnderecoEntity,
-      TiposTelefoneEntity,
+      EnderecoEntity,
+      EstadoEntity,
+      MunicipioEntity,
+      PessoaEntity,
+      TelefoneEntity,
+      TipoEnderecoEntity,
+      TipoTelefoneEntity,
     ]),
   ],
   providers: [
@@ -56,6 +57,7 @@ import { PessoasController } from './controller/pessoas.controller';
     TiposEnderecoRepository,
     TiposTelefoneService,
     TiposTelefoneRepository,
+    MockService
   ],
   controllers: [
     EnderecosController,
@@ -66,6 +68,6 @@ import { PessoasController } from './controller/pessoas.controller';
     TiposEnderecoController,
     TiposTelefoneController,
   ],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule,MockService],
 })
 export class ComumModule {}

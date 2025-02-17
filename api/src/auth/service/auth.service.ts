@@ -33,7 +33,10 @@ export class AuthService {
     try {
       const payload = this.jwtService.verify(refreshToken);
       const usuario = await this.usuarioService.findById(payload.sub);
-      return this.buildTokens(usuario);
+      if(usuario){
+        return this.buildTokens(usuario);
+      }
+      throw new UnauthorizedException('Usuário não encontrado');
     } catch (e) {
       console.log(e);
       throw new UnauthorizedException(

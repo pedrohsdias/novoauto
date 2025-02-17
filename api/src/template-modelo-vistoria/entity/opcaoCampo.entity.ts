@@ -1,10 +1,10 @@
 import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { CamposEntity } from './campos.entity';
+import { CampoEntity } from './campo.entity';
 import { BaseEntity } from '../../base/base.entity';
 import { NivelRiscoEnum } from '../enum/nivelRisco.enum';
 
 @Entity('opcoes_campo')
-export class OpcoesCampoEntity extends BaseEntity {
+export class OpcaoCampoEntity extends BaseEntity {
   @Column({
     length: 100,
     comment: 'Campo tipo slug para usara em referencias fixas'
@@ -26,7 +26,7 @@ export class OpcoesCampoEntity extends BaseEntity {
   })
   nivelRisco: NivelRiscoEnum;
 
-  @ManyToOne(() => CamposEntity, (campo) => campo.opcoesCampo)
+  @ManyToOne(() => CampoEntity, (campo) => campo.opcoesCampo)
   @JoinColumn({ name: 'campo_id' })
-  campo: CamposEntity;
+  campo: CampoEntity;
 }

@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { BaseRepository } from '../../base/base.repository';
 import { DataSource } from 'typeorm';
-import { MunicipiosEntity } from '../entity/municipios.entity';
+import { MunicipioEntity } from '../entity/municipio.entity';
 
 @Injectable()
-export class MunicipiosRepository extends BaseRepository<MunicipiosEntity> {
+export class MunicipiosRepository extends BaseRepository<MunicipioEntity> {
   protected autoCompleteFields: string[] = ['nome',];
   constructor(dataSource: DataSource) {
-    super(MunicipiosEntity, dataSource, MunicipiosEntity);
+    super(MunicipioEntity, dataSource, MunicipioEntity);
   }
 }

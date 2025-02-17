@@ -5,16 +5,16 @@ import {
   UpdateBlocoDto,
 } from '../../template-modelo-vistoria/dto/bloco.dto';
 import { PessoasService } from '../service/pessoas.service';
-import { PessoasEntity } from '../entity/pessoas.entity';
+import { PessoaEntity } from '../entity/pessoa.entity';
 import { ApiTags } from '@nestjs/swagger';
 @ApiTags('Pessoa')
 @Controller('pessoas')
-export class PessoasController extends BaseCrudController<PessoasEntity> {
+export class PessoasController extends BaseCrudController<PessoaEntity> {
   constructor(protected readonly baseService: PessoasService) {
     super(baseService);
   }
   @Post()
-  async create(@Body() createDto: CreateBlocoDto): Promise<PessoasEntity> {
+  async create(@Body() createDto: CreateBlocoDto): Promise<PessoaEntity> {
     return super.create(createDto);
   }
 
@@ -22,7 +22,7 @@ export class PessoasController extends BaseCrudController<PessoasEntity> {
   async update(
     @Param('id') id: string,
     @Body() updateDto: UpdateBlocoDto,
-  ): Promise<PessoasEntity> {
+  ): Promise<PessoaEntity> {
     return super.update(id, updateDto);
   }
 }

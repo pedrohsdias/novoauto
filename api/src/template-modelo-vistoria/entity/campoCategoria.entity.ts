@@ -1,15 +1,15 @@
 import { Entity, Column, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
-import { CamposEntity } from './campos.entity';
+import { CampoEntity } from './campo.entity';
 
 @Entity('campos_categorias')
-export class CamposCategoriasEntity extends BaseEntity {
+export class CampoCategoriaEntity extends BaseEntity {
   @Column({
     length: 100,
     comment: 'nome da categoria',
   })
   nome: string;
 
-  @OneToMany(() => CamposEntity, (campo) => campo.categoria)
-  campos: CamposEntity[];
+  @OneToMany(() => CampoEntity, (campo) => campo.categoria)
+  campos: CampoEntity[];
 }

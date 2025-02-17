@@ -1,14 +1,14 @@
 import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
-import { CamposEntity } from './campos.entity';
-import { BlocoImagemEntity } from './blocoImagens.entity';
+import { CampoEntity } from './campo.entity';
+import { BlocoImagemEntity } from './blocoImagem.entity';
 
 @Entity('campos_coordenadas_imagens')
 export class CampoCoordenadaImagemEntity extends BaseEntity {
 
-  @ManyToOne(() => CamposEntity, (campo) => campo.coordenadas)
+  @ManyToOne(() => CampoEntity, (campo) => campo.coordenadas)
   @JoinColumn({name: 'campo_id'})
-  campo: CamposEntity;
+  campo: CampoEntity;
 
   @ManyToOne(() => BlocoImagemEntity, (imagem) => imagem.coordenadas)
   @JoinColumn({name: 'imagem_id'})

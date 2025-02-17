@@ -1,12 +1,12 @@
 import { DataSource } from 'typeorm';
-import { PessoasEntity } from '../../comum/entity/pessoas.entity';
+import { PessoaEntity } from '../../comum/entity/pessoa.entity';
 import { ClienteEntity } from '../../cliente/entity/cliente.entity';
 import { TipoPessoaEnum } from '../../comum/enum/tipoPessoa.enum';
 import { TipoClienteEnum } from '../../cliente/enum/tipoCliente.enum';
 
 export class ClienteSeed {
   async run(dataSource: DataSource): Promise<void> {
-    const pessoaRepository = dataSource.getRepository(PessoasEntity);
+    const pessoaRepository = dataSource.getRepository(PessoaEntity);
     const clienteRepository = dataSource.getRepository(ClienteEntity);
     const pessoas = [
       {
@@ -48,19 +48,19 @@ export class ClienteSeed {
         apelido: `Autonomo`,
         linkLogo: `teste`,
         pessoa: pessoasSalvas[0],
-        tipo: TipoClienteEnum.AUTONOMO,
+        tipo: TipoClienteEnum.EMPRESA_UNICA,
       },//0
       {
         apelido: `ECV`,
         linkLogo: `teste`,
         pessoa: pessoasSalvas[1],
-        tipo: TipoClienteEnum.EMPRESA_ECV,
+        tipo: TipoClienteEnum.EMPRESA_UNICA,
       },//1
       {
         apelido: `Matriz`,
         linkLogo: `teste`,
         pessoa: pessoasSalvas[2],
-        tipo: TipoClienteEnum.EMPRESA_MATRZ,
+        tipo: TipoClienteEnum.EMPRESA_FRANQUIADORA,
       },//2
   ]
 
@@ -69,13 +69,13 @@ export class ClienteSeed {
       {
         apelido: `Filial 1`,
         pessoa: pessoasSalvas[0],
-        tipo: TipoClienteEnum.EMPRESA_FILIAL,
+        tipo: TipoClienteEnum.EMPRESA_FRANQUEADA,
         matriz: matriz[2],
       },
       {
         apelido: `Filial 2`,
         pessoa: pessoasSalvas[1],
-        tipo: TipoClienteEnum.EMPRESA_FILIAL,
+        tipo: TipoClienteEnum.EMPRESA_FRANQUEADA,
         matriz: matriz[2],
       },
     ];

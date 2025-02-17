@@ -2,7 +2,7 @@ import { DataSource } from 'typeorm';
 import { join } from 'path';
 import * as dotenv from 'dotenv';
 dotenv.config();
-
+//@ts-ignore
 export const AppDataSourceCli = new DataSource({
   type: 'postgres',
   host: process.env.DATABASE_HOST,

@@ -6,6 +6,7 @@ import { ComumModule } from './comum/comum.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/AuthModule';
 import { ClienteModule } from './cliente/cliente.module';
+import { ServicosExternosModule } from './servicos-externos/ServicosExternosModule';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ClienteModule } from './cliente/cliente.module';
     ComumModule,
     ClienteModule,
     AuthModule,
+    ServicosExternosModule,
   ],
   controllers: [],
   providers: [],

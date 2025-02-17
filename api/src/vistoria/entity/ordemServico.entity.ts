@@ -1,16 +1,17 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 
 import { BaseEntity } from '../../base/base.entity';
-import { ModelosVistoriaEntity } from '../../template-modelo-vistoria/entity/modelosVistoria.entity';
+import { ModeloVistoriaEntity } from '../../template-modelo-vistoria/entity/modeloVistoria.entity';
 import { StatusOrdemServicoEnum } from '../enum/statusOrdemServico.enum';
 import { ParecerVistoriaEnum } from '../enum/parecerVistoria.enum';
 import { ClienteFinalEntity } from './clienteFinal.entity';
 import { UsuariosEntity } from '../../auth/entity/usuario.entity';
 import { TipoDadoConsultadoEnum } from '../../cliente/enum/tipoDadoConsultado.enum';
 import { ClienteEntity } from '../../cliente/entity/cliente.entity';
+import { DadosServicosExternosEntity } from '../../servicos-externos/entity/dadosServicosExternos.entity';
 
 @Entity('ordem_servico')
-export class OrdensServicoEntity extends BaseEntity {
+export class OrdemServicoEntity extends BaseEntity {
   @Column({ length: 50 })
   sequenciador: string;
 
@@ -63,9 +64,9 @@ export class OrdensServicoEntity extends BaseEntity {
   @JoinColumn({ name: 'cliente_id' })
   cliente: ClienteEntity;
 
-  @ManyToOne(() => ModelosVistoriaEntity, (modelo) => modelo.ordensServico)
+  @ManyToOne(() => ModeloVistoriaEntity, (modelo) => modelo.ordensServico)
   @JoinColumn({ name: 'modelo_vistoria_id' })
-  modeloVistoria: ModelosVistoriaEntity;
+  modeloVistoria: ModeloVistoriaEntity;
 
   @ManyToOne(() => UsuariosEntity, (usuario) => usuario.ordensServicoCriadas)
   @JoinColumn({ name: 'usuario_criador_id' })
@@ -77,4 +78,8 @@ export class OrdensServicoEntity extends BaseEntity {
   )
   @JoinColumn({ name: 'usuario_finalizador_id' })
   usuarioFinalizador: UsuariosEntity;
+
+  @OneToOne(() => DadosServicosExternosEntity, { cascade: true, nullable: true })
+  @JoinColumn({ name:'consulta_veicular_id'})
+  consultaVeicular: DadosServicosExternosEntity;
 }

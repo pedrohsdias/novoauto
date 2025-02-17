@@ -1,16 +1,16 @@
 import { DataSource } from 'typeorm';
-import { CamposEntity } from '../template-modelo-vistoria/entity/campos.entity';
-import { OpcoesCampoEntity } from '../template-modelo-vistoria/entity/opcoesCampo.entity';
+import { CampoEntity } from '../template-modelo-vistoria/entity/campo.entity';
+import { OpcaoCampoEntity } from '../template-modelo-vistoria/entity/opcaoCampo.entity';
 import { TipoCampoEnum } from '../template-modelo-vistoria/enum/tipoCampo.enum';
-import { BlocosEntity } from '../template-modelo-vistoria/entity/blocos.entity';
+import { BlocoEntity } from '../template-modelo-vistoria/entity/bloco.entity';
 import { TipoBlocoEnum } from '../template-modelo-vistoria/enum/tipoBloco.enum';
 import { NivelRiscoEnum } from '../template-modelo-vistoria/enum/nivelRisco.enum';
 
 export class BlocoPinturaSeed {
   async run(dataSource: DataSource): Promise<void> {
-    const blocoRepository = dataSource.getRepository(BlocosEntity);
-    const campoRepository = dataSource.getRepository(CamposEntity);
-    const opcaoCampoRepository = dataSource.getRepository(OpcoesCampoEntity);
+    const blocoRepository = dataSource.getRepository(BlocoEntity);
+    const campoRepository = dataSource.getRepository(CampoEntity);
+    const opcaoCampoRepository = dataSource.getRepository(OpcaoCampoEntity);
 
     const blocos = [
       {

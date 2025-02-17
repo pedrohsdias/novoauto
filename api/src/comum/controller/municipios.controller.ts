@@ -1,16 +1,11 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
-import { BaseCrudController } from '../../base/baseCrud.controller';
-import {
-  CreateBlocoDto,
-  UpdateBlocoDto,
-} from '../../template-modelo-vistoria/dto/bloco.dto';
-import { MunicipiosEntity } from '../entity/municipios.entity';
+import { MunicipioEntity } from '../entity/municipio.entity';
 import { MunicipiosService } from '../service/municipios.service';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseAuxController } from '../../base/baseAux.controller';
-@ApiTags('Municipio')
+@ApiTags('Auto Complete')
 @Controller('municipios')
-export class MunicipiosController extends BaseAuxController<MunicipiosEntity> {
+export class MunicipiosController extends BaseAuxController<MunicipioEntity> {
   constructor(protected readonly baseService: MunicipiosService) {
     super(baseService);
   }

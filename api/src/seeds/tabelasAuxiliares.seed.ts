@@ -1,17 +1,17 @@
 import { DataSource } from 'typeorm';
-import { TiposEnderecoEntity } from '../comum/entity/tiposEndereco.entity';
-import { TiposTelefoneEntity } from '../comum/entity/tiposTelefone.entity';
-import { EstadosEntity } from '../comum/entity/estados.entity';
-import { MunicipiosEntity } from '../comum/entity/municipios.entity';
+import { TipoEnderecoEntity } from '../comum/entity/tipoEndereco.entity';
+import { TipoTelefoneEntity } from '../comum/entity/tipoTelefone.entity';
+import { EstadoEntity } from '../comum/entity/estado.entity';
+import { MunicipioEntity } from '../comum/entity/municipio.entity';
 
 export class TabelasAuxiliaresSeed {
   async run(dataSource: DataSource): Promise<void> {
     const tiposEnderecoRepository =
-      dataSource.getRepository(TiposEnderecoEntity);
+      dataSource.getRepository(TipoEnderecoEntity);
     const tiposTelefoneRepository =
-      dataSource.getRepository(TiposTelefoneEntity);
-    const estadosRepository = dataSource.getRepository(EstadosEntity);
-    const municipioRepository = dataSource.getRepository(MunicipiosEntity);
+      dataSource.getRepository(TipoTelefoneEntity);
+    const estadosRepository = dataSource.getRepository(EstadoEntity);
+    const municipioRepository = dataSource.getRepository(MunicipioEntity);
 
     const tiposEndereco = [
       { descricao: 'COMERCIAL' },

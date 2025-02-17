@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { BaseCrudController } from '../../base/baseCrud.controller';
-import { OpcoesCampoEntity } from '../entity/opcoesCampo.entity';
+import { OpcaoCampoEntity } from '../entity/opcaoCampo.entity';
 import { OpcoesCampoService } from '../service/opcoesCampo.service';
 import {
   CreateOpcaoCampoDto,
@@ -10,14 +10,14 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Opções dos campos do bloco')
 @Controller('opcao-campo')
-export class OpcoesCampoController extends BaseCrudController<OpcoesCampoEntity> {
+export class OpcoesCampoController extends BaseCrudController<OpcaoCampoEntity> {
   constructor(protected readonly baseService: OpcoesCampoService) {
     super(baseService);
   }
   @Post()
   async create(
     @Body() createDto: CreateOpcaoCampoDto,
-  ): Promise<OpcoesCampoEntity> {
+  ): Promise<OpcaoCampoEntity> {
     return super.create(createDto);
   }
 
@@ -25,7 +25,7 @@ export class OpcoesCampoController extends BaseCrudController<OpcoesCampoEntity>
   async update(
     @Param('id') id: string,
     @Body() updateDto: UpdateOpcaoCampoDto,
-  ): Promise<OpcoesCampoEntity> {
+  ): Promise<OpcaoCampoEntity> {
     return super.update(id, updateDto);
   }
 }

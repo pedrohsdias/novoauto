@@ -1,0 +1,98 @@
+{
+  "code": 200,
+  "code_message": "A consulta foi realizada com sucesso e retornou um resultado.",
+  "header": {
+    "api_version": "v1",
+    "service": "receita-federal/cnpj",
+    "parameters": {
+      "cnpj": "44133410000186",
+      "mobile_sem_login_md5": "cfcd208495d565ef66e7dff9f98764da"
+    },
+    "client": "Auto Crivo Solucoes Ltda",
+    "client_name": "Auto Crivo Solucoes Ltda",
+    "token": "nGWAF2OBLE...",
+    "token_name": "AutoCrivo",
+    "billable": true,
+    "credits": 1,
+    "price_extra": "0.04",
+    "has_limit": false,
+    "limit": 0,
+    "used": 0,
+    "limit_price": "0.0",
+    "used_price": "1514.58",
+    "cache_hit": false,
+    "cached_at": null,
+    "requested_at": "2025-01-31T08:56:22.000-03:00",
+    "elapsed_time_in_milliseconds": 2454,
+    "signature": "U2FsdGVkX19rWrmf3oeZe7Ppuv75gM68iTp7yd8aHpguk96VeQ7PecUurLcjatD6FrmNlUPFCBb8Mgo5ugHJ1Q=="
+  },
+  "data_count": 1,
+  "data": {
+    "abertura_data": "05/11/2021",
+    "atividade_economica": "45.11-1-02 - Comércio a varejo de automóveis, camionetas e utilitários usados",
+    "atividade_economica_secundaria": "45.11-1-01 - Comércio a varejo de automóveis, camionetas e utilitários novos; 45.12-9-02 - Comércio sob consignação de veículos automotores; 45.20-0-01 - Serviços de manutenção e reparação mecânica de veículos automotores; 45.20-0-05 - Serviços de lavagem, lubrificação e polimento de veículos automotores; 45.30-7-03 - Comércio a varejo de peças e acessórios novos para veículos automotores; 45.30-7-04 - Comércio a varejo de peças e acessórios usados para veículos automotores; 74.90-1-04 - Atividades de intermediação e agenciamento de serviços e negócios em geral, exceto imobiliários; 77.11-0-00 - Locação de automóveis sem condutor",
+    "atividade_economica_secundaria_lista": [
+      "45.11-1-01 - Comércio a varejo de automóveis, camionetas e utilitários novos",
+      "45.12-9-02 - Comércio sob consignação de veículos automotores",
+      "45.20-0-01 - Serviços de manutenção e reparação mecânica de veículos automotores",
+      "45.20-0-05 - Serviços de lavagem, lubrificação e polimento de veículos automotores",
+      "45.30-7-03 - Comércio a varejo de peças e acessórios novos para veículos automotores",
+      "45.30-7-04 - Comércio a varejo de peças e acessórios usados para veículos automotores",
+      "74.90-1-04 - Atividades de intermediação e agenciamento de serviços e negócios em geral, exceto imobiliários",
+      "77.11-0-00 - Locação de automóveis sem condutor"
+    ],
+    "capital_social": "R$500.000,00 (Quinhentos mil reais)",
+    "certidao_baixa": {},
+    "cnpj": "44.133.410/0001-86 ",
+    "consulta_datahora": "31/01/2025 08:56:21",
+    "efr": "*****",
+    "email": "RJ106VEICULO@GMAIL.COM",
+    "endereco_bairro": "SAO JOSE DE IMBASSAI",
+    "endereco_cep": "24.931-000",
+    "endereco_complemento": "LOTE 2A6 QUADRAAREA",
+    "endereco_logradouro": "ROD ERNANI DO AMARAL PEIXOTO",
+    "endereco_municipio": "MARICA",
+    "endereco_numero": "23378",
+    "endereco_uf": "RJ",
+    "licenciamento_dispensado": [],
+    "matriz_filial": "MATRIZ",
+    "natureza_juridica": "206-2 - Sociedade Empresária Limitada",
+    "natureza_juridica_codigo": "2062",
+    "nome_fantasia": "********",
+    "normalizado_abertura_data": "05/11/2021",
+    "normalizado_capital_social": 500000.0,
+    "normalizado_cnpj": "44133410000186",
+    "normalizado_consulta_datahora": "31/01/2025 08:56:21",
+    "normalizado_endereco_cep": "24931000",
+    "normalizado_situacao_cadastral_data": "05/11/2021",
+    "normalizado_situacao_especial_data": "",
+    "origem": "web",
+    "porte": "EPP",
+    "qsa": [
+      {
+        "nome": "GUILHERME MATTIOLI PASCOA",
+        "qualificacao": "49-Sócio-Administrador",
+        "nome_representante_legal": "",
+        "qualificacao_representante_legal": "",
+        "pais_origem": ""
+      }
+    ],
+    "razao_social": "RJ 106 VEICULOS COMERCIO LTDA",
+    "situacao_cadastral": "ATIVA",
+    "situacao_cadastral_data": "05/11/2021",
+    "situacao_cadastral_observacoes": "",
+    "situacao_especial": "********",
+    "situacao_especial_data": "********",
+    "telefone": "(21) 6474-7522",
+    "site_receipt": "https://us-central1-infosimples-data.cloudfunctions.net/infosimples-storage/15655/cYcX96YJJg44eMgxLWo7MzjuUX1cuQy0YAfAfiOk8iU=/1738929382/t8Tkbz/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2luZm9zaW1wbGVzLWFwaS10bXAvYXBpL3JlY2VpdGEtZmVkZXJhbC9jbnBqLzIwMjUwMTMxMDg1NjIyL09PTkJSVlFfTXdVUW1UY3NMZUR0YUZvN0xNbGFiWmxBLzc0MjljNjhhZDM2N2U5NjFhMTU0NmRkMzQ0ODg5YWY4XzBfQlY0.html"
+  },
+  "errors": null,
+  "receipt": {
+    "url": "https://api.infosimples.com/autenticidade",
+    "id": "1182300843",
+    "key": "U-Bi3JI7TFea-yVTTKRPdSEy-zFG57eMykC6ShG8",
+    "sites_urls": [
+      "https://us-central1-infosimples-data.cloudfunctions.net/infosimples-storage/15655/cYcX96YJJg44eMgxLWo7MzjuUX1cuQy0YAfAfiOk8iU=/1738929382/t8Tkbz/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2luZm9zaW1wbGVzLWFwaS10bXAvYXBpL3JlY2VpdGEtZmVkZXJhbC9jbnBqLzIwMjUwMTMxMDg1NjIyL09PTkJSVlFfTXdVUW1UY3NMZUR0YUZvN0xNbGFiWmxBLzc0MjljNjhhZDM2N2U5NjFhMTU0NmRkMzQ0ODg5YWY4XzBfQlY0.html"
+    ]
+  }
+}

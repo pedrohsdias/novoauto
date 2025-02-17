@@ -1,19 +1,19 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
-import { EnderecosEntity } from './enderecos.entity';
-import { TelefonesEntity } from './telefones.entity';
-import { ClienteFinalEntity } from '../../vistoria/entity/clienteFinal.entity';
 import { TipoPessoaEnum } from '../enum/tipoPessoa.enum';
 import { ClienteEntity } from '../../cliente/entity/cliente.entity';
+import { ContatoEntity } from './contato.entity';
 
-@Entity('pessoa')
-export class PessoasEntity extends BaseEntity {
+@Entity('pessoa',{
+  comment:'Generalização para clientes que estão em mais de uma posição',
+})
+export class PessoaEntity extends BaseEntity {
   @Column({
     length: 150,
     nullable: true,
     comment: 'Apelido para pf e nome fantasia para pj',
   })
-  apelido: string;
+  nomeSocial: string;
 
   @Column({
     length: 200,
@@ -33,15 +33,11 @@ export class PessoasEntity extends BaseEntity {
   })
   tipo: TipoPessoaEnum;
 
-  @OneToMany(() => EnderecosEntity, (endereco) => endereco.pessoa)
-  enderecos: EnderecosEntity[];
-
-  @OneToMany(() => TelefonesEntity, (telefone) => telefone.pessoa)
-  telefones: TelefonesEntity[];
-
-  @OneToMany(() => ClienteFinalEntity, (clienteFinal) => clienteFinal.pessoa)
-  clienteFinal: ClienteFinalEntity[];
-
   @OneToMany(() => ClienteEntity, (cliente) => cliente.pessoa)
   cliente: ClienteEntity[];
+
+  @OneToMany(() => ContatoEntity, (contato) => contato.pessoa)
+  contatos: ContatoEntity[];
+  @OneToMany(() => ContatoEntity, (contato) => contato.representante)
+  representa: ContatoEntity[];
 }

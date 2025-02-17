@@ -58,7 +58,7 @@ export class BaseRepository<T extends BaseEntity> extends Repository<T> {
   }
 
   paginate(options: BaseRequestFindAllDto): SelectQueryBuilder<T> {
-    const { rowsPerPage, page, orderBy, order = 'asc' } = options;
+    const { rowsPerPage=20, page = 1, orderBy, order = 'asc' } = options;
     const query = this.createQueryBuilder();
 
     if (orderBy) {

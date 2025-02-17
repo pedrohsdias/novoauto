@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Post, Put } from '@nestjs/common';
 import { BaseCrudController } from '../../base/baseCrud.controller';
-import { ModelosVistoriaEntity } from '../entity/modelosVistoria.entity';
+import { ModeloVistoriaEntity } from '../entity/modeloVistoria.entity';
 import { ModeloVistoriaService } from '../service/modeloVistoria.service';
 import {
   CreateModeloVistoriaDto,
@@ -10,14 +10,14 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Modelo Vistoria')
 @Controller('modelo-vistoria')
-export class ModelosVistoriaController extends BaseCrudController<ModelosVistoriaEntity> {
+export class ModelosVistoriaController extends BaseCrudController<ModeloVistoriaEntity> {
   constructor(protected readonly baseService: ModeloVistoriaService) {
     super(baseService);
   }
   @Post()
   async create(
     @Body() createDto: CreateModeloVistoriaDto,
-  ): Promise<ModelosVistoriaEntity> {
+  ): Promise<ModeloVistoriaEntity> {
     return super.create(createDto);
   }
 
@@ -25,7 +25,7 @@ export class ModelosVistoriaController extends BaseCrudController<ModelosVistori
   async update(
     @Param('id') id: string,
     @Body() updateDto: UpdateModeloVistoriaDto,
-  ): Promise<ModelosVistoriaEntity> {
+  ): Promise<ModeloVistoriaEntity> {
     return super.update(id, updateDto);
   }
 }

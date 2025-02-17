@@ -1,13 +1,13 @@
 import { Entity, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
-import { OpcoesCampoEntity } from './opcoesCampo.entity';
+import { OpcaoCampoEntity } from './opcaoCampo.entity';
 import { BaseEntity } from '../../base/base.entity';
-import { BlocosEntity } from './blocos.entity';
+import { BlocoEntity } from './bloco.entity';
 import { TipoCampoEnum } from '../enum/tipoCampo.enum';
-import { CampoCoordenadaImagemEntity } from './camposCoordenadasImagens.entity';
-import { CamposCategoriasEntity } from './camposCategorias.entity';
+import { CampoCoordenadaImagemEntity } from './campoCoordenadasImagem.entity';
+import { CampoCategoriaEntity } from './campoCategoria.entity';
 
 @Entity('campos')
-export class CamposEntity extends BaseEntity {
+export class CampoEntity extends BaseEntity {
   @Column({
     length: 100,
     comment: 'Campo para usara em referencias especificas'
@@ -42,13 +42,13 @@ export class CamposEntity extends BaseEntity {
   })
   tipo: TipoCampoEnum;
 
-  @ManyToOne(() => BlocosEntity, (bloco) => bloco.campos)
+  @ManyToOne(() => BlocoEntity, (bloco) => bloco.campos)
   @JoinColumn({ name: 'bloco_id' })
-  bloco: BlocosEntity;
+  bloco: BlocoEntity;
 
-  @ManyToOne(() => CamposCategoriasEntity, (categoria) => categoria.campos)
+  @ManyToOne(() => CampoCategoriaEntity, (categoria) => categoria.campos)
   @JoinColumn({ name: 'categoria_id' })
-  categoria: CamposCategoriasEntity;
+  categoria: CampoCategoriaEntity;
 
   @Column({
     name: 'qtd_selecionado',
@@ -65,8 +65,8 @@ export class CamposEntity extends BaseEntity {
   })
   temObservacao: boolean;
 
-  @OneToMany(() => OpcoesCampoEntity, (opcaoCampo) => opcaoCampo.campo)
-  opcoesCampo: OpcoesCampoEntity[];
+  @OneToMany(() => OpcaoCampoEntity, (opcaoCampo) => opcaoCampo.campo)
+  opcoesCampo: OpcaoCampoEntity[];
 
   @OneToMany(() => CampoCoordenadaImagemEntity, (coordenada) => coordenada.campo)
   coordenadas: CampoCoordenadaImagemEntity[];

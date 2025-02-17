@@ -1,13 +1,13 @@
 import { DataSource } from 'typeorm';
-import { CamposEntity } from '../template-modelo-vistoria/entity/campos.entity';
+import { CampoEntity } from '../template-modelo-vistoria/entity/campo.entity';
 import { TipoCampoEnum } from '../template-modelo-vistoria/enum/tipoCampo.enum';
-import { BlocosEntity } from '../template-modelo-vistoria/entity/blocos.entity';
+import { BlocoEntity } from '../template-modelo-vistoria/entity/bloco.entity';
 import { TipoBlocoEnum } from '../template-modelo-vistoria/enum/tipoBloco.enum';
 
 export class BlocoProponenteSeed {
   async run(dataSource: DataSource): Promise<void> {
-    const blocoRepository = dataSource.getRepository(BlocosEntity);
-    const campoRepository = dataSource.getRepository(CamposEntity);
+    const blocoRepository = dataSource.getRepository(BlocoEntity);
+    const campoRepository = dataSource.getRepository(CampoEntity);
 
     const blocos = [
       {

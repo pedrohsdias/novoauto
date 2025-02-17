@@ -8,12 +8,12 @@ import {
 } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
 import { TipoServicoEnum } from '../enum/tipoServico.enum';
-import { ModelosVistoriaEntity } from '../../template-modelo-vistoria/entity/modelosVistoria.entity';
+import { ModeloVistoriaEntity } from '../../template-modelo-vistoria/entity/modeloVistoria.entity';
 import { ClienteEntity } from './cliente.entity';
-import { TipoIntegracaoEnum } from '../../integracao/enum/TipoIntegracao.enum';
+import { ConsultasVeicularesEnum } from '../../servicos-externos/enum/ConsultasVeicularesEnum';
 
 @Entity('servicos')
-export class ServicosEntity extends BaseEntity {
+export class ServicoEntity extends BaseEntity {
   @Column({ length: 150 })
   nome: string;
 
@@ -34,20 +34,20 @@ export class ServicosEntity extends BaseEntity {
 
   @Column({
     type: 'enum',
-    enum: TipoIntegracaoEnum,
-    default: TipoIntegracaoEnum.SEM_INTEGRACAO,
+    enum: ConsultasVeicularesEnum,
+    default: ConsultasVeicularesEnum.SEM_CONSULTA,
   })
-  integracao: TipoIntegracaoEnum;
+  integracao: ConsultasVeicularesEnum;
 
   @ManyToOne(() => ClienteEntity, (clienteVistoriador) => clienteVistoriador.servicos)
   @JoinColumn({ name: 'cliente_id' })
   cliente: ClienteEntity;
 
-  @ManyToMany(() => ModelosVistoriaEntity, (modelo) => modelo.servicos)
+  @ManyToMany(() => ModeloVistoriaEntity, (modelo) => modelo.servicos)
   @JoinTable({
     name: 'servicos_modelos_vistoria',
     joinColumn: { name: 'servico_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'modelo_vistoria_id', referencedColumnName: 'id' },
   })
-  modelos: ModelosVistoriaEntity[];
+  modelos: ModeloVistoriaEntity[];
 }

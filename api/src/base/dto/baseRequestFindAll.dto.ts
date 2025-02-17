@@ -12,7 +12,7 @@ export class BaseRequestFindAllDto {
   @IsInt()
   page?: number;
 
-  @ApiPropertyOptional({ example: 'name', description: 'Campo pelo qual ordenar', default: 'id' })
+  @ApiPropertyOptional({description: 'Campo pelo qual ordenar', default: 'id' })
   @IsOptional()
   @IsString()
   orderBy?: string;

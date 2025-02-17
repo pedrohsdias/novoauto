@@ -12,7 +12,7 @@ import { BaseEntity } from '../../base/base.entity';
 import * as bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
 import { PerfilUsuarioEnum } from '../enum/perfilUsuario.enum';
-import { OrdensServicoEntity } from '../../vistoria/entity/ordensServico.entity';
+import { OrdemServicoEntity } from '../../vistoria/entity/ordemServico.entity';
 import { ClienteEntity } from '../../cliente/entity/cliente.entity';
 
 @Entity('usuarios')
@@ -54,9 +54,9 @@ export class UsuariosEntity extends BaseEntity {
     this.senha = await bcrypt.hash(this.senha, 10);
   }
 
-  @OneToMany(() => OrdensServicoEntity, (os) => os.usuarioFinalizador)
-  ordensServicoFinalizadas: OrdensServicoEntity;
+  @OneToMany(() => OrdemServicoEntity, (os) => os.usuarioFinalizador)
+  ordensServicoFinalizadas: OrdemServicoEntity;
 
-  @OneToMany(() => OrdensServicoEntity, (os) => os.usuarioCriador)
-  ordensServicoCriadas: OrdensServicoEntity;
+  @OneToMany(() => OrdemServicoEntity, (os) => os.usuarioCriador)
+  ordensServicoCriadas: OrdemServicoEntity;
 }

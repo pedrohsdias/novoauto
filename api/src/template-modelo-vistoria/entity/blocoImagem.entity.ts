@@ -1,8 +1,8 @@
 import { Entity, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
-import { BlocosEntity } from './blocos.entity';
+import { BlocoEntity } from './bloco.entity';
 import { TipoVeiculoEnum } from '../enum/tipoVeiculo.enum';
-import { CampoCoordenadaImagemEntity } from './camposCoordenadasImagens.entity';
+import { CampoCoordenadaImagemEntity } from './campoCoordenadasImagem.entity';
 
 @Entity('bloco_imagens')
 export class BlocoImagemEntity extends BaseEntity {
@@ -23,9 +23,9 @@ export class BlocoImagemEntity extends BaseEntity {
   })
   tipo: TipoVeiculoEnum;
 
-  @ManyToOne(() => BlocosEntity, (bloco) => bloco.imagens)
+  @ManyToOne(() => BlocoEntity, (bloco) => bloco.imagens)
   @JoinColumn({ name: 'bloco_id' })
-  bloco: BlocosEntity;
+  bloco: BlocoEntity;
 
   @OneToMany(() => CampoCoordenadaImagemEntity, (coordenada) => coordenada.campo)
   coordenadas: CampoCoordenadaImagemEntity[];

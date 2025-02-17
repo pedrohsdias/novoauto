@@ -1,11 +1,11 @@
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 
 import { BaseEntity } from '../../base/base.entity';
-import { PessoasEntity } from '../../comum/entity/pessoas.entity';
+import { PessoaEntity } from '../../comum/entity/pessoa.entity';
 import { UsuariosEntity } from '../../auth/entity/usuario.entity';
 import { TipoClienteEnum } from '../enum/tipoCliente.enum';
-import { ServicosEntity } from './servicos.entity';
-import { OrdensServicoEntity } from '../../vistoria/entity/ordensServico.entity';
+import { ServicoEntity } from './servico.entity';
+import { OrdemServicoEntity } from '../../vistoria/entity/ordemServico.entity';
 import { ClienteFinalEntity } from '../../vistoria/entity/clienteFinal.entity';
 
 @Entity('clientes')
@@ -19,7 +19,7 @@ export class ClienteEntity extends BaseEntity {
     name: 'tipo_cliente',
     type: 'enum',
     enum: TipoClienteEnum,
-    default: TipoClienteEnum.EMPRESA_ECV,
+    default: TipoClienteEnum.EMPRESA_UNICA,
     nullable: false,
   })
   tipo: TipoClienteEnum;
@@ -33,16 +33,16 @@ export class ClienteEntity extends BaseEntity {
   @Column({ name: 'termo_usuario_id', nullable: true })
   termoUsuarioAceite: string;
 
-  @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.cliente, {
+  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.cliente, {
     nullable: false,
   })
   @JoinColumn({ name: 'pessoa_id' })
-  pessoa: PessoasEntity;
-  @OneToMany(() => ServicosEntity, (servico) => servico.cliente)
-  servicos: ServicosEntity[];
+  pessoa: PessoaEntity;
+  @OneToMany(() => ServicoEntity, (servico) => servico.cliente)
+  servicos: ServicoEntity[];
 
-  @OneToMany(() => OrdensServicoEntity, (os) => os.cliente)
-  ordensServico: OrdensServicoEntity[];
+  @OneToMany(() => OrdemServicoEntity, (os) => os.cliente)
+  ordensServico: OrdemServicoEntity[];
 
   @ManyToMany(() => UsuariosEntity, (usuario) => usuario.clientes)
   usuarios: UsuariosEntity[];

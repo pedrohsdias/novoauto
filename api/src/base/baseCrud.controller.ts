@@ -37,7 +37,7 @@ export class BaseCrudController<T extends BaseEntity> {
     isArray: false,
   })
   async findAll(@Query() query: BaseRequestFindAllDto): Promise<ApiResponseDto<T[]>> {
-    const { rowsPerPage = 15, page = 1, orderBy, order = 'asc' } = query;
+    const { rowsPerPage = 20, page = 1, orderBy, order = 'asc' } = query;
     try {
       const response = await this.service.findAll({
         rowsPerPage: Number(rowsPerPage),

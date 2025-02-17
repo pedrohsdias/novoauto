@@ -1,20 +1,40 @@
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
-import { PessoasEntity } from '../../comum/entity/pessoas.entity';
-import { OrdensServicoEntity } from './ordensServico.entity';
+import { OrdemServicoEntity } from './ordemServico.entity';
 import { ClienteEntity } from '../../cliente/entity/cliente.entity';
+import { TipoPessoaEnum } from '../../comum/enum/tipoPessoa.enum';
+import { ContatoEntity } from '../../comum/entity/contato.entity';
 
-@Entity('clientes_finais')
+@Entity('clientes_finais',{comment:'Cliente do nosso cliente, replica a estrutura de pessoa porque não pode ser reaproveitado'})
 export class ClienteFinalEntity extends BaseEntity {
 
-  @ManyToOne(() => PessoasEntity, (pessoa) => pessoa.clienteFinal, {
-    nullable: false,
+  @Column({
+    length: 150,
+    nullable: true,
+    comment: 'Apelido para pf e nome fantasia para pj',
   })
-  @JoinColumn({ name: 'pessoa_id' })
-  pessoa: PessoasEntity;
+  nomeSocial: string;
 
-  @OneToMany(() => OrdensServicoEntity, (os) => os.clienteFinal)
-  ordensServico: OrdensServicoEntity[];
+  @Column({
+    length: 200,
+    name: 'nome_formal',
+    comment: 'Nome como no RG ou razão social para pj',
+  })
+  nomeFormal: string;
+
+  @Column({ length: 18, nullable: true, comment: 'CPF ou CNPJ' })
+  documento: string;
+
+  @Column({
+    name: 'tipo_documento',
+    type: 'enum',
+    enum: TipoPessoaEnum,
+    default: TipoPessoaEnum.PJ,
+  })
+  tipo: TipoPessoaEnum;
+
+  @OneToMany(() => OrdemServicoEntity, (os) => os.clienteFinal)
+  ordensServico: OrdemServicoEntity[];
 
   @ManyToMany(() => ClienteEntity, (cliente) => cliente.clientesFinais)
   @JoinTable({
@@ -23,4 +43,7 @@ export class ClienteFinalEntity extends BaseEntity {
     inverseJoinColumn: { name: 'cliente_final_id', referencedColumnName: 'id' },
   })
   clientes: ClienteEntity[];
+
+  @OneToMany(() => ContatoEntity, (contato) => contato.clienteFinal)
+  contatos: ContatoEntity[];
 }

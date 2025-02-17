@@ -1,18 +1,18 @@
 import { DataSource } from 'typeorm';
-import { CamposEntity } from '../template-modelo-vistoria/entity/campos.entity';
+import { CampoEntity } from '../template-modelo-vistoria/entity/campo.entity';
 import { TipoCampoEnum } from '../template-modelo-vistoria/enum/tipoCampo.enum';
-import { BlocosEntity } from '../template-modelo-vistoria/entity/blocos.entity';
+import { BlocoEntity } from '../template-modelo-vistoria/entity/bloco.entity';
 import { TipoBlocoEnum } from '../template-modelo-vistoria/enum/tipoBloco.enum';
-import { CamposCategoriasEntity } from '../template-modelo-vistoria/entity/camposCategorias.entity';
+import { CampoCategoriaEntity } from '../template-modelo-vistoria/entity/campoCategoria.entity';
 import { NivelRiscoEnum } from '../template-modelo-vistoria/enum/nivelRisco.enum';
-import { OpcoesCampoEntity } from '../template-modelo-vistoria/entity/opcoesCampo.entity';
+import { OpcaoCampoEntity } from '../template-modelo-vistoria/entity/opcaoCampo.entity';
 
 export class BlocoItensAvaliacaoSeed {
   async run(dataSource: DataSource): Promise<void> {
-    const blocoRepository = dataSource.getRepository(BlocosEntity);
-    const campoRepository = dataSource.getRepository(CamposEntity);
-    const categoriaRepository = dataSource.getRepository(CamposCategoriasEntity);
-    const opcaoCampoRepository = dataSource.getRepository(OpcoesCampoEntity);
+    const blocoRepository = dataSource.getRepository(BlocoEntity);
+    const campoRepository = dataSource.getRepository(CampoEntity);
+    const categoriaRepository = dataSource.getRepository(CampoCategoriaEntity);
+    const opcaoCampoRepository = dataSource.getRepository(OpcaoCampoEntity);
 
     const blocos = [
       {
@@ -165,7 +165,7 @@ export class BlocoItensAvaliacaoSeed {
       { alias: 'RODA_DE', nome: 'Roda DE', tipo: TipoCampoEnum.RADIO_BUTTON, temObservacao: true, bloco: blocosCriados[0], categoria: categoriaCriada[0] },
       { alias: 'RODA_TD', nome: 'Roda TD', tipo: TipoCampoEnum.RADIO_BUTTON, temObservacao: true, bloco: blocosCriados[0], categoria: categoriaCriada[0] },
       { alias: 'RODA_TE', nome: 'Roda TE', tipo: TipoCampoEnum.RADIO_BUTTON, temObservacao: true, bloco: blocosCriados[0], categoria: categoriaCriada[0] },
-      { alias: 'RODA_ESTOPE', nome: 'Roda estepe', tipo: TipoCampoEnum.RADIO_BUTTON, temObservacao: true, bloco: blocosCriados[0], categoria: categoriaCriada[0] },
+      { alias: 'RODA_ESTEPE', nome: 'Roda estepe', tipo: TipoCampoEnum.RADIO_BUTTON, temObservacao: true, bloco: blocosCriados[0], categoria: categoriaCriada[0] },
       { alias: 'PNEU_DD', nome: 'Pneu DD', tipo: TipoCampoEnum.RADIO_BUTTON, temObservacao: true, bloco: blocosCriados[0], categoria: categoriaCriada[0] },
       { alias: 'PNEU_DE', nome: 'Pneu DE', tipo: TipoCampoEnum.RADIO_BUTTON, temObservacao: true, bloco: blocosCriados[0], categoria: categoriaCriada[0] },
       { alias: 'PNEU_TD', nome: 'Pneu TD', tipo: TipoCampoEnum.RADIO_BUTTON, temObservacao: true, bloco: blocosCriados[0], categoria: categoriaCriada[0] },
