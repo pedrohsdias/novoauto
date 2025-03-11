@@ -6,6 +6,18 @@ import { ServicoEntity } from '../entity/servico.entity';
 @Injectable()
 export class ServicosRepository extends BaseRepository<ServicoEntity> {
   constructor(dataSource: DataSource) {
-    super(ServicoEntity, dataSource, ServicoEntity);
+    super(ServicoEntity, dataSource, ServicoEntity, 'servicosEntity');
+  }
+
+  getAutoCompleteColumms(): string[] {
+    return [];
+  }
+
+  getRelationsToLoadOnMany(): string[] {
+    return [];
+  }
+
+  getRelationsToLoadOnOne(): string[] {
+    return [];
   }
 }

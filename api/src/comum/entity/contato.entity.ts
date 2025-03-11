@@ -9,29 +9,49 @@ import { TipoContatoEntity } from './tipoContato.entity';
 
 @Entity('contatos')
 export class ContatoEntity extends BaseEntity {
-
+  @ManyToOne(() => TipoContatoEntity, (tipoContato) => tipoContato.contatos)
   @JoinColumn({ name: 'tipo_contato_id' })
   tipo: TipoContatoEntity;
+  @Column({ name: 'tipo_contato_id' })
+  tipoId: string;
+
   @Column({ length: 70, nullable: true })
   descricao: string;
 
-  @Column({ nullable: true, comment: 'Cliente final a quem esse contato pertence' })
-  clienteFinalId: string;
-  @ManyToOne(() => ClienteFinalEntity, (clienteFinal) => clienteFinal.contatos, {nullable: true,})
+  @ManyToOne(
+    () => ClienteFinalEntity,
+    (clienteFinal) => clienteFinal.contatos,
+    { nullable: true },
+  )
   @JoinColumn({ name: 'cliente_final_id' })
   clienteFinal: ClienteFinalEntity;
+  @Column({
+    name: 'cliente_final_id',
+    comment: 'Cliente final a quem esse contato pertence',
+  })
+  clienteFinalId: string;
 
-  @Column({ nullable: true, comment: 'Cliente (pj) a quem esse contato pertence' })
-  pessoaId: string;
-  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.contatos, {nullable: true,})
-  @JoinColumn({name: 'pessoa_id',})
+  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.contatos, {
+    nullable: true,
+  })
+  @JoinColumn({ name: 'pessoa_id' })
   pessoa: PessoaEntity;
+  @Column({
+    name: 'pessoa_id',
+    comment: 'Cliente (pj) a quem esse contato pertence',
+  })
+  pessoaId: string;
 
-  @Column({ nullable: true, comment: 'Pessoa que representa esse contato, Ex: socio administrador' })
-  representanteId: string;
-  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.representa, { nullable: true,})
+  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.representa, {
+    nullable: true,
+  })
   @JoinColumn({ name: 'representante_id' })
   representante: PessoaEntity;
+  @Column({
+    name: 'representante_id',
+    comment: 'Pessoa que representa esse contato, Ex: socio administrador',
+  })
+  representanteId: string;
 
   @OneToMany(() => EnderecoEntity, (endereco) => endereco.contato)
   enderecos: EnderecoEntity[];

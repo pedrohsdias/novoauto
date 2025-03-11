@@ -6,6 +6,18 @@ import { PessoaEntity } from '../entity/pessoa.entity';
 @Injectable()
 export class PessoasRepository extends BaseRepository<PessoaEntity> {
   constructor(dataSource: DataSource) {
-    super(PessoaEntity, dataSource, PessoaEntity);
+    super(PessoaEntity, dataSource, PessoaEntity, 'pessoaEntity');
+  }
+
+  getAutoCompleteColumms(): string[] {
+    return [];
+  }
+
+  getRelationsToLoadOnMany(): string[] {
+    return [];
+  }
+
+  getRelationsToLoadOnOne(): string[] {
+    return [];
   }
 }

@@ -6,9 +6,11 @@ import {
   SwaggerModule,
 } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(new ValidationPipe());
   app.enableCors({
     origin: ['http://localhost:3000', 'https://meudominio.com'], // Domínios permitidos
     methods: 'GET,POST,PUT,DELETE', // Métodos permitidos

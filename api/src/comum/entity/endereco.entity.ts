@@ -23,15 +23,18 @@ export class EnderecoEntity extends BaseEntity {
   })
   @JoinColumn({ name: 'contato_id' })
   contato: ContatoEntity;
+  @Column({ name: 'contato_id' })
+  contatoId: string;
 
   @ManyToOne(() => MunicipioEntity, (municipio) => municipio.enderecos)
   @JoinColumn({ name: 'municipio_id' })
   municipio: MunicipioEntity;
+  @Column({ name: 'municipio_id' })
+  municipioId: string;
 
-  @ManyToOne(
-    () => TipoEnderecoEntity,
-    (tipoEndereco) => tipoEndereco.enderecos,
-  )
+  @ManyToOne(() => TipoEnderecoEntity, (tipoEndereco) => tipoEndereco.enderecos)
   @JoinColumn({ name: 'tipo_endereco_id' })
   tipo: TipoEnderecoEntity;
+  @Column({ name: 'tipo_endereco_id' })
+  tipoId: string;
 }

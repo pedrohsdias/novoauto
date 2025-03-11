@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
-import { TelefoneEntity } from './telefone.entity';
 import { ContatoEntity } from './contato.entity';
 
 @Entity('tipos_contato')

@@ -1,4 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 
 import { BaseEntity } from '../../base/base.entity';
 import { PessoaEntity } from '../../comum/entity/pessoa.entity';
@@ -38,6 +45,9 @@ export class ClienteEntity extends BaseEntity {
   })
   @JoinColumn({ name: 'pessoa_id' })
   pessoa: PessoaEntity;
+  @Column({ name: 'pessoa_id' })
+  pessoaId: string;
+
   @OneToMany(() => ServicoEntity, (servico) => servico.cliente)
   servicos: ServicoEntity[];
 
@@ -57,6 +67,8 @@ export class ClienteEntity extends BaseEntity {
   })
   @JoinColumn({ name: 'matriz_id' })
   matriz: ClienteEntity;
+  @Column({ name: 'matriz_id' })
+  matrizId: string;
 
   @OneToMany(() => ClienteEntity, (clienteFilho) => clienteFilho.matriz)
   filiais: ClienteEntity[];

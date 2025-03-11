@@ -14,11 +14,12 @@ export class TelefoneEntity extends BaseEntity {
   })
   @JoinColumn({ name: 'contato_id' })
   contato: ContatoEntity;
+  @Column({ name: 'contato_id' })
+  contatoId: string;
 
-  @ManyToOne(
-    () => TipoTelefoneEntity,
-    (tipoTelefone) => tipoTelefone.telefones,
-  )
+  @ManyToOne(() => TipoTelefoneEntity, (tipoTelefone) => tipoTelefone.telefones)
   @JoinColumn({ name: 'tipo_telefone_id' })
   tipo: TipoTelefoneEntity;
+  @Column({ name: 'tipo_telefone_id' })
+  tipoId: string;
 }

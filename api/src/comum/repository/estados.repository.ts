@@ -5,9 +5,19 @@ import { EstadoEntity } from '../entity/estado.entity';
 
 @Injectable()
 export class EstadosRepository extends BaseRepository<EstadoEntity> {
-
-  protected autoCompleteFields: string[] = ['nome','uf'];
   constructor(dataSource: DataSource) {
-    super(EstadoEntity, dataSource, EstadoEntity);
+    super(EstadoEntity, dataSource, EstadoEntity, 'estadoEntity');
+  }
+
+  getAutoCompleteColumms(): string[] {
+    return ['nome', 'uf'];
+  }
+
+  getRelationsToLoadOnMany(): string[] {
+    return [];
+  }
+
+  getRelationsToLoadOnOne(): string[] {
+    return [];
   }
 }

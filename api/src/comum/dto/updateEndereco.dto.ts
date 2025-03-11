@@ -1,21 +1,21 @@
-import { BaseModelDto } from '../../base/dto/baseModel.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
+import { CreateEnderecoDto } from './createEndereco.dto';
 
-export class CreateEnderecoDto extends BaseModelDto {
-  @ApiProperty()
-  logradouro: string;
-  @ApiProperty()
-  numero: string;
+export class UpdateEnderecoDto extends CreateEnderecoDto {
   @ApiProperty()
   @IsOptional()
-  complemento: string;
-  @ApiProperty()
+  id: string;
+  @IsOptional()
+  logradouro: string;
+  @IsOptional()
+  numero: string;
+  @IsOptional()
   cep: string;
-  @ApiProperty()
+  @IsOptional()
   bairro: string;
-  @ApiProperty()
+  @IsOptional()
   municipioId: string;
-  @ApiProperty()
+  @IsOptional()
   tipoId: string;
 }

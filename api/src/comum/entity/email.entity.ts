@@ -1,23 +1,19 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
-import { TipoTelefoneEntity } from './tipoTelefone.entity';
 import { ContatoEntity } from './contato.entity';
 
 @Entity('emails')
 export class EmailsEntity extends BaseEntity {
   @Column({ length: 15 })
-  numero: string;
+  email: string;
+  @Column({ name: 'eh_principal' })
+  ehPrincipal: boolean;
 
   @ManyToOne(() => ContatoEntity, (contato) => contato.emails, {
     nullable: false,
   })
   @JoinColumn({ name: 'contato_id' })
   contato: ContatoEntity;
-
-  @ManyToOne(
-    () => TipoTelefoneEntity,
-    (tipoTelefone) => tipoTelefone.telefones,
-  )
-  @JoinColumn({ name: 'tipo_telefone_id' })
-  tipo: TipoTelefoneEntity;
+  @Column({ name: 'contato_id' })
+  contatoId: string;
 }

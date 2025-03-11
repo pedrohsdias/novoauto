@@ -6,6 +6,23 @@ import { TipoTelefoneEntity } from '../entity/tipoTelefone.entity';
 @Injectable()
 export class TiposTelefoneRepository extends BaseRepository<TipoTelefoneEntity> {
   constructor(dataSource: DataSource) {
-    super(TipoTelefoneEntity, dataSource, TipoTelefoneEntity);
+    super(
+      TipoTelefoneEntity,
+      dataSource,
+      TipoTelefoneEntity,
+      'tipoTelefoneEntity',
+    );
+  }
+
+  getAutoCompleteColumms(): string[] {
+    return [];
+  }
+
+  getRelationsToLoadOnMany(): string[] {
+    return [];
+  }
+
+  getRelationsToLoadOnOne(): string[] {
+    return [];
   }
 }

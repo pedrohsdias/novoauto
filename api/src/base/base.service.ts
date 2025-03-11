@@ -7,7 +7,6 @@ import { RequestAutoCompleteDto } from '../comum/dto/requestAutoComplete.dto';
 
 @Injectable()
 export class BaseService<T extends BaseEntity> {
-
   constructor(protected readonly repository: BaseRepository<T>) {}
 
   async autoComplete(options: RequestAutoCompleteDto): Promise<T[]> {
@@ -17,8 +16,7 @@ export class BaseService<T extends BaseEntity> {
   }
 
   async findAll(options: BaseRequestFindAllDto): Promise<T[]> {
-    const query = this.repository.paginate(options)
-    return query.getMany();
+    return await this.repository.findAll(options);
   }
 
   async findById(id: string): Promise<T | null> {

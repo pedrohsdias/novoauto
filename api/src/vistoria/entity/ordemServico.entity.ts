@@ -56,13 +56,18 @@ export class OrdemServicoEntity extends BaseEntity {
     default: ParecerVistoriaEnum.SEM_STATUS,
   })
   parecerVistoria: ParecerVistoriaEnum;
+
   @ManyToOne(() => ClienteFinalEntity, (cliente) => cliente.ordensServico)
   @JoinColumn({ name: 'cliente_final_id' })
   clienteFinal: ClienteFinalEntity;
+  @Column({ name: 'cliente_final_id' })
+  clienteFinalId: ClienteFinalEntity;
 
   @ManyToOne(() => ClienteEntity, (cliente) => cliente.ordensServico)
   @JoinColumn({ name: 'cliente_id' })
   cliente: ClienteEntity;
+  @Column({ name: 'cliente_id' })
+  clienteId: ClienteEntity;
 
   @ManyToOne(() => ModeloVistoriaEntity, (modelo) => modelo.ordensServico)
   @JoinColumn({ name: 'modelo_vistoria_id' })
@@ -79,7 +84,10 @@ export class OrdemServicoEntity extends BaseEntity {
   @JoinColumn({ name: 'usuario_finalizador_id' })
   usuarioFinalizador: UsuariosEntity;
 
-  @OneToOne(() => DadosServicosExternosEntity, { cascade: true, nullable: true })
-  @JoinColumn({ name:'consulta_veicular_id'})
+  @OneToOne(() => DadosServicosExternosEntity, {
+    cascade: true,
+    nullable: true,
+  })
+  @JoinColumn({ name: 'consulta_veicular_id' })
   consultaVeicular: DadosServicosExternosEntity;
 }

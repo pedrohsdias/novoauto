@@ -1,0 +1,10 @@
+services:
+  web:
+    container_name: auto_web
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    volumes:
+      - ./:/app
+    depends_on:
+      - api

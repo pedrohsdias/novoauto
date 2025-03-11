@@ -7,6 +7,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { ClienteEntity } from '../entity/cliente.entity';
 import { ClientesService } from '../service/clientes.service';
 import { CreateClienteDto } from '../dto/createCliente.dto';
+import { UpdateClienteDto } from '../dto/updateCliente.dto';
 
 @ApiTags('Cliente')
 @Controller('clientes')
@@ -15,16 +16,14 @@ export class ClientesController extends BaseCrudController<ClienteEntity> {
     super(baseService);
   }
   @Post()
-  async create(
-    @Body() createDto: CreateClienteDto,
-  ): Promise<ClienteEntity> {
+  async create(@Body() createDto: CreateClienteDto): Promise<ClienteEntity> {
     return super.create(createDto);
   }
 
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateDto: UpdateBlocoDto,
+    @Body() updateDto: UpdateClienteDto,
   ): Promise<ClienteEntity> {
     return super.update(id, updateDto);
   }

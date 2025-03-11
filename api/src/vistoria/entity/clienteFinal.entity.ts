@@ -1,13 +1,15 @@
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
 import { OrdemServicoEntity } from './ordemServico.entity';
 import { ClienteEntity } from '../../cliente/entity/cliente.entity';
 import { TipoPessoaEnum } from '../../comum/enum/tipoPessoa.enum';
 import { ContatoEntity } from '../../comum/entity/contato.entity';
 
-@Entity('clientes_finais',{comment:'Cliente do nosso cliente, replica a estrutura de pessoa porque não pode ser reaproveitado'})
+@Entity('clientes_finais', {
+  comment:
+    'Cliente do nosso cliente, replica a estrutura de pessoa porque não pode ser reaproveitado',
+})
 export class ClienteFinalEntity extends BaseEntity {
-
   @Column({
     length: 150,
     nullable: true,

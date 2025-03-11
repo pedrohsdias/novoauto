@@ -9,7 +9,6 @@ export class MockService {
       // @ts-ignore
       const fullPath = path.resolve(process.cwd(),'src/mocks', `${fileName}.json`);
       const fileContent = await fs.readFile(fullPath, 'utf-8');
-      console.log(fileContent)
       return JSON.parse(fileContent) as T;
     } catch (error) {
       throw new Error(`Erro ao ler o arquivo JSON: ${error.message}`);

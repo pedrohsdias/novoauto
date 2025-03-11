@@ -24,11 +24,14 @@ import { TiposTelefoneService } from './service/tiposTelefone.service';
 import { EstadosController } from './controller/estados.controller';
 import { TiposTelefoneController } from './controller/tiposTelefone.controller';
 import { TiposEnderecoController } from './controller/tiposEndereco.controller';
-import { TelefonesController } from './controller/telefones.controller';
 import { MunicipiosController } from './controller/municipios.controller';
-import { EnderecosController } from './controller/enderecos.controller';
-import { PessoasController } from './controller/pessoas.controller';
 import { MockService } from './service/mock.service';
+import { ContatosController } from './controller/contatos.controller';
+import { ContatosService } from './service/contatos.service';
+import { ContatosRepository } from './repository/contatos.repository';
+import { EmailsEntity } from './entity/email.entity';
+import { EmailsService } from './service/emails.service';
+import { EmailsRepository } from './repository/emails.repository';
 
 @Module({
   imports: [
@@ -38,6 +41,7 @@ import { MockService } from './service/mock.service';
       MunicipioEntity,
       PessoaEntity,
       TelefoneEntity,
+      EmailsEntity,
       TipoEnderecoEntity,
       TipoTelefoneEntity,
     ]),
@@ -57,17 +61,19 @@ import { MockService } from './service/mock.service';
     TiposEnderecoRepository,
     TiposTelefoneService,
     TiposTelefoneRepository,
-    MockService
+    MockService,
+    ContatosService,
+    ContatosRepository,
+    EmailsService,
+    EmailsRepository,
   ],
   controllers: [
-    EnderecosController,
     EstadosController,
     MunicipiosController,
-    // PessoasController,
-    TelefonesController,
     TiposEnderecoController,
     TiposTelefoneController,
+    ContatosController,
   ],
-  exports: [TypeOrmModule,MockService],
+  exports: [TypeOrmModule, MockService, PessoasService, PessoasRepository],
 })
 export class ComumModule {}

@@ -4,7 +4,10 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class QueryDto {
   @IsString()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'CNPJ sem mascara',
+    example: '28348641000150',
+    enum: ['28348641000150', '44133410000186', '48551805000150']})
   cnpj: string;
 }
 

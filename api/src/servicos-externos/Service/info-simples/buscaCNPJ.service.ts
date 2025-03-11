@@ -12,12 +12,12 @@ export class BuscaCNPJService implements IExternalService {
     private readonly configService: ConfigService,
     protected mock: MockService
   ) {
-    this.apiUrl = '';//this.configService.get<string>('API_INFOSIMPLES_CNPJ');
+    this.apiUrl = this.configService.get<string>('API_INFOSIMPLES_CNPJ');
   }
 
   async fetchData<T, R>(data: T ): Promise<R> {
     const dados = data as QueryDto
-    if (this.configService.get<string>('APP_ENV')){
+    if (this.configService.get<string>('APP_ENV')!=='production') {
       return this.mock.readJsonFile(`${this.mockPath}/${dados?.cnpj}`);
     }
     const response = await fetch(this.apiUrl, {

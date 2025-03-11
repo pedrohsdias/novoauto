@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { BaseRepository } from '../../base/base.repository';
 import { DataSource } from 'typeorm';
-import { EnderecoEntity } from '../entity/endereco.entity';
+import { ContatoEntity } from '../entity/contato.entity';
 
 @Injectable()
-export class EnderecosRepository extends BaseRepository<EnderecoEntity> {
+export class ContatosRepository extends BaseRepository<ContatoEntity> {
   constructor(dataSource: DataSource) {
-    super(EnderecoEntity, dataSource, EnderecoEntity, 'enderecoEntity');
+    super(ContatoEntity, dataSource, ContatoEntity, 'contatoEntity');
   }
 
   getAutoCompleteColumms(): string[] {

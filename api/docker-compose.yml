@@ -1,0 +1,30 @@
+services:
+  api:
+    build:
+      context: .
+    container_name: auto_api
+    ports:
+      - "3001:3000"
+      - "9230:9229"
+    volumes:
+      - ./:/app
+    depends_on:
+      - postgres
+    networks:
+      - auto_db
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: yourusername
+      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: yourdatabase
+    ports:
+      - "5433:5432"
+      #    volumes:
+      # - postgres_data:/var/lib/postgresql/data
+    networks:
+      - auto_db
+
+networks:
+  auto_db:

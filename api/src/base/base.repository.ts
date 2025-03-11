@@ -1,33 +1,53 @@
-import { Repository, EntityTarget, DataSource, FindOneOptions, SelectQueryBuilder } from 'typeorm';
+import {
+  Repository,
+  EntityTarget,
+  DataSource,
+  FindOneOptions,
+  SelectQueryBuilder,
+} from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { Injectable } from '@nestjs/common';
 import { BaseRequestFindAllDto } from './dto/baseRequestFindAll.dto';
 import { RequestAutoCompleteDto } from '../comum/dto/requestAutoComplete.dto';
+import { ICrudRepository } from './contracts/ICrudRepository';
 
 @Injectable()
-export class BaseRepository<T extends BaseEntity> extends Repository<T> {
-
-  protected autoCompleteFields: string[] = [];
-
+export abstract class BaseRepository<T extends BaseEntity>
+  extends Repository<T>
+  implements ICrudRepository<T>
+{
   constructor(
     protected readonly entity: EntityTarget<T>,
     protected readonly dataSource: DataSource,
     private readonly entityClass: new () => T,
+    public readonly tableAlias: string = 'entity',
   ) {
     super(entity, dataSource.createEntityManager());
   }
+
+  abstract getAutoCompleteColumms(): string[];
+  abstract getRelationsToLoadOnMany(): string[];
+  abstract getRelationsToLoadOnOne(): string[];
 
   createInstance(): T {
     return new this.entityClass(); // Cria uma nova instância de T
   }
 
-  findAll(): Promise<T[]> {
-    return this.find();
+  findAll(options: BaseRequestFindAllDto): Promise<T[]> {
+    const query = this.paginate(options);
+    this.getRelationsToLoadOnMany().forEach((relationToLoad) => {
+      query.leftJoinAndSelect(
+        `${this.tableAlias}.${relationToLoad}`,
+        `${relationToLoad}`,
+      );
+    });
+    return query.getMany();
   }
 
   findById(id: string): Promise<T | null> {
     const options: FindOneOptions<T> = {
-      where: { id } as any, // 'as any' usado para contornar o erro de tipagem
+      where: { id } as any,
+      relations: this.getRelationsToLoadOnOne(),
     };
     return this.findOne(options);
   }
@@ -45,27 +65,35 @@ export class BaseRepository<T extends BaseEntity> extends Repository<T> {
   }
 
   autoComplete(options: RequestAutoCompleteDto): SelectQueryBuilder<T> {
-    const { param } = options
-    const query = this.paginate(options)
+    const { param } = options;
+    const query = this.paginate(options);
 
-    if(param) {
-      this.autoCompleteFields.forEach(campo => {
+    if (param) {
+      this.getAutoCompleteColumms().forEach((campo) => {
         query.where(`${campo} ILIKE :search`, { search: `%${param}%` });
-      })
+      });
     }
 
     return query;
   }
 
   paginate(options: BaseRequestFindAllDto): SelectQueryBuilder<T> {
-    const { rowsPerPage=20, page = 1, orderBy, order = 'asc' } = options;
-    const query = this.createQueryBuilder();
+    const {
+      rowsPerPage = 20,
+      page = 1,
+      orderBy = 'createdAt',
+      order = 'asc',
+    } = options;
+    const query = this.createQueryBuilder(this.tableAlias);
 
     if (orderBy) {
-      query.orderBy(orderBy, order.toUpperCase() as 'ASC' | 'DESC');
+      const validOrder: 'ASC' | 'DESC' =
+        order.toLowerCase() === 'desc' ? 'DESC' : 'ASC';
+
+      query.orderBy(`${this.tableAlias}.${orderBy}`, validOrder);
     }
 
-    query.skip(page * rowsPerPage).take(rowsPerPage);
+    query.skip((page - 1) * rowsPerPage).take(rowsPerPage);
 
     return query;
   }

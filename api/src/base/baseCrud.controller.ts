@@ -7,24 +7,29 @@ import {
   Controller,
   Put,
   UseGuards,
-  Query, HttpException, HttpStatus,
+  Query,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { BaseEntity } from './base.entity';
 import { BaseService } from './base.service';
 import { BaseModelDto } from './dto/baseModel.dto';
-import { ApiBearerAuth, ApiInternalServerErrorResponse, ApiOkResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiInternalServerErrorResponse,
+  ApiOkResponse,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../guard/guard';
 import { BaseRequestFindAllDto } from './dto/baseRequestFindAll.dto';
 import { ApiResponseDto } from './dto/apiResponse.dto';
 import { ApiResponsePaginatedDto } from './dto/apiResponsePaginated.dto';
-import { createError, createPaginatedResponse, createResponse } from './util/responses.util';
+import { createError, createPaginatedResponse } from './util/responses.util';
 
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @Controller()
 export class BaseCrudController<T extends BaseEntity> {
-  constructor(protected readonly service: BaseService<T>) {
-  }
+  constructor(protected readonly service: BaseService<T>) {}
 
   @Get()
   @ApiOkResponse({
@@ -36,20 +41,25 @@ export class BaseCrudController<T extends BaseEntity> {
     type: ApiResponseDto,
     isArray: false,
   })
-  async findAll(@Query() query: BaseRequestFindAllDto): Promise<ApiResponseDto<T[]>> {
-    const { rowsPerPage = 20, page = 1, orderBy, order = 'asc' } = query;
-    try {
-      const response = await this.service.findAll({
-        rowsPerPage: Number(rowsPerPage),
-        page: Number(page),
-        orderBy: orderBy || undefined,
-        order: order as 'asc' | 'desc',
-      });
+  async findAll(
+    @Query() query: BaseRequestFindAllDto,
+  ): Promise<ApiResponseDto<T[]>> {
+    const { rowsPerPage = 20, page = 1, orderBy, order = 'ASC' } = query;
+    // try {
+    const response = await this.service.findAll({
+      rowsPerPage: Number(rowsPerPage),
+      page: Number(page),
+      orderBy: orderBy || undefined,
+      order: order as 'asc' | 'desc',
+    });
 
-      return createPaginatedResponse(response,page)
-    }catch (error) {
-      throw new HttpException(createError(error), HttpStatus.INTERNAL_SERVER_ERROR)
-    }
+    return createPaginatedResponse(response, page);
+    // } catch (error) {
+    //   throw new HttpException(
+    //     createError(error),
+    //     HttpStatus.INTERNAL_SERVER_ERROR,
+    //   );
+    // }
   }
 
   @Get(':id')
@@ -75,8 +85,7 @@ export class BaseCrudController<T extends BaseEntity> {
     await this.service.delete(id);
   }
 
-
   private delay(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }

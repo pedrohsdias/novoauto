@@ -1,0 +1,7 @@
+FROM node:21
+
+WORKDIR /app
+
+EXPOSE 3000 9229
+
+CMD ["tail","-f","/dev/null"]

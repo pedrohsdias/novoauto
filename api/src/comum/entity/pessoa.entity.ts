@@ -4,8 +4,8 @@ import { TipoPessoaEnum } from '../enum/tipoPessoa.enum';
 import { ClienteEntity } from '../../cliente/entity/cliente.entity';
 import { ContatoEntity } from './contato.entity';
 
-@Entity('pessoa',{
-  comment:'Generalização para clientes que estão em mais de uma posição',
+@Entity('pessoa', {
+  comment: 'Generalização para clientes que estão em mais de uma posição',
 })
 export class PessoaEntity extends BaseEntity {
   @Column({
@@ -22,7 +22,7 @@ export class PessoaEntity extends BaseEntity {
   })
   nomeFormal: string;
 
-  @Column({ length: 18, nullable: true, comment: 'CPF ou CNPJ' })
+  @Column({ length: 18, nullable: true, comment: 'CPF ou CNPJ', unique: true })
   documento: string;
 
   @Column({
