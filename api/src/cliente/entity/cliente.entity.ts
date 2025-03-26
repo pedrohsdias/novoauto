@@ -40,13 +40,13 @@ export class ClienteEntity extends BaseEntity {
   @Column({ name: 'termo_usuario_id', nullable: true })
   termoUsuarioAceite: string;
 
+  @Column({ name: 'pessoa_id' })
+  pessoaId: string;
   @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.cliente, {
     nullable: false,
   })
   @JoinColumn({ name: 'pessoa_id' })
   pessoa: PessoaEntity;
-  @Column({ name: 'pessoa_id' })
-  pessoaId: string;
 
   @OneToMany(() => ServicoEntity, (servico) => servico.cliente)
   servicos: ServicoEntity[];
@@ -59,16 +59,15 @@ export class ClienteEntity extends BaseEntity {
 
   @ManyToMany(() => ClienteFinalEntity, (cliente) => cliente.clientes)
   clientesFinais: ClienteFinalEntity[];
+
   /**
    * auto relaciomento
    */
-  @ManyToOne(() => ClienteEntity, (clientePai) => clientePai.filiais, {
-    nullable: true,
-  })
+  @Column({ name: 'matriz_id', nullable: true })
+  matrizId: string;
+  @ManyToOne(() => ClienteEntity, (clientePai) => clientePai.filiais)
   @JoinColumn({ name: 'matriz_id' })
   matriz: ClienteEntity;
-  @Column({ name: 'matriz_id' })
-  matrizId: string;
 
   @OneToMany(() => ClienteEntity, (clienteFilho) => clienteFilho.matriz)
   filiais: ClienteEntity[];

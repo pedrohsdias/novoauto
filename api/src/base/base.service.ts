@@ -3,7 +3,7 @@ import { BaseRepository } from './base.repository';
 import { BaseEntity } from './base.entity';
 import { BaseModelDto } from './dto/baseModel.dto';
 import { BaseRequestFindAllDto } from './dto/baseRequestFindAll.dto';
-import { RequestAutoCompleteDto } from '../comum/dto/requestAutoComplete.dto';
+import { RequestAutoCompleteDto } from '../comum/dto/requests/requestAutoComplete.dto';
 
 @Injectable()
 export class BaseService<T extends BaseEntity> {

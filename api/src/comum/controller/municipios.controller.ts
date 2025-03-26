@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, Put } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { MunicipioEntity } from '../entity/municipio.entity';
 import { MunicipiosService } from '../service/municipios.service';
 import { ApiTags } from '@nestjs/swagger';

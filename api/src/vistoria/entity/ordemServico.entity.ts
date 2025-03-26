@@ -57,17 +57,17 @@ export class OrdemServicoEntity extends BaseEntity {
   })
   parecerVistoria: ParecerVistoriaEnum;
 
+  @Column({ name: 'cliente_final_id' })
+  clienteFinalId: string;
   @ManyToOne(() => ClienteFinalEntity, (cliente) => cliente.ordensServico)
   @JoinColumn({ name: 'cliente_final_id' })
   clienteFinal: ClienteFinalEntity;
-  @Column({ name: 'cliente_final_id' })
-  clienteFinalId: ClienteFinalEntity;
 
+  @Column({ name: 'cliente_id' })
+  clienteId: string;
   @ManyToOne(() => ClienteEntity, (cliente) => cliente.ordensServico)
   @JoinColumn({ name: 'cliente_id' })
   cliente: ClienteEntity;
-  @Column({ name: 'cliente_id' })
-  clienteId: ClienteEntity;
 
   @ManyToOne(() => ModeloVistoriaEntity, (modelo) => modelo.ordensServico)
   @JoinColumn({ name: 'modelo_vistoria_id' })

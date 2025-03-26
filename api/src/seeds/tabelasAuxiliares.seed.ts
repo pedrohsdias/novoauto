@@ -3,6 +3,7 @@ import { TipoEnderecoEntity } from '../comum/entity/tipoEndereco.entity';
 import { TipoTelefoneEntity } from '../comum/entity/tipoTelefone.entity';
 import { EstadoEntity } from '../comum/entity/estado.entity';
 import { MunicipioEntity } from '../comum/entity/municipio.entity';
+import { TipoContatoEntity } from '../comum/entity/tipoContato.entity';
 
 export class TabelasAuxiliaresSeed {
   async run(dataSource: DataSource): Promise<void> {
@@ -10,8 +11,14 @@ export class TabelasAuxiliaresSeed {
       dataSource.getRepository(TipoEnderecoEntity);
     const tiposTelefoneRepository =
       dataSource.getRepository(TipoTelefoneEntity);
+    const tiposContatoRepository = dataSource.getRepository(TipoContatoEntity);
     const estadosRepository = dataSource.getRepository(EstadoEntity);
     const municipioRepository = dataSource.getRepository(MunicipioEntity);
+
+    const tiposContato = [
+      { descricao: 'COMERCIAL' },
+      { descricao: 'COBRANÇA' },
+    ];
 
     const tiposEndereco = [
       { descricao: 'COMERCIAL' },
@@ -5641,6 +5648,7 @@ export class TabelasAuxiliaresSeed {
 
     await tiposEnderecoRepository.save(tiposEndereco);
     await tiposTelefoneRepository.save(tiposTelefone);
+    await tiposContatoRepository.save(tiposContato);
     await estadosRepository.save(estados);
     await municipioRepository.save(municipios1);
     await municipioRepository.save(municipios2);

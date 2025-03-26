@@ -1,4 +1,4 @@
-import { Controller, } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 
 import { EstadoEntity } from '../entity/estado.entity';
 import { EstadosService } from '../service/estados.service';
@@ -11,5 +11,4 @@ export class EstadosController extends BaseAuxController<EstadoEntity> {
   constructor(protected readonly baseService: EstadosService) {
     super(baseService);
   }
-
 }

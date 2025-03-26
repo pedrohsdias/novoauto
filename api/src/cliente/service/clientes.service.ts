@@ -4,8 +4,10 @@ import { ClientesRepository } from '../repository/clientes.repository';
 import { ClienteEntity } from '../entity/cliente.entity';
 import { BaseModelDto } from '../../base/dto/baseModel.dto';
 import { PessoasService } from '../../comum/service/pessoas.service';
-import { CreateClienteDto } from '../dto/createCliente.dto';
-import { UpdateClienteDto } from '../dto/updateCliente.dto';
+import {
+  CreateClienteDto,
+  UpdateClienteDto,
+} from '../dto/requests/requestsCliente.dto';
 
 @Injectable()
 export class ClientesService extends BaseService<ClienteEntity> {
@@ -19,10 +21,9 @@ export class ClientesService extends BaseService<ClienteEntity> {
   async create(createDto: BaseModelDto): Promise<ClienteEntity> {
     const clienteDto = createDto as CreateClienteDto;
     const pessoaSalva = await this.pessoaService.create(clienteDto);
-    const matriz = await this.findById(clienteDto?.matrizId);
     clienteDto.apelido = await this.buildApelido(clienteDto);
 
-    const dadosCliente = { ...createDto, pessoa: pessoaSalva, matriz: matriz };
+    const dadosCliente = { ...createDto, pessoa: pessoaSalva };
     return super.create(dadosCliente);
   }
 

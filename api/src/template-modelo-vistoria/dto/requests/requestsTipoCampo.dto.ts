@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { CreateCampoDto } from './campo.dto';
-import { BaseModelDto } from '../../base/dto/baseModel.dto';
+import { CreateCampoDto } from './requestsCampo.dto';
+import { BaseModelDto } from '../../../base/dto/baseModel.dto';
 
 export class CreateTipoCampoDto extends BaseModelDto {
   @IsNotEmpty()

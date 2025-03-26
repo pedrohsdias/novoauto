@@ -8,7 +8,7 @@ import {
 import { BaseEntity } from './base.entity';
 import { Injectable } from '@nestjs/common';
 import { BaseRequestFindAllDto } from './dto/baseRequestFindAll.dto';
-import { RequestAutoCompleteDto } from '../comum/dto/requestAutoComplete.dto';
+import { RequestAutoCompleteDto } from '../comum/dto/requests/requestAutoComplete.dto';
 import { ICrudRepository } from './contracts/ICrudRepository';
 
 @Injectable()

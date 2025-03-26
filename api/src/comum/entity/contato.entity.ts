@@ -9,15 +9,21 @@ import { TipoContatoEntity } from './tipoContato.entity';
 
 @Entity('contatos')
 export class ContatoEntity extends BaseEntity {
+  @Column({ name: 'tipo_contato_id' })
+  tipoId: string;
   @ManyToOne(() => TipoContatoEntity, (tipoContato) => tipoContato.contatos)
   @JoinColumn({ name: 'tipo_contato_id' })
   tipo: TipoContatoEntity;
-  @Column({ name: 'tipo_contato_id' })
-  tipoId: string;
 
   @Column({ length: 70, nullable: true })
   descricao: string;
 
+  @Column({
+    name: 'cliente_final_id',
+    nullable: true,
+    comment: 'Cliente final a quem esse contato pertence',
+  })
+  clienteFinalId: string;
   @ManyToOne(
     () => ClienteFinalEntity,
     (clienteFinal) => clienteFinal.contatos,
@@ -25,33 +31,26 @@ export class ContatoEntity extends BaseEntity {
   )
   @JoinColumn({ name: 'cliente_final_id' })
   clienteFinal: ClienteFinalEntity;
-  @Column({
-    name: 'cliente_final_id',
-    comment: 'Cliente final a quem esse contato pertence',
-  })
-  clienteFinalId: string;
 
-  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.contatos, {
-    nullable: true,
-  })
-  @JoinColumn({ name: 'pessoa_id' })
-  pessoa: PessoaEntity;
   @Column({
     name: 'pessoa_id',
+    nullable: true,
     comment: 'Cliente (pj) a quem esse contato pertence',
   })
   pessoaId: string;
+  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.contatos)
+  @JoinColumn({ name: 'pessoa_id' })
+  pessoa: PessoaEntity;
 
-  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.representa, {
-    nullable: true,
-  })
-  @JoinColumn({ name: 'representante_id' })
-  representante: PessoaEntity;
   @Column({
     name: 'representante_id',
+    nullable: true,
     comment: 'Pessoa que representa esse contato, Ex: socio administrador',
   })
   representanteId: string;
+  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.representa)
+  @JoinColumn({ name: 'representante_id' })
+  representante: PessoaEntity;
 
   @OneToMany(() => EnderecoEntity, (endereco) => endereco.contato)
   enderecos: EnderecoEntity[];

@@ -1,7 +1,7 @@
-import { BaseModelDto } from '../../base/dto/baseModel.dto';
-import { TipoClienteEnum } from '../enum/tipoCliente.enum';
+import { BaseModelDto } from '../../../base/dto/baseModel.dto';
+import { TipoClienteEnum } from '../../enum/tipoCliente.enum';
 import { ApiProperty } from '@nestjs/swagger';
-import { TipoPessoaEnum } from '../../comum/enum/tipoPessoa.enum';
+import { TipoPessoaEnum } from '../../../comum/enum/tipoPessoa.enum';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
 
 export class CreateClienteDto extends BaseModelDto {
@@ -59,3 +59,5 @@ export class CreateClienteDto extends BaseModelDto {
   })
   linkLogo: string;
 }
+
+export class UpdateClienteDto extends CreateClienteDto {}

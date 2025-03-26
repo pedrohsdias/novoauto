@@ -5,6 +5,10 @@ export class ApiResponsePaginatedDto<T> extends ApiResponseDto<T> {
   @ApiProperty()
   currentPage: number;
 
-  @ApiProperty({ example: 0, description: 'Número total de itens', required: false })
+  @ApiProperty({
+    example: 0,
+    description: 'Número total de itens',
+    required: false,
+  })
   total?: number;
 }

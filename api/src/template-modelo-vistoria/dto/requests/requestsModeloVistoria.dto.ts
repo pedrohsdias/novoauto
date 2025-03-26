@@ -5,7 +5,7 @@ import {
   IsString,
   IsOptional,
 } from 'class-validator';
-import { BaseModelDto } from '../../base/dto/baseModel.dto';
+import { BaseModelDto } from '../../../base/dto/baseModel.dto';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateModeloVistoriaDto extends BaseModelDto {

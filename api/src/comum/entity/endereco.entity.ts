@@ -2,7 +2,6 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseEntity } from '../../base/base.entity';
 import { MunicipioEntity } from './municipio.entity';
 import { TipoEnderecoEntity } from './tipoEndereco.entity';
-import { PessoaEntity } from './pessoa.entity';
 import { ContatoEntity } from './contato.entity';
 
 @Entity('enderecos')
@@ -18,23 +17,23 @@ export class EnderecoEntity extends BaseEntity {
   @Column({ length: 70 })
   bairro: string;
 
+  @Column({ name: 'contato_id' })
+  contatoId: string;
   @ManyToOne(() => ContatoEntity, (contato) => contato.enderecos, {
     nullable: false,
   })
   @JoinColumn({ name: 'contato_id' })
   contato: ContatoEntity;
-  @Column({ name: 'contato_id' })
-  contatoId: string;
 
+  @Column({ name: 'municipio_id' })
+  municipioId: string;
   @ManyToOne(() => MunicipioEntity, (municipio) => municipio.enderecos)
   @JoinColumn({ name: 'municipio_id' })
   municipio: MunicipioEntity;
-  @Column({ name: 'municipio_id' })
-  municipioId: string;
 
+  @Column({ name: 'tipo_endereco_id' })
+  tipoId: string;
   @ManyToOne(() => TipoEnderecoEntity, (tipoEndereco) => tipoEndereco.enderecos)
   @JoinColumn({ name: 'tipo_endereco_id' })
   tipo: TipoEnderecoEntity;
-  @Column({ name: 'tipo_endereco_id' })
-  tipoId: string;
 }

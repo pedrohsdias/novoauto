@@ -32,6 +32,10 @@ import { ContatosRepository } from './repository/contatos.repository';
 import { EmailsEntity } from './entity/email.entity';
 import { EmailsService } from './service/emails.service';
 import { EmailsRepository } from './repository/emails.repository';
+import { TipoContatoEntity } from './entity/tipoContato.entity';
+import { TiposContatoController } from './controller/tiposContato.controller';
+import { TiposContatoService } from './service/tiposContato.service';
+import { TiposContatoRepository } from './repository/tiposContato.repository';
 
 @Module({
   imports: [
@@ -44,6 +48,7 @@ import { EmailsRepository } from './repository/emails.repository';
       EmailsEntity,
       TipoEnderecoEntity,
       TipoTelefoneEntity,
+      TipoContatoEntity,
     ]),
   ],
   providers: [
@@ -61,6 +66,8 @@ import { EmailsRepository } from './repository/emails.repository';
     TiposEnderecoRepository,
     TiposTelefoneService,
     TiposTelefoneRepository,
+    TiposContatoService,
+    TiposContatoRepository,
     MockService,
     ContatosService,
     ContatosRepository,
@@ -72,6 +79,7 @@ import { EmailsRepository } from './repository/emails.repository';
     MunicipiosController,
     TiposEnderecoController,
     TiposTelefoneController,
+    TiposContatoController,
     ContatosController,
   ],
   exports: [TypeOrmModule, MockService, PessoasService, PessoasRepository],

@@ -6,7 +6,7 @@ export function createPaginatedResponse<T extends any[]>(
   currentPage = 1,
   errors?: any,
 ): ApiResponsePaginatedDto<T> {
-  const clearData = clearReponse(data);
+  const clearData = clearResponse(data);
   return {
     message: 'success',
     total: data.length, // Agora sabemos que data é um array
@@ -16,7 +16,7 @@ export function createPaginatedResponse<T extends any[]>(
   };
 }
 
-export function clearReponse<T extends any[]>(data: T): T {
+export function clearResponse<T extends any[]>(data: T): T {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return data.map(({ createdAt, updatedAt, deletedAt, ...rest }) => rest) as T;
 }

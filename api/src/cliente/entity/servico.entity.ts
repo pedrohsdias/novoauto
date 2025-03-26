@@ -46,14 +46,14 @@ export class ServicoEntity extends BaseEntity {
   })
   integracao: ConsultasVeicularesEnum;
 
+  @Column({ name: 'cliente_id' })
+  clienteId: string;
   @ManyToOne(
     () => ClienteEntity,
     (clienteVistoriador) => clienteVistoriador.servicos,
   )
   @JoinColumn({ name: 'cliente_id' })
   cliente: ClienteEntity;
-  @Column({ name: 'cliente_id' })
-  clienteId: string;
 
   @ManyToMany(() => ModeloVistoriaEntity, (modelo) => modelo.servicos)
   @JoinTable({

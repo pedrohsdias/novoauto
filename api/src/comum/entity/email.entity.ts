@@ -4,16 +4,14 @@ import { ContatoEntity } from './contato.entity';
 
 @Entity('emails')
 export class EmailsEntity extends BaseEntity {
-  @Column({ length: 15 })
+  @Column({ length: 150 })
   email: string;
   @Column({ name: 'eh_principal' })
   ehPrincipal: boolean;
 
-  @ManyToOne(() => ContatoEntity, (contato) => contato.emails, {
-    nullable: false,
-  })
+  @Column({ name: 'contato_id', nullable: true })
+  contatoId: string;
+  @ManyToOne(() => ContatoEntity, (contato) => contato.emails)
   @JoinColumn({ name: 'contato_id' })
   contato: ContatoEntity;
-  @Column({ name: 'contato_id' })
-  contatoId: string;
 }
